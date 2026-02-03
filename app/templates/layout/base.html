@@ -1,0 +1,117 @@
+{# app/templates/layout/base.html #}
+<!doctype html>
+<html lang="en" data-theme="forest">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>
+    {% block title %}
+      {{ page_title if page_title else "GoRhino CRM" }}
+    {% endblock %}
+  </title>
+
+  {# --- Tailwind (dev via CDN) --- #}
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  {# --- DaisyUI (dev via CDN) ---
+     DaisyUI works as a Tailwind plugin. In dev/CDN mode we can pull the full
+     compiled DaisyUI CSS bundle and still use its classes.
+     Note: In production you’ll compile Tailwind + DaisyUI properly.
+  #}
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/daisyui@4.12.14/dist/full.min.css">
+
+  {# Optional: your app’s custom CSS (keep small in dev) #}
+  <link rel="stylesheet" href="{{ url_for('static', path='css/app.css') }}">
+
+  {# --- HTMX --- #}
+  <script src="https://unpkg.com/htmx.org@1.9.12"></script>
+  <script src="https://unpkg.com/htmx.org/dist/ext/ws.js"></script>
+  <script src="https://unpkg.com/htmx.org/dist/ext/sse.js"></script>
+
+  {# Nice-to-have: puts hx-* on forms/links without JS, and helps with redirects #}
+  <meta name="htmx-config" content='{"historyCacheSize": 20, "refreshOnHistoryMiss": true}' />
+
+  {% block head_extra %}{% endblock %}
+
+  <style>
+    /* Minimal global tweaks + HTMX indicator */
+    [x-cloak] { display: none !important; }
+
+    /* Show spinner during htmx requests when element has .htmx-indicator */
+    .htmx-indicator { display: none; }
+    .htmx-request .htmx-indicator { display: inline-flex; }
+    .htmx-request.htmx-indicator { display: inline-flex; }
+
+    /* Optional: smoother page feel */
+    html { scroll-behavior: smooth; }
+  </style>
+</head>
+
+<body class="min-h-screen bg-base-200 text-base-content">
+  {# Top navbar slot (optional) #}
+  {% block navbar %}
+  <!-- Example (replace with your include later):
+  <div class="navbar bg-base-100 border-b border-base-300">
+    <div class="flex-1 px-2 font-semibold">GoRhino CRM</div>
+  </div>
+  -->
+  {% endblock %}
+
+  <div class="flex min-h-[calc(100vh-0px)]">
+    {# Sidebar slot (optional) #}
+    {% block sidebar %}{% endblock %}
+
+    <main class="flex-1 p-4 lg:p-6">
+      {# Page header slot #}
+      {% block header %}{% endblock %}
+
+      {# Flash / toast slot #}
+      {% block flashes %}
+        {# If you pass `flash_message` or similar from FastAPI, show it here #}
+        {% if flash_message %}
+          <div class="alert alert-info shadow mb-4">
+            <span>{{ flash_message }}</span>
+          </div>
+        {% endif %}
+      {% endblock %}
+
+      {# Global HTMX loading indicator (can be used anywhere) #}
+      <div id="global_loading" class="fixed bottom-4 right-4 z-50">
+        <div class="toast toast-end">
+          <div class="alert bg-base-100 shadow border border-base-300 htmx-indicator">
+            <span class="loading loading-spinner loading-sm"></span>
+            <span>Working…</span>
+          </div>
+        </div>
+      </div>
+
+      {# Main page content #}
+      {% block content %}{% endblock %}
+    </main>
+  </div>
+
+  {# Footer slot (optional) #}
+  {% block footer %}{% endblock %}
+
+  <script>
+    // Make global indicator work automatically for all HTMX requests
+    document.body.addEventListener("htmx:configRequest", function (evt) {
+      // add the indicator to every request if none specified
+      if (!evt.detail.elt.hasAttribute("hx-indicator")) {
+        evt.detail.elt.setAttribute("hx-indicator", ".htmx-indicator");
+      }
+    });
+
+    // Optional: handle 401/403 and redirect to login page
+    document.body.addEventListener("htmx:responseError", function (evt) {
+      const status = evt.detail.xhr.status;
+      if (status === 401 || status === 403) {
+        window.location.href = "/login";
+      }
+    });
+  </script>
+
+  {% block scripts %}{% endblock %}
+</body>
+</html>
