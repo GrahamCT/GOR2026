@@ -11,7 +11,7 @@ router = APIRouter(tags=["admin"], prefix="/login")
 @router.get("/")
 async def login(request: Request):
     context = {"request": request}
-    return templates.TemplateResponse("admin/login.html", context)
+    return templates.TemplateResponse("auth/login.html", context)
 
 @router.get("/admin")
 async def admin_dashboard(request: Request):

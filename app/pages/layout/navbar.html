@@ -1,14 +1,15 @@
 {% import 'layout/mac_icons.html' as mac_icons %}
-<!-- Material Icons -->
+
 <link
   href="https://fonts.googleapis.com/icon?family=Material+Icons"
   rel="stylesheet"
 />
 
-<nav class="bg-white border-b border-gray-200 px-4">
-  <div class="max-w-7xl mx-auto flex items-center h-14">
+<nav class="bg-white border-b border-gray-200 h-14">
+  <!-- FULL WIDTH WRAPPER -->
+  <div class="relative h-full flex items-center px-4">
 
-    <!-- Left: Logo -->
+    <!-- LEFT: Logo (true far left) -->
     <div class="flex items-center gap-2">
       <img
         src="{{ url_for('static', path='gorhino-logo.png') }}"
@@ -18,24 +19,16 @@
       />
     </div>
 
-    <!-- Middle: Navigation icons -->
-    <div class="flex-1 flex justify-center">
-      <div class="flex items-center gap-8 text-gray-600">
-
-        {{ mac_icons.nav_icon("groups", "CRM","/crm") }}
-
-        {{ mac_icons.nav_icon("event", "Bookings","/booking") }}
-
-        {{ mac_icons.nav_icon("store", "Stores","/establishment") }}
-
-        {{ mac_icons.nav_icon("settings", "Settings","/testing") }}
-        
-
-      </div>
+    <!-- CENTER: Icons (true viewport center) -->
+    <div class="absolute left-1/2 -translate-x-1/2 flex items-center gap-8 text-gray-600">
+      {{ mac_icons.nav_icon("groups", "CRM","/crm") }}
+      {{ mac_icons.nav_icon("event", "Bookings","/booking") }}
+      {{ mac_icons.nav_icon("store", "Stores","/establishment") }}
+      {{ mac_icons.nav_icon("settings", "Settings","/testing") }}
     </div>
 
-    <!-- Right: User -->
-    <div class="flex items-center gap-2 text-gray-700">
+    <!-- RIGHT: User (true far right) -->
+    <div class="ml-auto flex items-center gap-2 text-gray-700">
       <span class="material-icons">account_circle</span>
       <span class="text-sm font-medium">
         {{ current_user.name if current_user else "User" }}

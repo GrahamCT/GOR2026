@@ -1,11 +1,9 @@
 {% macro nav_icon(icon_name, label="", nav_url="#") %}
-  <a href="{{ nav_url }}" class="hover:text-lime-400 flex flex-col items-center text-xs text-gray-600">
-    <span class="material-icons">{{ icon_name }}</span>
+  <a href="{{ nav_url }}" class="flex flex-col items-center gap-0.5 text-xs text-gray-600 hover:text-lime-400">
+    <span class="material-symbols-outlined leading-none">{{ icon_name }}</span>
 
     {% if label %}
-      <span class="text-xs">{{ label }}</span>
+      <span class="text-xs leading-none">{{ label }}</span>
     {% endif %}
-
   </a>
-
 {% endmacro %}
