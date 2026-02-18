@@ -1,29 +1,66 @@
 {% extends "/base.html" %}
 
-
 {% block content %}
 
-<div class="bg-white border border-slate-200 rounded-2xl shadow-sm
-            flex items-center h-10 mb-6 px-3 w-96">
+<style>
+  /* show indicator while HTMX request is in-flight */
+  #search-indicator { display: none; }
+  #search-indicator.htmx-request { display: flex; }
+</style>
+
+<form
+  hx-post="/crm/get_client"
+  hx-trigger="submit"
+  hx-target="#client-result"
+  hx-swap="innerHTML"
+  hx-on::after-request="this.reset(); this.querySelector('input').focus();"
+  hx-indicator="#search-indicator"
+  class="bg-white border border-slate-200 rounded-2xl shadow-sm
+         flex items-center h-10 mb-6 px-3 w-96"
+>
   <span class="material-symbols-outlined text-slate-600">
     manage_search
   </span>
 
-  <input
-    type="text"
-    placeholder="Enter Mobile or Customer No to search on ..."
-    class="flex-1 ml-2 border-none outline-none
-           text-sm text-slate-700 placeholder-slate-400"
-  />
+  <div class="relative flex-1 ml-2">
+    <input
+      type="text"
+      name="search_for"
+      placeholder="Enter Mobile or Customer No"
+      class="w-full border-none outline-none text-lg text-slate-700 placeholder-slate-400 pr-8"
+      required
+    />
 
+    <!-- Spinner inside input (right side) -->
+    <div
+      id="search-indicator"
+      class="absolute right-2 top-1/2 -translate-y-1/2 items-center"
+      aria-label="Searching"
+    >
+      <svg class="animate-spin h-6 w-6 text-[#B1D154]" viewBox="0 0 24 24">
+        <circle
+          class="opacity-25"
+          cx="12"
+          cy="12"
+          r="10"
+          stroke="currentColor"
+          stroke-width="4"
+          fill="none"
+        ></circle>
+        <path
+          class="opacity-75"
+          fill="currentColor"
+          d="M4 12a8 8 0 018-8v8H4z"
+        ></path>
+      </svg>
+    </div>
+  </div>
+</form>
+
+<div id="client-result">
+  <div class="text-1xl text-slate-400 ml-4">
+    waiting for search results...
+  </div>
 </div>
 
-{% include 'crm/_card_data.html' %}
-
-
-
-
 {% endblock %}
-
-
-
