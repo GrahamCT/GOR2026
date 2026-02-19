@@ -46,7 +46,7 @@ async def get_client( request: Request, search_for:str =Form(...),):
         context = {
          "request": request,
          "search_for": search_for,
-         "rows":rows
+         "customers":rows
          # add client data here
          }
 
