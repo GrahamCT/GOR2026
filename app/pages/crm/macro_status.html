@@ -1,0 +1,15 @@
+{% macro status_circle(status) %}
+
+    {% set color_map = {
+        "ACTIVE": "bg-green-500",
+        "SUSPEND": "bg-orange-400",
+        "CANCEL": "bg-red-500",
+        "WAIT": "bg-blue-400"
+    } %}
+
+    {% set color = color_map.get(status|upper, "bg-gray-300") %}
+
+    <span class="inline-block w-3 h-3 rounded-full {{ color }}"  title="{{ status|capitalize }}">
+    </span>
+
+{% endmacro %}

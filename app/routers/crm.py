@@ -4,8 +4,6 @@ import app.services.dal as dal
 
 #TEST: 0842908212 - MULTIPLE 0824697194 - SINGLE
 
-
-
 router = APIRouter(prefix="/crm", tags=["crm"])
 
 @router.get("/")
@@ -34,10 +32,23 @@ async def get_client( request: Request, search_for:str =Form(...),):
         return templates.TemplateResponse('crm/_record_not_found.html', context)
     
     if len(rows)==1:
+
+        sql = "exec [spGetCustomerData_2026] ?"
+        data  = dal.generic_fetch_multiple_datasets(sql, rows[0]['id'])
+        customer = data['result_1'][0]
+        mandates= data['result_2']
+        benefits = data['result_3']
+        vehicles = data['result_5']
+
+
+
         context = {
          "request": request,
          "search_for": search_for,
-         # add client data here
+         "customer": customer,
+         "mandates": mandates,
+         "benefits": benefits,
+         "vehicles": vehicles
          }
 
         return templates.TemplateResponse('crm/_card_data.html', context)
@@ -51,6 +62,17 @@ async def get_client( request: Request, search_for:str =Form(...),):
          }
 
         return templates.TemplateResponse('crm/_multiple_found.html', context)
+    
+@router.get("/get_customer/{customer_id}")
+async def get_client_data( request: Request, customer_id: int):
+
+    context = {
+         "request": request,
+         "customer_id": customer_id
+         }
+
+    return templates.TemplateResponse('crm/_card_data.html', context)
+
 
 
 

@@ -1,46 +1,102 @@
-<div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4">
+{% from "crm/macro_status.html" import status_circle %}
+
+<div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-12 gap-4 items-stretch">
 
   <!-- Card 1 -->
-  <section class="bg-white border border-slate-200 rounded-2xl shadow-sm flex flex-col min-h-72 max-h-96">
+  <section class="bg-white border border-slate-200 rounded-2xl shadow-sm flex flex-col h-96 xl:col-span-4">
     <header class="flex items-center gap-2 px-4 py-3 border-b border-slate-100">
       <span class="material-symbols-outlined text-lime-400">group</span>
       <h2 class="text-lg font-semibold text-lime-800">Customer</h2>
     </header>
+
     <div class="flex-1 min-h-0 overflow-y-auto px-4 py-3">
-      <div class="text-sm text-slate-500">Waiting for data...</div>
+      <span class="text-slate-800 font-semibold">
+        {{ customer.customer_number }}
+      </span>
+
+      <div class="flex items-center gap-2 mt-2">
+        <span class="material-symbols-outlined text-lime-400">person</span>
+        <span class="text-slate-800 font-semibold">{{ customer.first_name }} {{ customer.last_name }}</span>
+      </div>
+
+      <div class="flex items-center gap-2 mt-2">
+        <span class="material-symbols-outlined text-lime-400">call</span>
+        <span class="text-slate-800 font-semibold">{{ customer.mobile_number }}</span>
+      </div>
+
+      <div class="flex items-center gap-2 mt-2">
+        <span class="material-symbols-outlined text-lime-400">mail</span>
+        <span class="text-slate-800 font-semibold">{{ customer.email_address }}</span>
+      </div>
+
+      <div class="flex items-center gap-2 mt-2">
+        <span class="material-symbols-outlined text-lime-400">corporate_fare</span>
+        <span class="text-slate-800 font-semibold">{{ customer.corp_client }}</span>
+      </div>
+
+      <div class="flex items-center gap-2 mt-3">
+        <span class="material-symbols-outlined text-lime-400">dining</span>
+        <a class="text-slate-800 font-semibold hover:underline underline-offset-4" href="#">
+          View Bookings
+        </a>
+      </div>
     </div>
   </section>
 
-  <!-- Card 2 -->
-  <section class="bg-white border border-slate-200 rounded-2xl shadow-sm flex flex-col h-72">
+  <!-- Card 2 (Narrow) -->
+  <section class="bg-white border border-slate-200 rounded-2xl shadow-sm flex flex-col h-96 xl:col-span-2">
     <header class="flex items-center gap-2 px-4 py-3 border-b border-slate-100">
       <span class="material-symbols-outlined text-lime-400">menu_book</span>
       <h2 class="text-lg font-semibold text-lime-800">Mandates</h2>
     </header>
-    <div class="flex-1 min-h-0 overflow-y-auto px-4 py-3">
-      <div class="text-sm text-slate-500">Waiting for data...</div>
+
+    <div class="flex-1 min-h-0 overflow-y-auto px-4 py-3 space-y-2">
+      {% for mandate in mandates %}
+        <div class="flex items-center justify-between gap-2">
+          <span class="text-slate-800 font-semibold truncate" title="{{ mandate.mandate_number }}">
+            {{ mandate.mandate_number }}
+          </span>
+          {{ status_circle(mandate.status) }}
+        </div>
+      {% endfor %}
     </div>
   </section>
 
   <!-- Card 3 -->
-  <section class="bg-white border border-slate-200 rounded-2xl shadow-sm flex flex-col h-72">
+  <section class="bg-white border border-slate-200 rounded-2xl shadow-sm flex flex-col h-96 xl:col-span-3">
     <header class="flex items-center gap-2 px-4 py-3 border-b border-slate-100">
       <span class="material-symbols-outlined text-lime-400">coffee</span>
       <h2 class="text-lg font-semibold text-lime-800">Benefits</h2>
     </header>
-    <div class="flex-1 min-h-0 overflow-y-auto px-4 py-3">
-      <div class="text-sm text-slate-500">Waiting for data...</div>
+
+    <div class="flex-1 min-h-0 overflow-y-auto px-4 py-3 space-y-2">
+      {% for benefit in benefits %}
+        <div class="flex items-center gap-2">
+          <span class="text-slate-800 font-semibold">
+            {{ benefit.short_desc }} {{ benefit.category }}
+          </span>
+        </div>
+      {% endfor %}
     </div>
   </section>
 
   <!-- Card 4 -->
-  <section class="bg-white border border-slate-200 rounded-2xl shadow-sm flex flex-col h-72">
+  <section class="bg-white border border-slate-200 rounded-2xl shadow-sm flex flex-col h-96 xl:col-span-3">
     <header class="flex items-center gap-2 px-4 py-3 border-b border-slate-100">
       <span class="material-symbols-outlined text-lime-400">directions_car</span>
       <h2 class="text-lg font-semibold text-lime-800">Vehicles</h2>
     </header>
-    <div class="flex-1 min-h-0 overflow-y-auto px-4 py-3">
-      <div class="text-sm text-slate-500">Waiting for data...</div>
+
+    <div class="flex-1 min-h-0 overflow-y-auto px-4 py-3 space-y-2">
+      <div class="text-slate-800 font-semibold">
+        Make - Model - Colour - Registration
+      </div>
+
+      {% for vehicle in vehicles %}
+        <div class="text-slate-800 font-semibold">
+          {{ vehicle.make }}-{{ vehicle.model }}-{{ vehicle.colour }}-{{ vehicle.registration }}
+        </div>
+      {% endfor %}
     </div>
   </section>
 

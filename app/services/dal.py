@@ -44,3 +44,29 @@ def generic_fetch_data(query: str, params: tuple = None):
     # Convert rows to list of dicts
     results = [dict(zip(columns, row)) for row in rows]
     return results    
+
+
+def generic_fetch_multiple_datasets(query: str, params: tuple = None):
+    results = {}
+    set_index = 1
+
+    with pyodbc.connect(CONN_STRING) as conn:
+        cursor = conn.cursor()
+        cursor.execute(query, params or ())
+
+        while True:
+            if cursor.description:
+                columns = [col[0] for col in cursor.description]
+                rows = cursor.fetchall()
+
+                results[f"result_{set_index}"] = [
+                    dict(zip(columns, row))
+                    for row in rows
+                ]
+
+                set_index += 1
+
+            if not cursor.nextset():
+                break
+
+    return results or None
