@@ -16,30 +16,36 @@
 
       <div class="flex items-center gap-2 mt-2">
         <span class="material-symbols-outlined text-lime-400">person</span>
-        <span class="text-slate-800 font-semibold">{{ customer.first_name }} {{ customer.last_name }}</span>
+        <span class="text-slate-800 ">{{ customer.first_name }} {{ customer.last_name }}</span>
       </div>
 
       <div class="flex items-center gap-2 mt-2">
         <span class="material-symbols-outlined text-lime-400">call</span>
-        <span class="text-slate-800 font-semibold">{{ customer.mobile_number }}</span>
+        <span class="text-slate-800 ">{{ customer.mobile_number }}</span>
       </div>
 
       <div class="flex items-center gap-2 mt-2">
         <span class="material-symbols-outlined text-lime-400">mail</span>
-        <span class="text-slate-800 font-semibold">{{ customer.email_address }}</span>
+        <span class="text-slate-800 ">{{ customer.email_address }}</span>
       </div>
 
       <div class="flex items-center gap-2 mt-2">
         <span class="material-symbols-outlined text-lime-400">corporate_fare</span>
-        <span class="text-slate-800 font-semibold">{{ customer.corp_client }}</span>
+        <span class="text-slate-800 ">{{ customer.corp_client }}</span>
       </div>
 
       <div class="flex items-center gap-2 mt-3">
         <span class="material-symbols-outlined text-lime-400">dining</span>
-        <a class="text-slate-800 font-semibold hover:underline underline-offset-4" href="#">
+        <a class="text-slate-800 hover:underline underline-offset-4" href="#">
           View Bookings
         </a>
       </div>
+      <button
+        onclick="openBookingModal()"
+        class="bg-[#B1D154] text-slate-900 px-4 py-2 rounded-xl font-semibold hover:bg-lime-500 transition">
+        Create Booking
+      </button>
+
     </div>
   </section>
 
@@ -53,7 +59,7 @@
     <div class="flex-1 min-h-0 overflow-y-auto px-4 py-3 space-y-2">
       {% for mandate in mandates %}
         <div class="flex items-center justify-between gap-2">
-          <span class="text-slate-800 font-semibold truncate" title="{{ mandate.mandate_number }}">
+          <span class="text-slate-800 truncate" title="{{ mandate.mandate_number }}">
             {{ mandate.mandate_number }}
           </span>
           {{ status_circle(mandate.status) }}
@@ -72,7 +78,7 @@
     <div class="flex-1 min-h-0 overflow-y-auto px-4 py-3 space-y-2">
       {% for benefit in benefits %}
         <div class="flex items-center gap-2">
-          <span class="text-slate-800 font-semibold">
+          <span class="text-slate-800">
             {{ benefit.short_desc }} {{ benefit.category }}
           </span>
         </div>
@@ -93,7 +99,7 @@
       </div>
 
       {% for vehicle in vehicles %}
-        <div class="text-slate-800 font-semibold">
+        <div class="text-slate-800">
           {{ vehicle.make }}-{{ vehicle.model }}-{{ vehicle.colour }}-{{ vehicle.registration }}
         </div>
       {% endfor %}
@@ -101,3 +107,79 @@
   </section>
 
 </div>
+
+<!-- Booking Modal -->
+<div
+    id="bookingModal"
+    class="fixed inset-0 z-50 hidden items-center justify-center"
+>
+    <!-- Overlay -->
+    <div
+        class="absolute inset-0 bg-black/50 backdrop-blur-sm"
+        onclick="closeBookingModal()"
+    ></div>
+
+    <!-- Modal Card -->
+    <div
+        class="relative bg-white w-full max-w-lg rounded-2xl shadow-2xl p-6 z-10"
+    >
+        <!-- Header -->
+        <div class="flex items-center justify-between mb-4">
+            <h2 class="text-xl font-bold text-slate-800">
+                New Booking
+            </h2>
+
+            <button
+                onclick="closeBookingModal()"
+                class="text-slate-500 hover:text-slate-800"
+            >
+                ✕
+            </button>
+        </div>
+
+        <!-- Body -->
+        <div class="space-y-4">
+            <input
+                type="text"
+                placeholder="Customer Name"
+                class="w-full border border-slate-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#B1D154]"
+            />
+
+            <input
+                type="date"
+                class="w-full border border-slate-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#B1D154]"
+            />
+        </div>
+
+        <!-- Footer -->
+        <div class="flex justify-end gap-3 mt-6">
+            <button
+                onclick="closeBookingModal()"
+                class="px-4 py-2 rounded-lg border border-slate-300 text-slate-700 hover:bg-slate-100"
+            >
+                Cancel
+            </button>
+
+            <button
+                class="px-4 py-2 rounded-lg bg-[#B1D154] text-slate-900 font-semibold hover:bg-lime-500"
+            >
+                Save Booking
+            </button>
+        </div>
+    </div>
+</div>
+
+
+<script>
+function openBookingModal() {
+    const modal = document.getElementById('bookingModal');
+    modal.classList.remove('hidden');
+    modal.classList.add('flex');
+}
+
+function closeBookingModal() {
+    const modal = document.getElementById('bookingModal');
+    modal.classList.add('hidden');
+    modal.classList.remove('flex');
+}
+</script>

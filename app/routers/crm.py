@@ -66,34 +66,23 @@ async def get_client( request: Request, search_for:str =Form(...),):
 @router.get("/get_customer/{customer_id}")
 async def get_client_data( request: Request, customer_id: int):
 
+
+    sql = "exec [spGetCustomerData_2026] ?"
+    data  = dal.generic_fetch_multiple_datasets(sql, customer_id)
+    customer = data['result_1'][0]
+    mandates= data['result_2']
+    benefits = data['result_3']
+    vehicles = data['result_5']
+
+
+
     context = {
          "request": request,
-         "customer_id": customer_id
+         "customer": customer,
+         "mandates": mandates,
+         "benefits": benefits,
+         "vehicles": vehicles
          }
 
     return templates.TemplateResponse('crm/_card_data.html', context)
-
-
-
-
-
-
-
-
-    # s=1
-    # context = {
-    #     "request": request,
-    #     "search_for": search_for,
-    #     # add client data here
-    # }
-
-    # # return templates.TemplateResponse('crm/_card_data.html', context)
-
-    
-
-    # return templates.TemplateResponse('crm/_multiple_found.html', context)
-
-
-
-
 
