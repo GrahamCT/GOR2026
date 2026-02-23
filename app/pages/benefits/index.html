@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>The Unlimited Lifestyle</title>
+
+  <link rel="icon" type="image/ico" href="{{ url_for('static', path='fav.png') }}">
+
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- HTMX -->
+  <script src="https://unpkg.com/htmx.org@1.9.12"></script>
+</head>
+
+<body
+  class="min-h-screen font-sans"
+  style="background-image:url('{{ url_for('static', path='login-bg.jpg') }}'); background-size:cover; background-position:center; background-repeat:no-repeat;"
+>
+
+  <!-- spacing like original (<br/><br/>) -->
+  <div class="h-8"></div>
+  <div class="h-8"></div>
+
+  <!-- Logo (original had padding-left:5px and sits near top left) -->
+  <p class="pl-[5px]">
+    <img
+      src="{{ url_for('static', path='tug_logo.png') }}"
+      alt="The Unlimited"
+      class="h-12 w-auto"
+    />
+  </p>
+
+  <div class="h-8"></div>
+
+  <!-- Login Container: width 500, margin-top 5%, right aligned with right margin ~20% -->
+  <div
+    class="w-[500px] max-w-[92vw]
+           bg-white rounded-[15px] shadow-[0_0_15px_rgba(0,0,0,0.5)]
+           px-[10px] pt-[20px] pb-[35px]
+           text-center
+           ml-auto mr-[20%] mt-[5vh]"
+  >
+    <h3 class="text-black text-[24px] font-black m-0 p-0 leading-tight">
+      Welcome to The Unlimited lifestyle!
+    </h3>
+
+    <p class="text-[18px] text-[#222] mt-2">
+      Login below to unlock your unbelievable benefits.
+    </p>
+
+    <div class="h-4"></div>
+
+    <form action="" method="post" class="space-y-0">
+      <input name="email_address" type="hidden" value="0" />
+
+      <!-- input -->
+      <input
+        name="mobile_number"
+        type="text"
+        maxlength="10"
+        required
+        placeholder=""
+        class="w-[330px] max-w-full
+               px-[5px] py-[5px]
+               border-0 border-b-2 border-b-[#999]
+               outline-none
+               text-center text-[18px] text-[#FF0033]
+               focus:border-b-[#FF0033]"
+      />
+
+      <div class="mt-2">
+        <span class="text-[13px] text-[#999]">
+          Enter the cellphone number that you signed up with EG. 0821234567
+        </span>
+      </div>
+
+      <div class="h-6"></div>
+
+      <!-- button matches original: red bg, white border; hover invert -->
+      <input
+        type="submit"
+        value="LOGIN"
+        class="px-[20px] py-[10px]
+               bg-[#FF0033] text-white
+               border-2 border-white
+               outline-none
+               text-[16px] font-bold
+               cursor-pointer
+               hover:bg-white hover:text-[#FF0033] hover:border-[#FF0033]
+               transition"
+      />
+    </form>
+
+    <!-- error placeholder -->
+    <p class="text-[13px] text-[#FF0033] mt-4">
+      {{ error or "" }}
+    </p>
+  </div>
+
+  <!-- container below (original empty / optional forgot link) -->
+  <div class="w-[500px] max-w-[92vw] mx-auto mt-4">
+    {# Optional:
+    <p class="text-right">
+      <a href="#" class="text-[#FF0033] no-underline text-[13px] inline-block px-5 py-2 hover:bg-[#ccc] hover:rounded">
+        FORGOT POLICY NUMBER
+      </a>
+    </p>
+    #}
+  </div>
+
+</body>
+</html>
