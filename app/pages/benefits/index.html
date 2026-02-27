@@ -52,16 +52,23 @@
 
     <div class="h-4"></div>
 
-    <form action="" method="post" class="space-y-0">
+    <form 
+      class="space-y-0"
+      hx-post="/benefits/tug_login"
+      hx-target="#login-result"
+      hx-swap="innerHTML"
+      hx-indicator="#login-indicator"
+      >
+
       <input name="email_address" type="hidden" value="0" />
 
       <!-- input -->
       <input
         name="mobile_number"
-        type="text"
+        type="number"
         maxlength="10"
+        step="1"
         required
-        placeholder=""
         class="w-[330px] max-w-full
                px-[5px] py-[5px]
                border-0 border-b-2 border-b-[#999]
@@ -91,6 +98,8 @@
                hover:bg-white hover:text-[#FF0033] hover:border-[#FF0033]
                transition"
       />
+
+      <div id="login-result" class="mt-4"></div>
     </form>
 
     <!-- error placeholder -->

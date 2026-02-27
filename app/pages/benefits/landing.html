@@ -1,0 +1,19 @@
+{% extends "benefits/base.html" %}
+
+{% block content %}
+Landing page 
+<br> Customer: {{customer_id}} <br>
+if customer is cancelled or suspened.  notice here indicating problem with accoutn contact support
+<br>
+if customer is not logged in ie no customer id, then redirect to login
+<br>
+Else show partners here...
+
+<br>
+customer Data:
+{{customer}}
+
+
+
+
+{% endblock content %}
