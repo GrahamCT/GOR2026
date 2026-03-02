@@ -7,6 +7,12 @@ from app.core.templates import templates
 
 router = APIRouter(prefix="/benefits", tags=["benefits"])
 
+PARTNERS = [
+        {"id": 1, "name": "Partner A", "logo": "https://via.placeholder.com/80?text=A"},
+        {"id": 2, "name": "Partner B", "logo": "https://via.placeholder.com/80?text=B"},
+        {"id": 3, "name": "Partner C", "logo": "https://via.placeholder.com/80?text=C"},
+    ]
+
 
 @router.get("/")
 async def beneifts(request: Request):
@@ -31,21 +37,22 @@ async def tug_login(request: Request, mobile_number: str = Form(...), email_addr
         </div>
         """
     
-    customer_id = customer[0]['client_id']
-
     response = Response(status_code=204)
+    if customer[0]['status'] !="ACTIVE":
+        response.headers["HX-Redirect"] = "/benefits/support"
+    else:
+        customer_id = customer[0]['client_id']
     
-    response.set_cookie(
-        key="customer_id",
-        value = customer_id,
-        httponly=True,      # JS cannot read it
-        secure=False,       # True in production (HTTPS)
-        samesite="lax",     # Good default
-        max_age=60 * 60 * 4 # 4 hours
-    ) 
+        response.set_cookie(
+            key="customer_id",
+            value = customer_id,
+            httponly=True,      # JS cannot read it
+            secure=False,       # True in production (HTTPS)
+            samesite="lax",     # Good default
+            max_age=60 * 60 * 4 # 4 hours
+        ) 
+        response.headers["HX-Redirect"] = "/benefits/landing"
     
-    
-    response.headers["HX-Redirect"] = "/benefits/landing"
     return response
 
 
@@ -56,13 +63,65 @@ async def landing(request: Request):
     if not customer_id:
         return RedirectResponse("/benefits")
     
-
-
-    query = "select id, customer_number, first_name, last_name, email_address, mobile_number from customer where id = ?"
-
+    query = "exec [tug_GetInstantCustomer_fromID] ?"
     customer = DAL.dal(1,query,(customer_id,),'TUG')
 
-
-    
-    context = {"request": request, "customer_id": customer_id, "customer": customer[0]}
+    context = {"request": request, 
+               "customer_id": customer_id, 
+                "customer": customer[0]}
     return templates.TemplateResponse("benefits/landing.html", context)
+
+
+@router.get("/partners", response_class=HTMLResponse)
+async def partners_partial(request: Request):
+
+    sql = "select id, partner_name, logo_image  from book_Partner order by NEWID()"
+
+    partners = DAL.dal(1,sql,None,'TUG')
+
+
+    return templates.TemplateResponse(
+        "benefits/_partners.html",
+        {"request": request, "partners": partners},
+    )
+
+
+@router.get("/partner/{partner_id}", response_class=HTMLResponse)
+async def partner_detail_partial(request: Request, partner_id: int):
+    # Returns ONLY the detail "view" partial for selected partner
+
+    sql = "select * from book_Partner where id = ?"
+
+    partner = DAL.dal(1,sql,(partner_id,),'TUG')
+    if not partner:
+        # Keep it simple for scaffold
+        return HTMLResponse("<div>Partner not found</div>", status_code=404)
+
+    customer_id = request.cookies.get("customer_id")
+
+    if customer_id:
+        query = 'select first_name, last_name, email_address, mobile_number from customer where id = ?'
+        customer = DAL.dal(1,query,(customer_id,),'TUG')
+
+
+
+    return templates.TemplateResponse(
+        "benefits/_partner_detail.html",
+        {"request": request, "partner": partner[0], "customer":customer[0]},
+    )
+
+
+
+
+
+@router.get("/support")
+async def support(request:Request):
+    context = {"request": request}
+    return templates.TemplateResponse("benefits/support.html", context)
+
+
+@router.get("/partner/{partner_id}/detail")
+async def get_partner(request:Request):
+    context = {"request": request}
+    return templates.TemplateResponse("benefits/support.html", context)
+

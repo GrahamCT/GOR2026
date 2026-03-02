@@ -15,12 +15,12 @@ def getConstring(con):
     if con=='TUG':
         return os.getenv("TUG_CONN_STRING")
 
-def dal(typeExOrFetch, query: str, params: tuple=None, cons:str = 'GOR'):
+def dal(typeEx0_OrFetch1, query: str, params: tuple=None, cons:str = 'GOR'):
     # type=0 execute, 1=fetch all
 
     constring = getConstring(cons.upper())
 
-    if typeExOrFetch==0: #generic execute
+    if typeEx0_OrFetch1==0: #generic execute
         try:
             with pyodbc.connect(constring) as conn:
                 cursor = conn.cursor()
@@ -30,7 +30,7 @@ def dal(typeExOrFetch, query: str, params: tuple=None, cons:str = 'GOR'):
         except Exception as e:
             print(f"Database execution error: {e}")
             return "error"
-    elif typeExOrFetch ==1:
+    elif typeEx0_OrFetch1 ==1:
         with pyodbc.connect(constring) as conn:
             cursor = conn.cursor()
             cursor.execute(query, params or ())

@@ -1,0 +1,40 @@
+{% extends "benefits/base.html" %}
+
+{% block content %}
+
+    <img
+      src="{{ url_for('static', path='contact-slider.jpg') }}"
+      alt="The Unlimited - Are you Ready?"
+
+    />
+
+    <section class="bg-white">
+  <div class="mx-auto max-w-6xl px-4 py-12 sm:px-6 sm:py-16 lg:px-8">
+    <div>
+      <h1 class="text-balance text-2xl font-semibold tracking-tight text-gray-900 sm:text-3xl">
+        It looks like there may be an issue with your subscription. Please contact our support team and we’ll sort it out for you.
+      </h1>
+
+      <div class="mt-6 space-y-2 text-gray-700">
+        <p class="text-base sm:text-lg">
+          Call us on
+          <a
+            href="tel:0861990000"
+            class="font-semibold text-gray-900 underline decoration-gray-300 underline-offset-4 hover:decoration-gray-500"
+          >
+            0861 990 000
+          </a>.
+        </p>
+
+        <p class="text-sm sm:text-base text-gray-600">
+          We’re available Monday to Friday, 9am to 6pm. We are closed on public holidays.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+
+{% endblock content %}

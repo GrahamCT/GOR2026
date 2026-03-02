@@ -1,0 +1,26 @@
+<section>
+  <div style="display:flex; gap:16px; flex-wrap:wrap; margin-top:16px;justify-content:center;">
+    {% for p in partners %}
+<button
+  type="button"
+  hx-get="/benefits/partner/{{ p.id }}"
+  hx-target="#app"
+  hx-swap="innerHTML"
+  class="w-[163px] h-[163px] bg-white rounded-2xl shadow-md
+         border border-slate-100
+         flex items-center justify-center
+         hover:shadow-lg hover:-translate-y-0.5
+         active:translate-y-0
+         transition"
+>
+  <!-- Logo -->
+  <img
+  
+    src="{{ url_for('static', path=p.logo_image) }}"
+    alt="Partner logo"
+    class="max-h-[110px] max-w-[110px] object-contain"
+  />
+</button>
+    {% endfor %}
+  </div>
+</section>

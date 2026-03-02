@@ -1,0 +1,117 @@
+<section>
+  <div class="flex items-center justify-between my-5">
+  
+  <h2 class="text-[#EE3641] text-[28px] font-extrabold">
+    {{ partner.partner_name }}
+  </h2>
+
+  <button
+    hx-get="/benefits/partners"
+    hx-target="#app"
+    hx-swap="innerHTML"
+    class="px-4 py-2 bg-slate-200 hover:bg-slate-300 text-sm font-medium rounded-lg transition"
+  >
+    ← Return to Partners
+  </button>
+
+</div>
+
+  
+
+
+ <div class="relative w-full max-w-[1280px] mx-auto">
+  
+  <!-- Main image -->
+  <img
+    src="{{ url_for('static', path=partner.landing_image) }}"
+    alt="Main image"
+    class="w-full h-auto rounded-2xl shadow-lg"
+  />
+
+  <!-- Logo overlay -->
+  <img
+    src="{{ url_for('static', path=partner.logo_image) }}"
+    alt="Logo"
+    class="absolute top-4 left-4 w-36 h-36 object-contain bg-white/90 rounded-xl p-2 shadow"
+  />
+
+</div>
+
+
+
+  <div class="[&_p]:mb-6">
+  
+  <h2 class="text-[#EE3641] text-[26px]  my-5 font-extrabold">
+        Restaurant Write-Up
+  </h2>
+
+
+      <div class="block font-sans text-[20px] font-light mb-5 text-left break-words">
+      {{ partner.partner_write_up | safe }}
+    </div>
+
+  <h2 class="text-[#EE3641] text-[26px]  my-5 font-extrabold">
+        Restaurant Offer
+  </h2>
+
+<div class="block font-sans text-[20px] font-light mb-5 text-left break-words">
+      {{ partner.partner_offer | safe }}
+    </div>
+  </div>
+
+
+
+<div class="mt-6 p-4 border border-dashed border-slate-400 rounded-xl">
+  
+  <h3 class="text-lg font-semibold mb-4">
+    Don't delay {{customer.first_name}} - Request your voucher code for {{partner.partner_name}} now!!
+  </h3>
+
+  <form
+    hx-post="/benefits/request-voucher"
+    hx-target="#voucher-response"
+    hx-swap="innerHTML"
+    class="flex flex-col sm:flex-row gap-3"
+  >
+
+    <input
+      type="text"
+      name="name"
+      placeholder="Your name"
+      required
+      class="flex-1 px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-[#EE3641] focus:outline-none"
+      value="{{customer.first_name}} {{customer.last_name}}"
+    />
+
+    <input
+      type="email"
+      name="email"
+      placeholder="Your email"
+      required
+      class="flex-1 px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-[#EE3641] focus:outline-none"
+      value="{{customer.email_address or ''}}"
+    />
+
+    <input
+      type="tel"
+      name="phone"
+      placeholder="Your phone"
+      required
+      class="flex-1 px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-[#EE3641] focus:outline-none"
+      value ="{{customer.mobile_number or '' }}"
+    />
+
+    <button
+      type="submit"
+      class="px-5 py-2 bg-[#EE3641] text-white font-medium rounded-lg hover:bg-red-600 transition whitespace-nowrap"
+    >
+      Request Voucher
+    </button>
+
+  </form>
+
+  <div id="voucher-response" class="mt-4"></div>
+
+</div>
+
+</section>

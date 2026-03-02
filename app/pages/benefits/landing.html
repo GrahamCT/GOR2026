@@ -1,19 +1,45 @@
 {% extends "benefits/base.html" %}
 
 {% block content %}
-Landing page 
-<br> Customer: {{customer_id}} <br>
-if customer is cancelled or suspened.  notice here indicating problem with accoutn contact support
-<br>
-if customer is not logged in ie no customer id, then redirect to login
-<br>
-Else show partners here...
 
-<br>
-customer Data:
-{{customer}}
+    <img
+      src="{{ url_for('static', path='general-slider.jpg') }}"
+      alt="The Unlimited - Are you Ready?"
+    />
+
+
+    <img
+      src="{{ url_for('static', path='yes.jpg') }}"
+      alt="The Unlimited - Are you Ready?"
+    />
+
+<section class="bg-white">
+  <div class="mx-auto max-w-6xl px-2 py-6 sm:px-6 sm:py-16 lg:px-8">
+    <div class="text-center">
+      <h2 class="text-black text-[30px] text-center my-5 font-extrabold">
+        Congratulations! You've unlocked Unbelievable Savings.
+      </h2>
+    
+          <h2 class="mt-4 text-lg text-gray-700 sm:text-2xl">
+        Start saving now with massive discounts brought to you by SA's biggest brands.
+      </h2>
+    </div>
+  </div>
+</section>
+
+
+    <!-- One container that will be swapped between list + detail -->
+    <main id="app"
+          hx-get="/benefits/partners"
+          hx-trigger="load"
+          hx-swap="innerHTML">
+      Loading...
+    </main>
+
+
 
 
 
 
 {% endblock content %}
+
