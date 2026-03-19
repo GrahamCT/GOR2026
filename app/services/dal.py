@@ -30,6 +30,7 @@ def dal(typeEx0_OrFetch1, query: str, params: tuple=None, cons:str = 'GOR'):
         except Exception as e:
             print(f"Database execution error: {e}")
             return "error"
+    
     elif typeEx0_OrFetch1 ==1:
         with pyodbc.connect(constring) as conn:
             cursor = conn.cursor()
@@ -43,6 +44,17 @@ def dal(typeEx0_OrFetch1, query: str, params: tuple=None, cons:str = 'GOR'):
         # Convert rows to list of dicts
         results = [dict(zip(columns, row)) for row in rows]
         return results  
+    
+    elif typeEx0_OrFetch1 == 2: #generic execute with return row
+         with pyodbc.connect(constring) as conn:
+                cursor = conn.cursor()
+                cursor.execute(query, params or ())
+                row = cursor.fetchone()
+                conn.commit()
+                
+                return row
+
+
 
   
 def generic_execute(query: str, params: tuple = None, constring = CONN_STRING):

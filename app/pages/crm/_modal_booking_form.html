@@ -1,0 +1,105 @@
+  <form method="post" action="" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+    <div>
+      <label for="booking_datetime" class="block text-sm font-semibold text-slate-700 mb-2">
+        Booking Date &amp; Time
+      </label>
+      <input
+        type="datetime-local"
+        id="booking_datetime"
+        name="booking_datetime"
+        class="w-full rounded-xl border border-slate-300 px-4 py-3 text-slate-800
+               focus:outline-none focus:ring-2 focus:ring-lime-400 focus:border-lime-400"
+      >
+    </div>
+
+    <div>
+      <label for="establishment_id" class="block text-sm font-semibold text-slate-700 mb-2">
+        Establishment
+      </label>
+      <select
+        id="establishment_id"
+        name="establishment_id"
+        class="w-full rounded-xl border border-slate-300 px-4 py-3 text-slate-800 bg-white
+               focus:outline-none focus:ring-2 focus:ring-lime-400 focus:border-lime-400"
+      >
+        <option value="">Select establishment</option>
+        {% for establishment in establishments %}
+          <option value="{{ establishment.id }}">{{ establishment.name }}</option>
+        {% endfor %}
+      </select>
+    </div>
+
+    <div>
+      <label for="origination" class="block text-sm font-semibold text-slate-700 mb-2">
+        Origination
+      </label>
+      <select
+        id="origination"
+        name="origination"
+        class="w-full rounded-xl border border-slate-300 px-4 py-3 text-slate-800 bg-white
+               focus:outline-none focus:ring-2 focus:ring-lime-400 focus:border-lime-400"
+      >
+        <option value="">Select origination</option>
+        <option value="Booking Form">Booking Form</option>
+        <option value="Call In">Call In</option>
+        <option value="Whatsapp">Whatsapp</option>
+      </select>
+    </div>
+
+    <div>
+      <label for="benefit_id" class="block text-sm font-semibold text-slate-700 mb-2">
+        Benefit
+      </label>
+      <select
+        id="benefit_id"
+        name="benefit_id"
+        class="w-full rounded-xl border border-slate-300 px-4 py-3 text-slate-800 bg-white
+               focus:outline-none focus:ring-2 focus:ring-lime-400 focus:border-lime-400"
+      >
+        <option value="">Select benefit</option>
+        {% for benefit in benefits %}
+          <option value="{{ benefit.id }}">{{ benefit.name }}</option>
+        {% endfor %}
+      </select>
+    </div>
+
+    <div class="md:col-span-2">
+      <label for="booking_details" class="block text-sm font-semibold text-slate-700 mb-2">
+        Booking Details
+      </label>
+      <textarea
+        id="booking_details"
+        name="booking_details"
+        rows="4"
+        placeholder="Enter booking details"
+        class="w-full rounded-xl border border-slate-300 px-4 py-3 text-slate-800
+               focus:outline-none focus:ring-2 focus:ring-lime-400 focus:border-lime-400"
+      ></textarea>
+    </div>
+
+    <div class="md:col-span-2">
+      <label for="value_saving_text" class="block text-sm font-semibold text-slate-700 mb-2">
+        Value Saving Text
+      </label>
+      <input
+        type="text"
+        id="value_saving_text"
+        name="value_saving_text"
+        placeholder="Enter value saving text"
+        class="w-full rounded-xl border border-slate-300 px-4 py-3 text-slate-800
+               focus:outline-none focus:ring-2 focus:ring-lime-400 focus:border-lime-400"
+      >
+    </div>
+
+    <div class="md:col-span-2 pt-2">
+      <button
+        type="submit"
+        class="inline-flex items-center justify-center rounded-xl bg-lime-500 px-6 py-3
+               text-white font-semibold shadow-sm hover:bg-lime-600 transition"
+      >
+        Save Booking
+      </button>
+    </div>
+
+  </form>

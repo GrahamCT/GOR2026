@@ -8,7 +8,7 @@
   <button
     hx-get="/benefits/partners"
     hx-target="#app"
-    hx-swap="innerHTML"
+    hx-swap="innerHTML show:#app"
     class="px-4 py-2 bg-slate-200 hover:bg-slate-300 text-sm font-medium rounded-lg transition"
   >
     ← Return to Partners
@@ -68,11 +68,24 @@
   </h3>
 
   <form
-    hx-post="/benefits/request-voucher"
-    hx-target="#voucher-response"
+    hx-post="/benefits/request_voucher"
+    hx-target="#app"
     hx-swap="innerHTML"
     class="flex flex-col sm:flex-row gap-3"
   >
+
+    <input 
+      type="hidden"
+      name="partner_id"
+      value="{{partner.id}}"
+      >
+
+      <input 
+      type="hidden"
+      name="customer_id"
+      value="{{customer.id}}"
+      >
+
 
     <input
       type="text"

@@ -8,6 +8,17 @@ Testing Page/settings
 <button class="bg-lime-400 text-white px-4 py-2 rounded">Test Button</button>
 <button class="bg-[#B1D154] text-white px-4 py-2 rounded">Test Button</button>
 
+<div id="email_result">
+  <button
+      hx-post="/testing/send-email"
+      hx-target="#email_result"
+      hx-swap="innerHTML"
+      class="bg-blue-600 text-white px-4 py-2 rounded shadow hover:bg-blue-700">
+
+      Send Voucher Email
+  </button>
+</div>
+
 
 
 {% endblock %}

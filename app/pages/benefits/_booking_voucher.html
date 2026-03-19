@@ -1,0 +1,53 @@
+<img src="{{ url_for('static', path='booking_voucher.jpg') }}" alt="The Unlimited - We've got your booking" />
+
+<h2 class="text-[#EE3641] text-[26px]  my-5 font-extrabold">
+    Congratulations {{customer.first_name}} {{customer.last_name }}<br>
+</h2>
+
+
+<div class="block font-sans text-[20px] font-light mb-5 text-left break-words">
+
+    <p>When you buy two mail meals you get up to R 100 off your second meal!</p>
+    <p>
+        Your dining Voucher code is below, we will email it to you, as well.
+    </p>
+</div>
+
+
+<div class="bg-[#F4F3F4] p-6 rounded-xl max-w-4xl mx-auto shadow-lg">
+    <div class="flex flex-col md:flex-row items-center gap-6">
+
+        <!-- Left Image -->
+        <div class="w-40 h-40 flex-shrink-0">
+            <img src="{{ url_for('static', path=partner.logo_image) }}" alt="Restaurant Logo"
+                class="w-full h-full object-contain rounded-lg bg-white p-3 shadow" />
+        </div>
+
+        <!-- Right Content -->
+        <div class="text-center md:text-left">
+            <h2 class="text-[#EE3641] text-[26px]  my-2 font-extrabold">
+                Voucher - {{partner.partner_name}}<br>
+            </h2>
+            <h2 class="text-lg font-semibold mb-2">
+                <span class="text-2xl font-bold tracking-wider block mt-1">
+                    {{voucher_number}}
+                </span>
+            </h2>
+
+
+            <p class="text-sm text-gray-600 leading-relaxed">
+                When you buy two mail meals you get up to R 100 off your second meal!<br>
+                Please note: You must use your voucher code within 12 hours otherwise it will expire.<br/>
+                Voucher codes are non-transferrable and may only be used by you.
+            </p>
+        </div>
+
+    </div>
+</div>
+
+<p class="text-center text-slate-500 mt-2 text-sm">
+    Voucher sent by mail to: {{ customer.email_address }}
+</p>
+
+
+</div>

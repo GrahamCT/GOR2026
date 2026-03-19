@@ -1,5 +1,6 @@
 from fastapi import APIRouter, Form, Request, Response
 from fastapi.responses import HTMLResponse, RedirectResponse
+from app.services import comms
 import app.services.dal as DAL
 
 
@@ -100,7 +101,7 @@ async def partner_detail_partial(request: Request, partner_id: int):
     customer_id = request.cookies.get("customer_id")
 
     if customer_id:
-        query = 'select first_name, last_name, email_address, mobile_number from customer where id = ?'
+        query = 'select id, first_name, last_name, email_address, mobile_number from customer where id = ?'
         customer = DAL.dal(1,query,(customer_id,),'TUG')
 
 
@@ -111,7 +112,44 @@ async def partner_detail_partial(request: Request, partner_id: int):
     )
 
 
+@router.post("/request_voucher")
+async def request_voucher(request:Request,
+                            name: str = Form(...),
+                            email: str = Form(...),
+                            phone: str = Form(...),
+                            partner_id: int = Form(...),
+                            customer_id: int = Form(...)
+                          ):
 
+    #get a voucher no, asssign it to user, hide the form
+    # return voucher number     
+
+    sql = "exec tug_AssignVoucher ?,?"  #partner_id, cust_id
+
+    voucher = DAL.dal(2,sql,(partner_id, customer_id), 'TUG')
+    partner = DAL.dal(1,"select * from book_partner where id =?",(partner_id,),'TUG')
+    customer= DAL.dal(1,"select * from customer where id = ?",(customer_id,), 'TUG')
+
+       
+    
+    context = {"request": request, 
+               "voucher_number":voucher[0], 
+               "partner":partner[0],
+               "customer":customer[0]
+               }
+    
+    template_data = {
+        "first_name": customer[0]['first_name'],
+        "last_name": customer[0]['last_name'],
+        "voucher": voucher[0],
+        "partner": partner[0]['partner_name']
+               }
+
+    subject = f"Your {partner[0]['partner_name']} voucher"
+
+    comms.send_email_template('grahamr@ct-international.co.za',subject,template_data, "d-cf770a728cf04053bddf62d23bde823d"  )
+   
+    return templates.TemplateResponse("benefits/_booking_voucher.html", context)
 
 
 @router.get("/support")
