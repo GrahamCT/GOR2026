@@ -1,0 +1,33 @@
+build
+tag
+push
+restart web app
+
+docker build -t gorhino-fastapi .
+docker tag gorhino-fastapi gor20206acr.azurecr.io/gorhino-fastapi:qa
+docker push gor20206acr.azurecr.io/gorhino-fastapi:qa
+
+restart web app.
+xxx
+
+
+Run this whenever:  code changed requirements.txt changed Dockerfile changed
+docker build -t gorhino-fastapi .
+
+run locally:
+docker run --env-file .env -p 8000:8000 gorhino-fastapi
+
+http://localhost:8000/login
+
+
+
+container registery
+gor20206acr
+
+registery domain name: gor20206acr.azurecr.io
+
+access keys:
+
+login_server: gor20206acr.azurecr.io
+username: gor20206acr
+password: DQeqNkUM0KZvnMSwk0AityvljkopJuxp4qqCwLyNtmUTU9Hs9DXFJQQJ99CCACrIdLPEqg7NAAACAZCRwXW8

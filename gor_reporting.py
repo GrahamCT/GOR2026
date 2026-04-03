@@ -1,6 +1,9 @@
 import os
 import shutil
 import glob
+import subprocess
+import pyodbc
+from dotenv import load_dotenv
 
 DOWNLOADS = os.path.join(os.path.expanduser("~"), "Downloads")
 DEST = r"\\CTI-AZURE-SQL1\Backup"
@@ -49,6 +52,25 @@ def main():
 
         shutil.copy2(src_path, dest_path)
         print(f"📄 Copied to DEST: {dest_path}")
+
+    # Run spFullWeeklyReport and copy results to clipboard
+    load_dotenv()
+    conn_str = os.environ["TUG_CONN_STRING"]
+    print("⏳ Running spFullWeeklyReport...")
+    with pyodbc.connect(conn_str) as conn:
+        cursor = conn.execute("EXEC spFullWeeklyReport")
+        while cursor.description is None:
+            if not cursor.nextset():
+                raise RuntimeError("spFullWeeklyReport returned no result set")
+        columns = [col[0] for col in cursor.description]
+        rows = cursor.fetchall()
+
+    lines = ["\t".join(columns)]
+    lines += ["\t".join(str(v) if v is not None else "" for v in row) for row in rows]
+    tsv = "\r\n".join(lines)
+
+    subprocess.run("clip", input=tsv.encode("utf-16-le"), check=True)
+    print(f"📋 {len(rows)} rows copied to clipboard.")
 
     print("🎉 Done.")
 

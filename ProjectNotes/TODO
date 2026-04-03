@@ -1,0 +1,42 @@
+Landing Page:
+    ✔ scaffold @done(26-04-02 16:46)
+    ✔ dining coffee experience routes @done(26-04-02 16:46)
+database:
+    ✔ add category to database @done(26-04-02 16:46)
+    ☐ Change category 1:M not M:M
+    ☐ align with QA
+    ✔ Add coffee partners @done(26-04-02 16:46)
+    ✔ Add expreience Partners @done(26-04-02 16:46)
+    Same Partner Different 
+Booking Form:
+        ☐ form & post
+        ☐ email to GOR
+        ☐ Insert into Bubble
+Partner Page:
+    ☐ Show restaturant/ offer 
+    ☐ show restaurant / coffee offer
+    ☐ show venue write up/venue offer for experience
+    ☐ province selection
+    ☐ search for place
+    ☐ Search for keywords
+    ✔ scaffold @done(26-04-02 16:50)
+    ✔ crud @done(26-04-02 16:50)
+NavBar:
+    ☐ Home to category page
+    ☐ Add Coffee 
+    ☐ Add Experience
+    ☐ redeem 
+    ☐ contact
+Devops:
+    ☐ CICD to to azure
+TidyUP:
+    ☐ /root should go to tug login
+    
+    
+
+ https://theunlimited-lifestyle.co.za/access.php - Booking site open to all categories
+ https://theunlimited-lifestyle.co.za/benefits/access.php - Instant dining
+
+
+
+

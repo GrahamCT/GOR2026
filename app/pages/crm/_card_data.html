@@ -34,17 +34,14 @@
         <span class="text-slate-800 ">{{ customer.corp_client }}</span>
       </div>
 
-      <div class="flex items-center gap-2 mt-3">
-        <span class="material-symbols-outlined text-lime-400">dining</span>
-        <a class="text-slate-800 hover:underline underline-offset-4" href="#">
-          View Bookings
-        </a>
-      </div>
-      <button
-        onclick="openBookingModal()"
-        class="bg-[#B1D154] text-slate-900 px-4 py-2 rounded-xl font-semibold hover:bg-lime-500 transition">
-        Create Booking
-      </button>
+      
+  <div class="flex justify-center">
+    <a
+      href="/booking/booking_new/{{ customer.customer_id }}"
+      class="inline-block bg-[#B1D154] text-slate-900 px-4 py-2 rounded-xl font-semibold hover:bg-lime-500 transition mt-3">
+      Bookings
+    </a>
+  </div>
 
     </div>
   </section>

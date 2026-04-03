@@ -427,79 +427,12 @@
     </mxGraphModel>
   </diagram>
   <diagram id="QrFWmg_wl4X-mITAjfrw" name="Page-7">
-    <mxGraphModel dx="703" dy="832" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
+    <mxGraphModel dx="1175" dy="553" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
-        <mxCell id="JVCh0P2JmwikkYRQFhQz-18" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="" vertex="1">
-          <mxGeometry height="75" width="445" x="25" y="220" as="geometry" />
-        </mxCell>
-        <mxCell id="JVCh0P2JmwikkYRQFhQz-16" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" value="" vertex="1">
-          <mxGeometry height="50" width="560" x="40" y="337.5" as="geometry" />
-        </mxCell>
-        <mxCell id="JVCh0P2JmwikkYRQFhQz-3" edge="1" parent="1" source="JVCh0P2JmwikkYRQFhQz-1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="JVCh0P2JmwikkYRQFhQz-2" value="">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="JVCh0P2JmwikkYRQFhQz-1" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="LOGIN" vertex="1">
-          <mxGeometry height="60" width="120" x="40" y="40" as="geometry" />
-        </mxCell>
-        <mxCell id="ZToQtErELfyUqJi9KvqC-1" edge="1" parent="1" source="JVCh0P2JmwikkYRQFhQz-2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="JVCh0P2JmwikkYRQFhQz-18">
-          <mxGeometry relative="1" as="geometry">
-            <Array as="points">
-              <mxPoint x="248" y="160" />
-            </Array>
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="JVCh0P2JmwikkYRQFhQz-2" parent="1" style="whiteSpace=wrap;html=1;rounded=0;" value="category Page&lt;div&gt;(based on benefits, show)&lt;/div&gt;" vertex="1">
-          <mxGeometry height="60" width="120" x="40" y="140" as="geometry" />
-        </mxCell>
-        <mxCell id="JVCh0P2JmwikkYRQFhQz-4" parent="1" style="whiteSpace=wrap;html=1;rounded=0;" value="2 for 1&lt;div&gt;dining&lt;/div&gt;" vertex="1">
-          <mxGeometry height="60" width="50" x="40" y="227.5" as="geometry" />
-        </mxCell>
-        <mxCell id="JVCh0P2JmwikkYRQFhQz-5" parent="1" style="whiteSpace=wrap;html=1;rounded=0;" value="coffee" vertex="1">
-          <mxGeometry height="60" width="50" x="110" y="227.5" as="geometry" />
-        </mxCell>
-        <mxCell id="JVCh0P2JmwikkYRQFhQz-6" parent="1" style="whiteSpace=wrap;html=1;rounded=0;" value="Movies" vertex="1">
-          <mxGeometry height="60" width="50" x="170" y="227.5" as="geometry" />
-        </mxCell>
-        <mxCell id="JVCh0P2JmwikkYRQFhQz-7" parent="1" style="whiteSpace=wrap;html=1;rounded=0;" value="Exper&lt;div&gt;ience&lt;/div&gt;" vertex="1">
-          <mxGeometry height="60" width="50" x="230" y="227.5" as="geometry" />
-        </mxCell>
-        <mxCell id="JVCh0P2JmwikkYRQFhQz-8" parent="1" style="whiteSpace=wrap;html=1;rounded=0;" value="Motor&lt;div&gt;Disc.&lt;/div&gt;" vertex="1">
-          <mxGeometry height="60" width="50" x="290" y="227.5" as="geometry" />
-        </mxCell>
-        <mxCell id="JVCh0P2JmwikkYRQFhQz-9" parent="1" style="whiteSpace=wrap;html=1;rounded=0;" value="Travel&lt;div&gt;Disc&lt;/div&gt;" vertex="1">
-          <mxGeometry height="60" width="50" x="350" y="227.5" as="geometry" />
-        </mxCell>
-        <mxCell id="JVCh0P2JmwikkYRQFhQz-10" parent="1" style="whiteSpace=wrap;html=1;rounded=0;" value="Car Hire&lt;div&gt;Disc&lt;/div&gt;" vertex="1">
-          <mxGeometry height="60" width="50" x="410" y="227.5" as="geometry" />
-        </mxCell>
-        <mxCell id="JVCh0P2JmwikkYRQFhQz-11" parent="1" style="whiteSpace=wrap;html=1;rounded=0;" value="logos" vertex="1">
-          <mxGeometry height="30" width="120" x="55" y="347.5" as="geometry" />
-        </mxCell>
-        <mxCell id="JVCh0P2JmwikkYRQFhQz-13" parent="1" style="whiteSpace=wrap;html=1;rounded=0;" value="Search for Partner" vertex="1">
-          <mxGeometry height="30" width="120" x="205" y="347.5" as="geometry" />
-        </mxCell>
-        <mxCell id="JVCh0P2JmwikkYRQFhQz-14" parent="1" style="whiteSpace=wrap;html=1;rounded=0;" value="browse partners" vertex="1">
-          <mxGeometry height="30" width="120" x="465" y="347.5" as="geometry" />
-        </mxCell>
-        <mxCell id="JVCh0P2JmwikkYRQFhQz-15" parent="1" style="whiteSpace=wrap;html=1;rounded=0;" value="Province" vertex="1">
-          <mxGeometry height="30" width="120" x="335" y="347.5" as="geometry" />
-        </mxCell>
-        <mxCell id="JVCh0P2JmwikkYRQFhQz-19" edge="1" parent="1" source="JVCh0P2JmwikkYRQFhQz-18" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.467;entryY=0.05;entryDx=0;entryDy=0;entryPerimeter=0;" target="JVCh0P2JmwikkYRQFhQz-16">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="JVCh0P2JmwikkYRQFhQz-20" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="Logo/image/write/offer" vertex="1">
-          <mxGeometry height="30" width="560" x="40" y="397.5" as="geometry" />
-        </mxCell>
-        <mxCell id="JVCh0P2JmwikkYRQFhQz-21" parent="1" style="rounded=0;whiteSpace=wrap;html=1;verticalAlign=top;" value="Booking Form" vertex="1">
-          <mxGeometry height="70" width="560" x="40" y="437.5" as="geometry" />
-        </mxCell>
-        <mxCell id="JVCh0P2JmwikkYRQFhQz-22" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="Thank you&lt;div&gt;steps&lt;/div&gt;" vertex="1">
-          <mxGeometry height="60" width="120" x="210" y="517.5" as="geometry" />
-        </mxCell>
-        <mxCell id="JVCh0P2JmwikkYRQFhQz-23" parent="1" style="rounded=0;whiteSpace=wrap;html=1;textShadow=0;" value="Email" vertex="1">
-          <mxGeometry height="60" width="120" x="350" y="517.5" as="geometry" />
+        <mxCell id="i3D3nhJaEVyPaOmCG4h5-1" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="Login" vertex="1">
+          <mxGeometry height="60" width="120" x="80" y="40" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>

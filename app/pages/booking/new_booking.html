@@ -1,0 +1,184 @@
+{% extends "/base.html" %}
+
+{% block content %}
+
+
+
+<div class="min-h-screen bg-slate-100 flex items-center justify-center px-4">
+
+  <!-- CARD -->
+  <div class="w-full max-w-3xl bg-white rounded-2xl shadow-xl border border-slate-200 p-6 md:p-8"
+  id="booking-form-wrapper">
+
+    <!-- HEADER -->
+    <div class="mb-6 border-b border-slate-200 pb-4">
+      <h1 class="text-xl md:text-1xl font-semibold text-slate-800">
+        New booking for Customer {{ customer.customer_number }} - {{customer.first_name}} {{customer.last_name}}
+      </h1>
+      <p class="text-sm text-slate-500 mt-1">
+        Capture booking details below
+      </p>
+    </div>
+
+    <!-- FORM -->
+    <form
+      method="post"
+      hx-post="/booking/booking_new/{{ customer.customer_id }}"
+      hx-target="#booking-form-wrapper"
+      hx-swap="innerHTML"
+      class="grid grid-cols-1 md:grid-cols-2 gap-6"
+  >
+
+      <!-- ROW 1: FULL WIDTH -->
+      <div class="md:col-span-2">
+        <label for="booking_datetime" class="block text-sm font-semibold text-slate-700 mb-2">
+          Booking Date &amp; Time
+        </label>
+        <input
+          type="text"
+          id="booking_datetime"
+          name="booking_datetime"
+          required
+          placeholder="Select date and time"
+          class="w-full rounded-xl border border-slate-300 px-4 py-3 text-slate-800
+                focus:outline-none focus:ring-2 focus:ring-lime-400 focus:border-lime-400"
+        />
+      </div>
+
+      <!-- PARTNER -->
+      <div>
+        <label for="partner_id" class="block text-sm font-semibold text-slate-700 mb-2">
+          Partner
+        </label>
+        <select
+          id="partner_id"
+          name="partner_id"
+          hx-get="/booking/get_stores"
+          hx-trigger="change"
+          hx-target="#store_id"
+          hx-swap="innerHTML"
+          hx-include="[name='partner_id']"
+
+          class="w-full rounded-xl border border-slate-300 px-4 py-3 text-slate-800 bg-white
+                 focus:outline-none focus:ring-2 focus:ring-lime-400 focus:border-lime-400"
+        >
+          <option value="">Select partner</option>
+          {% for partner in partners %}
+            <option value="{{ partner.id }}">{{ partner.group_name }}</option>
+          {% endfor %}
+        </select>
+      </div>
+
+      <!-- STORE -->
+      <div>
+        <label for="store_id" class="block text-sm font-semibold text-slate-700 mb-2">
+          Store
+        </label>
+        <select
+          id="store_id"
+          name="store_id"
+          class="w-full rounded-xl border border-slate-300 px-4 py-3 text-slate-800 bg-white
+                focus:outline-none focus:ring-2 focus:ring-lime-400 focus:border-lime-400"
+        >
+          <option value="">Select store</option>
+        </select>
+      </div>
+
+      <!-- ORIGINATION -->
+      <div>
+        <label for="origination" class="block text-sm font-semibold text-slate-700 mb-2">
+          Origination
+        </label>
+        <select
+          id="origination"
+          name="origination"
+          class="w-full rounded-xl border border-slate-300 px-4 py-3 text-slate-800 bg-white
+                 focus:outline-none focus:ring-2 focus:ring-lime-400 focus:border-lime-400"
+        >
+          <option value="">Select origination</option>
+          <option value="Booking Form">Booking Form</option>
+          <option value="Call In">Call In</option>
+          <option value="Whatsapp">Whatsapp</option>
+        </select>
+      </div>
+
+      <!-- BENEFIT -->
+      <div>
+        <label for="benefit_id" class="block text-sm font-semibold text-slate-700 mb-2">
+          Benefit
+        </label>
+        <select
+          id="benefit_id"
+          name="benefit_id"
+          class="w-full rounded-xl border border-slate-300 px-4 py-3 text-slate-800 bg-white
+                 focus:outline-none focus:ring-2 focus:ring-lime-400 focus:border-lime-400"
+        >
+          <option value="">Select benefit</option>
+          {% for benefit in benefits %}
+            <option value="{{ benefit.ID }}">{{ benefit.short_desc }}</option>
+          {% endfor %}
+        </select>
+      </div>
+
+      <!-- BOOKING DETAILS -->
+      <div class="md:col-span-2">
+        <label for="booking_details" class="block text-sm font-semibold text-slate-700 mb-2">
+          Booking Details
+        </label>
+        <textarea
+          id="booking_details"
+          name="booking_details"
+          rows="4"
+          placeholder="Enter booking details"
+          class="w-full rounded-xl border border-slate-300 px-4 py-3 text-slate-800
+                 focus:outline-none focus:ring-2 focus:ring-lime-400 focus:border-lime-400"
+        ></textarea>
+      </div>
+
+      <!-- VALUE SAVING -->
+      <div class="md:col-span-2">
+        <label for="value_saving_text" class="block text-sm font-semibold text-slate-700 mb-2">
+          Value Saving Text
+        </label>
+        <input
+          type="text"
+          id="value_saving_text"
+          name="value_saving_text"
+          placeholder="Enter value saving text"
+          class="w-full rounded-xl border border-slate-300 px-4 py-3 text-slate-800
+                 focus:outline-none focus:ring-2 focus:ring-lime-400 focus:border-lime-400"
+        >
+      </div>
+
+      <!-- BUTTON -->
+      <div class="md:col-span-2 pt-4 flex justify-end gap-3">
+
+        <!-- Optional cancel -->
+        <a href="/customers"
+           class="px-4 py-3 rounded-xl border border-slate-300 text-slate-700 hover:bg-slate-100 transition">
+          Cancel
+        </a>
+
+        <button
+          type="submit"
+          class="px-6 py-3 rounded-xl bg-lime-500 text-white font-semibold shadow-sm hover:bg-lime-600 transition">
+          Save Booking
+        </button>
+
+      </div>
+
+    </form>
+
+  </div>
+</div>
+
+<script>
+  flatpickr("#booking_datetime", {
+    enableTime: true,
+    dateFormat: "Y-m-d H:i",
+    time_24hr: true,
+    defaultDate: "today"
+  });
+</script>
+
+{% endblock %}

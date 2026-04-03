@@ -1,0 +1,51 @@
+{% extends "benefits/base.html" %}
+
+{% block content %}
+
+<!-- Hero Image -->
+<div class="w-full mt-4 mb-8">
+  <img
+    src="{{ url_for('static', path='general-slider.jpg') }}"
+    alt="Benefits"
+    class="w-full h-auto rounded-lg object-cover"
+  />
+</div>
+
+<!-- Benefit Category Cards -->
+<div class="flex flex-wrap justify-center gap-6 mb-10">
+
+  <!-- Card 1: Dining -->
+  <a href="/benefits/select/1">
+    <div class="bg-white rounded-2xl shadow-lg overflow-hidden w-72">
+        <img
+        src="{{ url_for('static', path='2_4_1_dining.png') }}"
+        alt="2 for 1 Dining"
+        class="w-full h-auto object-cover"
+        />
+    </div>
+  </a>
+
+  <!-- Card 2: Coffee -->
+<a href="/benefits/select/2">
+  <div class="bg-white rounded-2xl shadow-lg overflow-hidden w-72">
+    <img
+      src="{{ url_for('static', path='241-coffee.png') }}"
+      alt="2 for 1 Coffee"
+      class="w-full h-auto object-cover"
+    />
+  </div>
+  </a>
+
+  <!-- Card 3: Experiences -->
+    <a href="/benefits/select/3">
+  <div class="bg-white rounded-2xl shadow-lg overflow-hidden w-72">
+    <img
+      src="{{ url_for('static', path='241-experiences.png') }}"
+      alt="2 for 1 Experiences"
+      class="w-full h-auto object-cover"
+    />
+  </div>
+</a>
+</div>
+
+{% endblock content %}

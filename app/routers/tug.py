@@ -1,3 +1,4 @@
+import os
 from fastapi import APIRouter, Form, Request, Response
 from fastapi.responses import HTMLResponse, RedirectResponse
 from app.services import comms
@@ -52,8 +53,22 @@ async def tug_login(request: Request, mobile_number: str = Form(...), email_addr
             samesite="lax",     # Good default
             max_age=60 * 60 * 4 # 4 hours
         ) 
-        response.headers["HX-Redirect"] = "/benefits/landing"
+        response.headers["HX-Redirect"] = "/benefits/category"
     
+    return response
+
+
+@router.get("/select/{category_id}")
+async def select_category(category_id: int):
+    response = RedirectResponse("/benefits/landing", status_code=302)
+    response.set_cookie(
+        key="category",
+        value=str(category_id),
+        httponly=True,
+        secure=False,
+        samesite="lax",
+        max_age=60 * 60 * 4
+    )
     return response
 
 
@@ -63,22 +78,54 @@ async def landing(request: Request):
     customer_id = request.cookies.get("customer_id")
     if not customer_id:
         return RedirectResponse("/benefits")
-    
+
+    category_id = int(request.cookies.get("category", 0))
+    # category_labels = {
+    #     1: "2 for 1 Dining",
+    #     2: "2 for 1 Coffee",
+    #     3: "2 for 1 Experiences",
+    # }
+    # category = category_labels.get(category_id, "")
+
     query = "exec [tug_GetInstantCustomer_fromID] ?"
     customer = DAL.dal(1,query,(customer_id,),'TUG')
 
-    context = {"request": request, 
-               "customer_id": customer_id, 
-                "customer": customer[0]}
+    category = DAL.dal(1,"select * from book_category where id =?", (category_id,),'TUG')
+    
+
+
+    context = {"request": request,
+               "customer_id": customer_id,
+               "customer": customer[0],
+               "category": category[0]}
     return templates.TemplateResponse("benefits/landing.html", context)
+
+
+@router.get("/category", response_class=HTMLResponse)
+async def category(request: Request):
+
+    context = {"request":request}
+
+    return templates.TemplateResponse(
+        "   benefits/category.html",context
+            )
+
 
 
 @router.get("/partners", response_class=HTMLResponse)
 async def partners_partial(request: Request):
 
-    sql = "select id, partner_name, logo_image  from book_Partner order by NEWID()"
+    category_id = int(request.cookies.get("category", 0))
 
-    partners = DAL.dal(1,sql,None,'TUG')
+    sql = """
+            select p.id, partner_name, logo_image, category_image, category_header
+            from book_Partner P 
+            join book_category C on p.book_category_id  = c.id
+            where book_category_id=? 
+            order by NEWID()
+          """
+
+    partners = DAL.dal(1,sql,(category_id,),'TUG')
 
 
     return templates.TemplateResponse(
@@ -87,11 +134,13 @@ async def partners_partial(request: Request):
     )
 
 
+
+
 @router.get("/partner/{partner_id}", response_class=HTMLResponse)
 async def partner_detail_partial(request: Request, partner_id: int):
     # Returns ONLY the detail "view" partial for selected partner
 
-    sql = "select * from book_Partner where id = ?"
+    sql = "select * from book_Partner P join book_category C on p.book_category_id = c.id where p.id = ?"
 
     partner = DAL.dal(1,sql,(partner_id,),'TUG')
     if not partner:
@@ -147,7 +196,9 @@ async def request_voucher(request:Request,
 
     subject = f"Your {partner[0]['partner_name']} voucher"
 
-    comms.send_email_template('grahamr@ct-international.co.za',subject,template_data, "d-cf770a728cf04053bddf62d23bde823d"  )
+    is_test = os.getenv("IS_TEST", "False") == "True"
+    to_email = os.getenv("TEST_EMAIL") if is_test else customer[0]['email_address']
+    comms.send_email_template(to_email, subject, template_data, "d-cf770a728cf04053bddf62d23bde823d")
    
     return templates.TemplateResponse("benefits/_booking_voucher.html", context)
 
