@@ -16,6 +16,10 @@
   <!-- HTMX -->
   <script src="https://unpkg.com/htmx.org@1.9.12"></script>
 
+  <!-- Flatpickr -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
   <link rel="icon" type="image/svg+xml" href="https://theunlimited-lifestyle.co.za/benefits/wp-content/themes/gorhino-wda/unlimitedfavicon.svg" />
 
  <title>{% block title %}The Unlimited Lifestyle{% endblock %}</title>
@@ -52,14 +56,24 @@
 
       <!-- Right: Menu -->
 <div class="hidden md:flex items-center space-x-4">
-  <a href="/benefits/landing" 
+  <a href="/benefits/category" 
      class="text-sm font-bold uppercase tracking-wide text-slate-700 hover:text-red-500 transition-colors duration-200">
     Home
   </a>
 
-  <a href="//benefits/landing" 
+  <a href="/benefits/select/1"
      class="text-sm font-bold uppercase tracking-wide text-slate-700 hover:text-red-500 transition-colors duration-200">
-    Dining Deals
+    Dining
+  </a>
+
+  <a href="/benefits/select/2"
+     class="text-sm font-bold uppercase tracking-wide text-slate-700 hover:text-red-500 transition-colors duration-200">
+    Coffee
+  </a>
+
+  <a href="/benefits/select/3"
+     class="text-sm font-bold uppercase tracking-wide text-slate-700 hover:text-red-500 transition-colors duration-200">
+    Experiences
   </a>
 
   <a href="/redeem" 

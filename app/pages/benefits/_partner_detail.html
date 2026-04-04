@@ -61,6 +61,8 @@
 
 
 
+{% if partner.book_category_id in [1, 2] %}
+
 <div class="mt-6 p-4 border border-dashed border-slate-400 rounded-xl">
   
   <h3 class="text-lg font-semibold mb-4">
@@ -126,5 +128,14 @@
   <div id="voucher-response" class="mt-4"></div>
 
 </div>
+{% endif %}
+
+{% if partner.book_category_id in [3] %}
+  {% include '/benefits/_booking_form.html' %}
+{% endif %}
+
+
+
+
 
 </section>

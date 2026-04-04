@@ -3,34 +3,40 @@ Landing Page:
     ✔ dining coffee experience routes @done(26-04-02 16:46)
 database:
     ✔ add category to database @done(26-04-02 16:46)
-    ☐ Change category 1:M not M:M
+    ✔ Change category 1:M not M:M @done(26-04-03 13:38)
     ☐ align with QA
     ✔ Add coffee partners @done(26-04-02 16:46)
     ✔ Add expreience Partners @done(26-04-02 16:46)
     Same Partner Different 
 Booking Form:
-        ☐ form & post
-        ☐ email to GOR
+        ✔ form & post @done(26-04-04 11:37)
+        ✔ populate booking form @done(26-04-04 11:47)
+        ✔ Booking date/time to datepicker control @done(26-04-04 12:52)
+        ✔ email to GOR @done(26-04-04 12:52)
         ☐ Insert into Bubble
-Partner Page:
-    ☐ Show restaturant/ offer 
-    ☐ show restaurant / coffee offer
-    ☐ show venue write up/venue offer for experience
+        ✔ On booking made, hide booking form and show done message @done(26-04-04 11:43)
+Landing Page:
     ☐ province selection
     ☐ search for place
     ☐ Search for keywords
+Partner Page:
+    ✔ Show restaturant/ offer @done(26-04-03 13:43)
+    ✔ show restaurant / coffee offer @done(26-04-03 13:43)
+    ✔ show venue write up/venue offer for experience @done(26-04-03 13:43)
     ✔ scaffold @done(26-04-02 16:50)
     ✔ crud @done(26-04-02 16:50)
 NavBar:
-    ☐ Home to category page
-    ☐ Add Coffee 
-    ☐ Add Experience
+    ✔ Home to category page @done(26-04-03 13:48)
+    ✔ Add Coffee @done(26-04-03 13:48)
+    ✔ Add Experience @done(26-04-03 13:48)
     ☐ redeem 
     ☐ contact
 Devops:
     ☐ CICD to to azure
-TidyUP:
+Phase 2:
     ☐ /root should go to tug login
+    ☐ Pagination
+
     
     
 

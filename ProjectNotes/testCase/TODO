@@ -2,6 +2,22 @@ Login:
     ☐ Invalid Number = Canot find message
     ☐ Login with 0727263407 = Contact Us Page
     ☐ login with 0726729147 = category Page
+Category:
+    ☐ Link to Dining
+    ☐ Link to Coffee
+    ☐ Link to Experiences
+Landing:
+    ☐ dining - 2 4 1 dining, Partners
+    ☐ coffee - 2 4 1 coffee, partners
+    ☐ experience - 2 4 1 exprience, partners
+partner Page:
+    ☐ Name, Image and Logo
+    ☐ Return to partners link
+    ☐ DINING: Restaurant Write up, Restaurant Offer 
+    ☐ COFFEE: Restaurant Write up, Coffee Offer
+    ☐ EXPERIENCE
+    ☐ coffee and dining - Generate Voucher
+    ☐ Voucher received email
 Navigation:
     navbar:
         ☐ home = Category Page
@@ -23,19 +39,3 @@ Navigation:
         ☐ 241 Coffee - partners page coffee
         ☐ 241 dining - partners dining
         ☐ 241 Experience - partners Experience
-Partners:
-    ☐ coffee and dining - Generate Voucher
-    ☐ Voucher received email
-    
-
-
-
-
-
-
-
-
-
-
-
-

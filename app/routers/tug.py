@@ -5,16 +5,10 @@ from app.services import comms
 import app.services.dal as DAL
 
 
+
 from app.core.templates import templates
 
 router = APIRouter(prefix="/benefits", tags=["benefits"])
-
-PARTNERS = [
-        {"id": 1, "name": "Partner A", "logo": "https://via.placeholder.com/80?text=A"},
-        {"id": 2, "name": "Partner B", "logo": "https://via.placeholder.com/80?text=B"},
-        {"id": 3, "name": "Partner C", "logo": "https://via.placeholder.com/80?text=C"},
-    ]
-
 
 @router.get("/")
 async def beneifts(request: Request):
@@ -107,7 +101,7 @@ async def category(request: Request):
     context = {"request":request}
 
     return templates.TemplateResponse(
-        "   benefits/category.html",context
+        "benefits/category.html",context
             )
 
 
@@ -213,4 +207,110 @@ async def support(request:Request):
 async def get_partner(request:Request):
     context = {"request": request}
     return templates.TemplateResponse("benefits/support.html", context)
+
+
+@router.post("/manage_booking", response_class=HTMLResponse)
+async def manage_booking(
+    book_customer_id: int = Form(...),
+    book_name: str = Form(...),
+    book_email: str = Form(...),
+    book_phone: str = Form(...),
+    book_branch: str = Form(...),
+    book_datetime: str = Form(...),
+    book_guests: int = Form(...),
+    partner_id: int = Form(...),
+    partner_name: str=Form(...)
+):
+    sql = "insert into book_booking_tug (client_id, partner_id, booking_date, branch, num_guests) values (?,?,?,?,?)"
+    DAL.dal(0, sql, (book_customer_id, partner_id, book_datetime, book_branch, book_guests), 'TUG')
+
+    body = f"""
+<table width="100%" cellpadding="0" cellspacing="0" style="font-family: Arial, sans-serif; background-color: #f5f5f5; padding: 20px;">
+  <tr>
+    <td align="center">
+      
+      <table width="500" cellpadding="0" cellspacing="0" style="background-color: #ffffff; border-radius: 8px; padding: 20px; border: 1px solid #e0e0e0;">
+        
+        <!-- Header -->
+        <tr>
+          <td style="font-size: 20px; font-weight: bold; padding-bottom: 15px; color: #333333;">
+            📅 New Booking Received
+          </td>
+        </tr>
+
+        <!-- Divider -->
+        <tr>
+          <td style="border-top: 1px solid #e0e0e0; padding-top: 15px;"></td>
+        </tr>
+
+        <!-- Booking Details -->
+        <tr>
+          <td>
+            <table width="100%" cellpadding="8" cellspacing="0" style="font-size: 14px; color: #444;">
+              
+              <tr>
+                <td style="font-weight: bold; width: 40%;">Name:</td>
+                <td>{book_name}</td>
+              </tr>
+
+              <tr>
+                <td style="font-weight: bold;">Mobile:</td>
+                <td>{book_phone}</td>
+              </tr>
+
+              <tr>
+                <td style="font-weight: bold;">Email:</td>
+                <td>{book_email}</td>
+              </tr>
+
+              <tr>
+                <td style="font-weight: bold;">Partner:</td>
+                <td>{partner_name}</td>
+              </tr>
+
+              <tr>
+                <td style="font-weight: bold;">Branch:</td>
+                <td>{book_branch}</td>
+              </tr>
+
+              <tr>
+                <td style="font-weight: bold;">Booking Date:</td>
+                <td>{book_datetime}</td>
+              </tr>
+
+              <tr>
+                <td style="font-weight: bold;">Guests:</td>
+                <td>{book_guests}</td>
+              </tr>
+
+            </table>
+          </td>
+        </tr>
+
+        <!-- Footer -->
+        <tr>
+          <td style="padding-top: 20px; font-size: 12px; color: #888888; text-align: center;">
+            This booking was submitted via your website.
+          </td>
+        </tr>
+
+      </table>
+
+    </td>
+  </tr>
+</table>
+        """
+
+
+    comms.GenericSendMail("grahamrusson@gmail.com","New Booking Recieved",body)
+
+
+
+    return f"""
+    <div class="mt-8 p-6 bg-green-50 border border-green-300 rounded-2xl max-w-3xl mx-auto text-sm text-green-800 font-semibold">
+        Booking received for <span class="font-bold">{book_name}</span> on {book_datetime}
+        for {book_guests} guest(s) at {book_branch}.
+        We will confirm via {book_email} or {book_phone}.
+    </div>
+    """
 

@@ -5,6 +5,26 @@ from sendgrid.helpers.mail import Mail
 
 load_dotenv() 
 
+
+def GenericSendMail(to_email, subject, body ):
+    api_key = os.getenv("SENDGRID_API_KEY")
+
+    message = Mail(
+        from_email ='graham@indigoio.co.za',
+        to_emails=to_email,
+        subject=subject,
+        html_content=body
+    )
+
+
+    sg = SendGridAPIClient(api_key)
+
+
+    response = sg.send(message)
+
+    print (response)
+
+
 def SendMail(to_email, subject ):
     api_key = os.getenv("SENDGRID_API_KEY")
 
