@@ -1,8 +1,9 @@
 import os
 import shutil
 import glob
-import subprocess
+from datetime import date
 import pyodbc
+import openpyxl
 from dotenv import load_dotenv
 
 DOWNLOADS = os.path.join(os.path.expanduser("~"), "Downloads")
@@ -65,12 +66,17 @@ def main():
         columns = [col[0] for col in cursor.description]
         rows = cursor.fetchall()
 
-    lines = ["\t".join(columns)]
-    lines += ["\t".join(str(v) if v is not None else "" for v in row) for row in rows]
-    tsv = "\r\n".join(lines)
+    today = date.today()
+    filename = f"Booking_report_{today.year}_{today.strftime('%B')}_{today.strftime('%d')}.xlsx"
+    filepath = os.path.join(DOWNLOADS, filename)
 
-    subprocess.run("clip", input=tsv.encode("utf-16-le"), check=True)
-    print(f"📋 {len(rows)} rows copied to clipboard.")
+    wb = openpyxl.Workbook()
+    ws = wb.active
+    ws.append(columns)
+    for row in rows:
+        ws.append([v if v is not None else "" for v in row])
+    wb.save(filepath)
+    print(f"📊 {len(rows)} rows written to {filepath}")
 
     print("🎉 Done.")
 
