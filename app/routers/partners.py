@@ -8,8 +8,8 @@ router = APIRouter(prefix="/partners", tags=["partners"])
 
 @router.get("/")
 async def partners_index(request: Request):
-    sql = "SELECT id, partner_name, logo_image FROM book_partner ORDER BY partner_name"
-    partners = DAL.dal(1, sql, None, 'TUG') or []
+    sql = "SELECT id, partner_name, logo_image FROM book_partner WHERE isActive = 1 ORDER BY partner_name"
+    partners = DAL.dal(1, sql, None) or []
     context = {"request": request, "partners": partners}
     return templates.TemplateResponse("partners/index.html", context)
 
@@ -17,11 +17,11 @@ async def partners_index(request: Request):
 @router.get("/search", response_class=HTMLResponse)
 async def partners_search(request: Request, q: str = Query("")):
     if q:
-        sql = "SELECT id, partner_name, logo_image FROM book_partner WHERE partner_name LIKE ? ORDER BY partner_name"
-        partners = DAL.dal(1, sql, (f"%{q}%",), 'TUG') or []
+        sql = "SELECT id, partner_name, logo_image FROM book_partner WHERE isActive = 1 AND partner_name LIKE ? ORDER BY partner_name"
+        partners = DAL.dal(1, sql, (f"%{q}%",)) or []
     else:
-        sql = "SELECT id, partner_name, logo_image FROM book_partner ORDER BY partner_name"
-        partners = DAL.dal(1, sql, None, 'TUG') or []
+        sql = "SELECT id, partner_name, logo_image FROM book_partner WHERE isActive = 1 ORDER BY partner_name"
+        partners = DAL.dal(1, sql, None) or []
     return templates.TemplateResponse("partners/_grid.html", {"request": request, "partners": partners})
 
 
@@ -33,7 +33,7 @@ async def partner_form_new(request: Request):
 @router.get("/{partner_id}/form", response_class=HTMLResponse)
 async def partner_form_edit(request: Request, partner_id: int):
     sql = "SELECT * FROM book_partner WHERE id = ?"
-    rows = DAL.dal(1, sql, (partner_id,), 'TUG')
+    rows = DAL.dal(1, sql, (partner_id,))
     partner = rows[0] if rows else None
     return templates.TemplateResponse("partners/_modal_form.html", {"request": request, "partner": partner})
 
@@ -52,14 +52,14 @@ async def partner_save(
         sql = """UPDATE book_partner
                  SET partner_name=?, logo_image=?, landing_image=?, partner_write_up=?, partner_offer=?
                  WHERE id=?"""
-        DAL.dal(0, sql, (partner_name, logo_image, landing_image, partner_write_up, partner_offer, int(partner_id)), 'TUG')
+        DAL.dal(0, sql, (partner_name, logo_image, landing_image, partner_write_up, partner_offer, int(partner_id)))
     else:
         sql = """INSERT INTO book_partner (partner_name, logo_image, landing_image, partner_write_up, partner_offer, create_date)
                  VALUES (?, ?, ?, ?, ?, GETDATE())"""
-        DAL.dal(0, sql, (partner_name, logo_image, landing_image, partner_write_up, partner_offer), 'TUG')
+        DAL.dal(0, sql, (partner_name, logo_image, landing_image, partner_write_up, partner_offer))
 
     all_sql = "SELECT id, partner_name, logo_image FROM book_partner ORDER BY partner_name"
-    partners = DAL.dal(1, all_sql, None, 'TUG') or []
+    partners = DAL.dal(1, all_sql, None) or []
     response = templates.TemplateResponse("partners/_grid.html", {"request": request, "partners": partners})
     response.headers["HX-Trigger"] = "closePartnerModal"
     return response

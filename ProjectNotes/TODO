@@ -1,48 +1,59 @@
-Landing Page:
-    ✔ scaffold @done(26-04-02 16:46)
-    ✔ dining coffee experience routes @done(26-04-02 16:46)
-database:
-    ✔ add category to database @done(26-04-02 16:46)
-    ✔ Change category 1:M not M:M @done(26-04-03 13:38)
-    ☐ align with QA
-    ✔ Add coffee partners @done(26-04-02 16:46)
-    ✔ Add expreience Partners @done(26-04-02 16:46)
-    Same Partner Different 
-Booking Form:
-        ✔ form & post @done(26-04-04 11:37)
-        ✔ populate booking form @done(26-04-04 11:47)
-        ✔ Booking date/time to datepicker control @done(26-04-04 12:52)
-        ✔ email to GOR @done(26-04-04 12:52)
-        ☐ Insert into Bubble
-        ✔ On booking made, hide booking form and show done message @done(26-04-04 11:43)
-Landing Page:
-    ☐ province selection
-    ☐ search for place
-    ☐ Search for keywords
-Partner Page:
-    ✔ Show restaturant/ offer @done(26-04-03 13:43)
-    ✔ show restaurant / coffee offer @done(26-04-03 13:43)
-    ✔ show venue write up/venue offer for experience @done(26-04-03 13:43)
-    ✔ scaffold @done(26-04-02 16:50)
-    ✔ crud @done(26-04-02 16:50)
-NavBar:
-    ✔ Home to category page @done(26-04-03 13:48)
-    ✔ Add Coffee @done(26-04-03 13:48)
-    ✔ Add Experience @done(26-04-03 13:48)
-    ☐ redeem 
-    ☐ contact
-Devops:
-    ☐ CICD to to azure
-Phase 2:
-    ☐ /root should go to tug login
-    ☐ Pagination
-
-    
-    
+TUG:
+    database:
+        ☐ align with QA
+        Same Partner Different 
+    Booking Form:
+            ☐ Insert into Bubble @3h
+    Landing Page:
+        ☐ province selection @30m
+        ☐ search for place @1h
+        ☐ Search for keywords @1h  
+    NavBar:
+        ☐ redeem @15m
+        ☐ contact @15m
+    Devops:
+        ☐ CICD to to azure
+    Phase 2:
+        ☐ /root should go to tug login @15m
+        ☐ Pagination @1h
+    Changes:
+        ☐ If no active partners, dont show category @2h
+LIVE:
+    ☐ Bookings to go to diningrewards@gorhino.co.za
+CRM:
+    Booking Page:
+        ☐ CRUD
+    Data:
+        ☐ Book Booking - Inline with Bubble @45m
+        ☐ book partner - sycnh with bubble for booking to be brought across establishment @45m
+        Note: We will use the book_booking - book establishment to bring stuff across from bubble 
+        ☐ book_establishment to move to book_partner (Group) @1h
+        ☐ book_establishment branches to move to book_branch. @1h  
+        ☐ Keep the bubble join booking--estabssment and move across.  @1h
+        ☐ book booking tug to fall away (mainly code ) @15m
+CRM:
+    ☐ Docs must not be allowed to insert user @15m
 
  https://theunlimited-lifestyle.co.za/access.php - Booking site open to all categories
  https://theunlimited-lifestyle.co.za/benefits/access.php - Instant dining
 
-
-
-
+Archive:
+  ✔ scaffold @done(26-04-02 16:46) @project(TUG.Landing Page)
+  ✔ dining coffee experience routes @done(26-04-02 16:46) @project(TUG.Landing Page)
+  ✔ add category to database @done(26-04-02 16:46) @project(TUG.database)
+  ✔ Change category 1:M not M:M @done(26-04-03 13:38) @project(TUG.database)
+  ✔ Add coffee partners @done(26-04-02 16:46) @project(TUG.database)
+  ✔ Add expreience Partners @done(26-04-02 16:46) @project(TUG.database)
+  ✔ form & post @done(26-04-04 11:37) @project(TUG.Booking Form)
+  ✔ populate booking form @done(26-04-04 11:47) @project(TUG.Booking Form)
+  ✔ Booking date/time to datepicker control @done(26-04-04 12:52) @project(TUG.Booking Form)
+  ✔ email to GOR @done(26-04-04 12:52) @project(TUG.Booking Form)
+  ✔ On booking made, hide booking form and show done message @done(26-04-04 11:43) @project(TUG.Booking Form)
+  ✔ Show restaturant/ offer @done(26-04-03 13:43) @project(TUG.Partner Page)
+  ✔ show restaurant / coffee offer @done(26-04-03 13:43) @project(TUG.Partner Page)
+  ✔ show venue write up/venue offer for experience @done(26-04-03 13:43) @project(TUG.Partner Page)
+  ✔ scaffold @done(26-04-02 16:50) @project(TUG.Partner Page)
+  ✔ crud @done(26-04-02 16:50) @project(TUG.Partner Page)
+  ✔ Home to category page @done(26-04-03 13:48) @project(TUG.NavBar)
+  ✔ Add Coffee @done(26-04-03 13:48) @project(TUG.NavBar)
+  ✔ Add Experience @done(26-04-03 13:48) @project(TUG.NavBar)

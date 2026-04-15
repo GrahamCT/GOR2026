@@ -1,0 +1,26 @@
+{% for p in partners %}
+<tr class="odd:bg-white even:bg-gray-50">
+  <td class="border px-3 py-2">{{ p.id }}</td>
+  <td class="border px-3 py-2">
+    <button
+      class="text-lime-700 hover:underline text-left"
+      hx-get="/partner_admin/{{ p.id }}/edit-form"
+      hx-target="#modal-body"
+      hx-swap="innerHTML"
+      hx-on::after-request="openPartnerModal('Edit Partner')"
+    >{{ p.partner_name }}</button>
+  </td>
+  <td class="border px-3 py-2">{{ p.cateogory }}</td>
+  <td class="border px-3 py-2 text-center">
+    {% if p.isActive %}
+    <span class="material-symbols-outlined text-green-500" style="font-size:1.1rem;">check_circle</span>
+    {% else %}
+    <span class="material-symbols-outlined text-red-400" style="font-size:1.1rem;">cancel</span>
+    {% endif %}
+  </td>
+</tr>
+{% else %}
+<tr>
+  <td class="border px-3 py-2 text-gray-400" colspan="4">No partners found.</td>
+</tr>
+{% endfor %}

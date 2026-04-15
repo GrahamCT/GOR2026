@@ -1,0 +1,65 @@
+{% extends "/base.html" %}
+
+{% block title %}Partner Admin{% endblock %}
+
+{% block content %}
+<div class="p-4">
+  <div class="flex items-center justify-between mb-4">
+    <h1 class="text-2xl font-bold">Partner Admin</h1>
+    <button
+      hx-get="/partner_admin/add-form"
+      hx-target="#modal-body"
+      hx-swap="innerHTML"
+      hx-on::after-request="openPartnerModal('Add Partner')"
+      class="px-4 py-2 bg-lime-600 text-white text-sm rounded hover:bg-lime-700"
+    >+ Add Partner</button>
+  </div>
+
+  <table class="w-full border-collapse text-sm">
+    <thead>
+      <tr class="bg-gray-100 text-left">
+        <th class="border px-3 py-2">ID</th>
+        <th class="border px-3 py-2">Partner Name</th>
+        <th class="border px-3 py-2">Category</th>
+        <th class="border px-3 py-2 text-center">Active</th>
+      </tr>
+    </thead>
+    <tbody id="partners-tbody">
+      {% include "partner_admin/_table_rows.html" %}
+    </tbody>
+  </table>
+</div>
+
+<!-- Partner Modal (shared for Add & Edit) -->
+<div
+  id="partner-modal"
+  class="fixed inset-0 z-50 hidden items-center justify-center bg-black/50"
+>
+  <div class="bg-white rounded-xl shadow-xl w-full max-w-2xl mx-4 max-h-[90vh] overflow-y-auto">
+    <div class="flex items-center justify-between px-6 py-4 border-b">
+      <h2 id="modal-title" class="text-lg font-semibold">Partner</h2>
+      <button onclick="closePartnerModal()" class="text-gray-400 hover:text-gray-600 text-xl leading-none">&times;</button>
+    </div>
+    <div id="modal-body" class="px-6 py-5">
+      <!-- form loaded here via HTMX -->
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+  function openPartnerModal(title) {
+    document.getElementById('modal-title').textContent = title;
+    const m = document.getElementById('partner-modal');
+    m.classList.remove('hidden');
+    m.classList.add('flex');
+  }
+  function closePartnerModal() {
+    const m = document.getElementById('partner-modal');
+    m.classList.add('hidden');
+    m.classList.remove('flex');
+  }
+  document.body.addEventListener('closePartnerModal', closePartnerModal);
+</script>
+{% endblock %}

@@ -9,6 +9,7 @@ from app.routers import establishment
 from app.routers import admin
 from app.routers import tug
 from app.routers import partners
+from app.routers import partner_admin
 
 
 app = FastAPI(title="GoRhino")
@@ -25,6 +26,7 @@ app.include_router(establishment.router)
 app.include_router(admin.router)
 app.include_router(tug.router)
 app.include_router(partners.router)
+app.include_router(partner_admin.router)
 
 app.mount(
     "/static",

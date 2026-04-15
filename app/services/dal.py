@@ -2,27 +2,18 @@ import os
 from dotenv import load_dotenv
 import pyodbc
 
-load_dotenv() 
+load_dotenv()
 
 
-CONN_STRING = os.getenv("GOR_CONN_STRING")
+CONN_STRING = os.getenv("GOR_CONNECTION")
 
 
-def getConstring(con):
-    if con =='GOR': 
-        return os.getenv("GOR_CONN_STRING")
-    
-    if con=='TUG':
-        return os.getenv("TUG_CONN_STRING")
-
-def dal(typeEx0_OrFetch1, query: str, params: tuple=None, cons:str = 'GOR'):
+def dal(typeEx0_OrFetch1, query: str, params: tuple=None):
     # type=0 execute, 1=fetch all
-
-    constring = getConstring(cons.upper())
 
     if typeEx0_OrFetch1==0: #generic execute
         try:
-            with pyodbc.connect(constring) as conn:
+            with pyodbc.connect(CONN_STRING) as conn:
                 cursor = conn.cursor()
                 cursor.execute(query, params or ())
                 conn.commit()
@@ -30,9 +21,9 @@ def dal(typeEx0_OrFetch1, query: str, params: tuple=None, cons:str = 'GOR'):
         except Exception as e:
             print(f"Database execution error: {e}")
             return "error"
-    
+
     elif typeEx0_OrFetch1 ==1:
-        with pyodbc.connect(constring) as conn:
+        with pyodbc.connect(CONN_STRING) as conn:
             cursor = conn.cursor()
             cursor.execute(query, params or ())
             columns = [col[0] for col in cursor.description]
@@ -43,20 +34,19 @@ def dal(typeEx0_OrFetch1, query: str, params: tuple=None, cons:str = 'GOR'):
 
         # Convert rows to list of dicts
         results = [dict(zip(columns, row)) for row in rows]
-        return results  
-    
+        return results
+
     elif typeEx0_OrFetch1 == 2: #generic execute with return row
-         with pyodbc.connect(constring) as conn:
+         with pyodbc.connect(CONN_STRING) as conn:
                 cursor = conn.cursor()
                 cursor.execute(query, params or ())
                 row = cursor.fetchone()
                 conn.commit()
-                
+
                 return row
 
 
 
-  
 def generic_execute(query: str, params: tuple = None, constring = CONN_STRING):
 
     try:
@@ -68,7 +58,7 @@ def generic_execute(query: str, params: tuple = None, constring = CONN_STRING):
     except Exception as e:
         print(f"Database execution error: {e}")
         return "error"
-    
+
 
 def generic_fetch_data(query: str, params: tuple = None):
     with pyodbc.connect(CONN_STRING) as conn:
@@ -82,7 +72,7 @@ def generic_fetch_data(query: str, params: tuple = None):
 
     # Convert rows to list of dicts
     results = [dict(zip(columns, row)) for row in rows]
-    return results    
+    return results
 
 
 def generic_fetch_multiple_datasets(query: str, params: tuple = None):

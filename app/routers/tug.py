@@ -22,7 +22,7 @@ async def tug_login(request: Request, mobile_number: str = Form(...), email_addr
     #'0727263407' cancel
     #'0726729147' active
 
-    customer = DAL.dal(1,"exec tug_GetInstantCustomer ?",(mobile_number,),'TUG')
+    customer = DAL.dal(1,"exec tug_GetInstantCustomer ?",(mobile_number,))
 
     if customer is None:
         return f"""
@@ -82,9 +82,9 @@ async def landing(request: Request):
     # category = category_labels.get(category_id, "")
 
     query = "exec [tug_GetInstantCustomer_fromID] ?"
-    customer = DAL.dal(1,query,(customer_id,),'TUG')
+    customer = DAL.dal(1,query,(customer_id,))
 
-    category = DAL.dal(1,"select * from book_category where id =?", (category_id,),'TUG')
+    category = DAL.dal(1,"select * from book_category where id =?", (category_id,))
     
 
 
@@ -115,11 +115,11 @@ async def partners_partial(request: Request):
             select p.id, partner_name, logo_image, category_image, category_header
             from book_Partner P 
             join book_category C on p.book_category_id  = c.id
-            where book_category_id=? 
+            where book_category_id=?  and isActive=1
             order by NEWID()
           """
 
-    partners = DAL.dal(1,sql,(category_id,),'TUG')
+    partners = DAL.dal(1,sql,(category_id,))
 
 
     return templates.TemplateResponse(
@@ -136,7 +136,7 @@ async def partner_detail_partial(request: Request, partner_id: int):
 
     sql = "select * from book_Partner P join book_category C on p.book_category_id = c.id where p.id = ?"
 
-    partner = DAL.dal(1,sql,(partner_id,),'TUG')
+    partner = DAL.dal(1,sql,(partner_id,))
     if not partner:
         # Keep it simple for scaffold
         return HTMLResponse("<div>Partner not found</div>", status_code=404)
@@ -145,7 +145,7 @@ async def partner_detail_partial(request: Request, partner_id: int):
 
     if customer_id:
         query = 'select id, first_name, last_name, email_address, mobile_number from customer where id = ?'
-        customer = DAL.dal(1,query,(customer_id,),'TUG')
+        customer = DAL.dal(1,query,(customer_id,))
 
 
 
@@ -169,9 +169,9 @@ async def request_voucher(request:Request,
 
     sql = "exec tug_AssignVoucher ?,?"  #partner_id, cust_id
 
-    voucher = DAL.dal(2,sql,(partner_id, customer_id), 'TUG')
-    partner = DAL.dal(1,"select * from book_partner where id =?",(partner_id,),'TUG')
-    customer= DAL.dal(1,"select * from customer where id = ?",(customer_id,), 'TUG')
+    voucher = DAL.dal(2,sql,(partner_id, customer_id))
+    partner = DAL.dal(1,"select * from book_partner where id =?",(partner_id,))
+    customer= DAL.dal(1,"select * from customer where id = ?",(customer_id,))
 
        
     
@@ -222,7 +222,7 @@ async def manage_booking(
     partner_name: str=Form(...)
 ):
     sql = "insert into book_booking_tug (client_id, partner_id, booking_date, branch, num_guests) values (?,?,?,?,?)"
-    DAL.dal(0, sql, (book_customer_id, partner_id, book_datetime, book_branch, book_guests), 'TUG')
+    DAL.dal(0, sql, (book_customer_id, partner_id, book_datetime, book_branch, book_guests))
 
     body = f"""
 <table width="100%" cellpadding="0" cellspacing="0" style="font-family: Arial, sans-serif; background-color: #f5f5f5; padding: 20px;">
