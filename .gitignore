@@ -4,3 +4,6 @@
 /backup
 __pycache__/
 *.py[cod]
+
+# Static images
+/app/static/

@@ -1,7 +1,6 @@
 TUG:
     database:
         ☐ align with QA
-        Same Partner Different 
     Booking Form:
             ☐ Insert into Bubble @3h
     Landing Page:
@@ -32,9 +31,63 @@ CRM:
         ☐ Keep the bubble join booking--estabssment and move across.  @1h
         ☐ book booking tug to fall away (mainly code ) @15m
 CRM:
-    ☐ Docs must not be allowed to insert user @15m
+    ☐ swagger must not be allowed to insert user @15m
 
- https://theunlimited-lifestyle.co.za/access.php - Booking site open to all categories
+TUG:
+    ✔ Images large reduce in size @done(26-04-18 10:44)
+    ☐ Experiencies not national no provinces
+    ✔ Hamburger menu different to main @done(26-04-18 10:44)
+
+
+DEPLOY LIVE:
+    ☐ On Prod db run script scripts/fix_image_extensions_prod.sql 
+
+New Site:
+    Design:
+        ☐ Login 
+        ☐ Login Mobile          
+        ☐ Login Failure            
+        ☐ Login Failure Mobile
+        ☐ Homepage
+        ☐ Homepage Mobile
+        Landing Pages:
+            ☐ Dining 
+            ☐ Dining Mobile
+            ☐ Coffee 
+            ☐ Coffee Mobile 
+            ☐ Experience
+            ☐ Experience Mobile
+    Email Templates:
+        ☐ Coffee 
+        ☐ Dining
+        ☐ Experiences
+    Whatsapp:
+        ☐ Coffee
+        ☐ Dining
+        ☐ Experiences
+
+
+              
+                              
+         
+Delete app/routers/tug.py and app/pages/benefits/
+Rename tug_v2.py → tug.py, change prefix back to /benefits
+Rename benefits_v2/ → benefits/, update template references back to benefits/
+In main.py: swap import from tug_v2 to tug
+
+
+GoLive:
+    ✔ Setup beneifits 2742/2743 @done(26-04-16 14:33)
+    ✔ Load Experience partners @30m @done(26-04-16 17:49)
+    ✔ Partner Vouchers @60m @done(26-04-17 13:09)
+    ✔ Root Landing page @30m @done(26-04-17 13:11)
+    ✔ Dont show partners if inactive or no vouchers.@45m @done(26-04-17 14:29)
+    ✔ Env Settings - BOOKING_EMAIL = "diningrewards@gorhino.co.za" @done(26-04-17 14:49)
+    ✔ Env Settings Booking from Tug VOUCHER_FROM_EMAIL = "grahamrusson@gmail.com" @done(26-04-17 14:49)
+
+ 
+ 
+    https://theunlimited-lifestyle.co.za/access.php - Booking site open to all categories
  https://theunlimited-lifestyle.co.za/benefits/access.php - Instant dining
 
 Archive:

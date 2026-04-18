@@ -22,12 +22,29 @@
         <th class="border px-3 py-2">Partner Name</th>
         <th class="border px-3 py-2">Category</th>
         <th class="border px-3 py-2 text-center">Active</th>
+      <th class="border px-3 py-2 text-center">Actions</th>
       </tr>
     </thead>
     <tbody id="partners-tbody">
       {% include "partner_admin/_table_rows.html" %}
     </tbody>
   </table>
+</div>
+
+<!-- Voucher Modal -->
+<div
+  id="voucher-modal"
+  class="fixed inset-0 z-50 hidden items-center justify-center bg-black/50"
+>
+  <div class="bg-white rounded-xl shadow-xl w-full max-w-lg mx-4 max-h-[90vh] overflow-y-auto">
+    <div class="flex items-center justify-between px-6 py-4 border-b">
+      <h2 id="voucher-modal-title" class="text-lg font-semibold">Add Vouchers</h2>
+      <button onclick="closeVoucherModal()" class="text-gray-400 hover:text-gray-600 text-xl leading-none">&times;</button>
+    </div>
+    <div id="voucher-modal-body" class="px-6 py-5">
+      <!-- form loaded here via HTMX -->
+    </div>
+  </div>
 </div>
 
 <!-- Partner Modal (shared for Add & Edit) -->
@@ -61,5 +78,30 @@
     m.classList.remove('flex');
   }
   document.body.addEventListener('closePartnerModal', closePartnerModal);
+
+  function openVoucherModal(partnerName) {
+    document.getElementById('voucher-modal-title').textContent = 'Add Vouchers – ' + partnerName;
+    const m = document.getElementById('voucher-modal');
+    m.classList.remove('hidden');
+    m.classList.add('flex');
+  }
+  function closeVoucherModal() {
+    const m = document.getElementById('voucher-modal');
+    m.classList.add('hidden');
+    m.classList.remove('flex');
+  }
+  document.body.addEventListener('closeVoucherModal', closeVoucherModal);
+
+  document.body.addEventListener('showVoucherToast', function(e) {
+    const added = e.detail.added;
+    const skipped = e.detail.skipped;
+    let msg = added + ' voucher' + (added !== 1 ? 's' : '') + ' added';
+    if (skipped > 0) msg += ', ' + skipped + ' duplicate' + (skipped !== 1 ? 's' : '') + ' skipped';
+    const toast = document.createElement('div');
+    toast.className = 'fixed bottom-6 right-6 z-[100]';
+    toast.innerHTML = '<div class="alert alert-success shadow-lg text-sm">' + msg + '</div>';
+    document.body.appendChild(toast);
+    setTimeout(() => toast.remove(), 4000);
+  });
 </script>
 {% endblock %}

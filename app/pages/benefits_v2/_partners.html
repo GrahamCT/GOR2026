@@ -17,7 +17,7 @@
     {% for p in partners %}
     <button
       type="button"
-      hx-get="/benefits/partner/{{ p.id }}"
+      hx-get="/v2/benefits/partner/{{ p.id }}"
       hx-target="#app"
       hx-swap="innerHTML"
       class="relative w-[163px] h-[163px] bg-white rounded-2xl shadow-md

@@ -1,0 +1,123 @@
+<div id="booking-form-wrapper" class="mt-8 bg-white rounded-2xl shadow-md p-6 sm:p-8 max-w-3xl mx-auto">
+
+  <h2 class="text-[#EE3641] text-[26px] font-extrabold mb-1">Make a Booking</h2>
+  <p class="text-sm text-slate-500 mb-6">All fields are required.</p>
+
+  <form
+    hx-post="/v2/benefits/manage_booking"
+    hx-target="#booking-form-wrapper"
+    hx-swap="outerHTML"
+    hx-indicator="#booking-spinner"
+  >
+    <input type="hidden" name="book_customer_id" value="{{ customer.id }}" />
+    <input type="hidden" name="partner_id" value="{{ partner.id }}" />
+    <input type="hidden" name="partner_name" value="{{ partner.partner_name }}" />
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+
+      <!-- Name -->
+      <div class="flex flex-col gap-1">
+        <label for="book_name" class="text-sm font-bold text-slate-700">Name</label>
+        <input
+          type="text"
+          id="book_name"
+          name="book_name"
+          value="{{ customer.first_name }} {{ customer.last_name }}"
+          placeholder="Name and Surname"
+          class="border border-slate-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#EE3641] focus:border-transparent"
+          required
+        />
+      </div>
+
+      <!-- Email -->
+      <div class="flex flex-col gap-1">
+        <label for="book_email" class="text-sm font-bold text-slate-700">Email</label>
+        <input
+          type="email"
+          id="book_email"
+          name="book_email"
+          value="{{ customer.email_address }}"
+          placeholder="Your email address"
+          class="border border-slate-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#EE3641] focus:border-transparent"
+          required
+        />
+      </div>
+
+      <!-- Phone -->
+      <div class="flex flex-col gap-1">
+        <label for="book_phone" class="text-sm font-bold text-slate-700">Phone</label>
+        <input
+          type="tel"
+          id="book_phone"
+          name="book_phone"
+          value="{{ customer.mobile_number }}"
+          placeholder="Your contact number"
+          class="border border-slate-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#EE3641] focus:border-transparent"
+          required
+        />
+      </div>
+
+      <!-- Branch -->
+      <div class="flex flex-col gap-1">
+        <label for="book_branch" class="text-sm font-bold text-slate-700">Branch</label>
+        <input
+          type="text"
+          id="book_branch"
+          name="book_branch"
+          placeholder="Which branch would you like to book at?"
+          class="border border-slate-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#EE3641] focus:border-transparent"
+          required
+        />
+      </div>
+
+      <!-- Booking Date & Time -->
+      <div class="flex flex-col gap-1 sm:col-span-2">
+        <label for="book_datetime" class="text-sm font-bold text-slate-700">Booking Date &amp; Time</label>
+        <input
+          type="text"
+          id="book_datetime"
+          name="book_datetime"
+          placeholder="Select date and time"
+          class="border border-slate-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#EE3641] focus:border-transparent"
+          required
+          readonly
+        />
+      </div>
+
+      <!-- Number of Guests -->
+      <div class="flex flex-col gap-1 sm:col-span-2">
+        <label for="book_guests" class="text-sm font-bold text-slate-700">Number of Guests</label>
+        <input
+          type="number"
+          id="book_guests"
+          name="book_guests"
+          min="1"
+          class="border border-slate-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#EE3641] focus:border-transparent"
+          required
+        />
+      </div>
+
+    </div>
+
+    <!-- Submit -->
+    <div class="mt-6 flex items-center gap-4">
+      <button
+        type="submit"
+        class="w-full sm:w-auto px-8 py-3 bg-[#EE3641] hover:bg-red-700 text-white text-sm font-bold uppercase tracking-wide rounded-lg transition-colors duration-200"
+      >
+        Make a Booking
+      </button>
+      <span id="booking-spinner" class="htmx-indicator text-sm text-slate-500">Submitting...</span>
+    </div>
+
+  </form>
+
+</div>
+
+<script>
+  flatpickr("#book_datetime", {
+    enableTime: true,
+    dateFormat: "Y-m-d H:i:S",
+    time_24hr: true,
+    minDate: "today"
+  });
+</script>

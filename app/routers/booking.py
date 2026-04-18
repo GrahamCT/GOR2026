@@ -19,7 +19,7 @@ async def booking_new(request: Request, customer_id: int):
     customer = data['result_1'][0]
     benefits = data['result_4']
 
-    sql = "select id, group_name  from [dbo].[book_group] order by group_name"
+    sql = "select id, partner_name from book_Partner order by partner_name"
     partners = dal.generic_fetch_data(sql,())
         
     context = {"request": request, "customer" : customer, "benefits":benefits, "partners":partners}

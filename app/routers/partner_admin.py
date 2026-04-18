@@ -1,12 +1,14 @@
+import json
 import os
 import re
 import shutil
 
+import pyodbc
 from fastapi import APIRouter, File, Form, Request, UploadFile
 from fastapi.responses import HTMLResponse
 
 from app.core.templates import templates
-from app.services.dal import generic_execute, generic_fetch_data
+from app.services.dal import CONN_STRING, generic_execute, generic_fetch_data
 
 router = APIRouter(prefix="/partner_admin", tags=["partner_admin"])
 
@@ -90,6 +92,50 @@ async def partner_save(
         {"request": request, "partners": partners},
     )
     response.headers["HX-Trigger"] = "closePartnerModal"
+    return response
+
+
+# ── Vouchers ─────────────────────────────────────────────────────────────────
+
+@router.get("/{partner_id}/voucher-form", response_class=HTMLResponse)
+async def partner_voucher_form(request: Request, partner_id: int):
+    return templates.TemplateResponse(
+        "partner_admin/_voucher_modal.html",
+        {"request": request, "partner_id": partner_id},
+    )
+
+
+@router.post("/{partner_id}/add-vouchers", response_class=HTMLResponse)
+async def partner_add_vouchers(
+    request: Request,
+    partner_id: int,
+    voucher_codes: str = Form(""),
+):
+    lines = [ln.strip() for ln in voucher_codes.splitlines() if ln.strip()]
+    added = 0
+    skipped = 0
+    sql = """
+        INSERT INTO book_voucher (book_partner_id, voucher_number, voucher_status)
+        VALUES (?, ?, 0)
+    """
+    with pyodbc.connect(CONN_STRING) as conn:
+        cursor = conn.cursor()
+        for code in lines:
+            try:
+                cursor.execute(sql, (partner_id, code))
+                conn.commit()
+                added += 1
+            except pyodbc.IntegrityError:
+                skipped += 1
+            except Exception as e:
+                print(f"Voucher insert error for {code}: {e}")
+                skipped += 1
+
+    response = HTMLResponse("")
+    response.headers["HX-Trigger"] = json.dumps({
+        "closeVoucherModal": True,
+        "showVoucherToast": {"added": added, "skipped": skipped},
+    })
     return response
 
 

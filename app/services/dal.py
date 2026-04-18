@@ -47,6 +47,18 @@ def dal(typeEx0_OrFetch1, query: str, params: tuple=None):
 
 
 
+def exec_sp(query: str, params: tuple = None):
+    """Execute a stored procedure and return a single value from the result."""
+    with pyodbc.connect(CONN_STRING) as conn:
+        cursor = conn.cursor()
+        cursor.execute(query, params or ())
+        row = cursor.fetchone()
+        conn.commit()
+    if row:
+        return row[0]
+    return None
+
+
 def generic_execute(query: str, params: tuple = None, constring = CONN_STRING):
 
     try:
@@ -73,6 +85,21 @@ def generic_fetch_data(query: str, params: tuple = None):
     # Convert rows to list of dicts
     results = [dict(zip(columns, row)) for row in rows]
     return results
+
+def generic_execute_return(query: str, params: tuple = None):
+    with pyodbc.connect(CONN_STRING) as conn:
+        cursor = conn.cursor()
+        cursor.execute(query, params or ())
+        while cursor.description is None:
+            if not cursor.nextset():
+                return None
+        columns = [col[0] for col in cursor.description]
+        row = cursor.fetchone()
+        conn.commit()
+    if not row:
+        return None
+    return dict(zip(columns, row))
+
 
 
 def generic_fetch_multiple_datasets(query: str, params: tuple = None):

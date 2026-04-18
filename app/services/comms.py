@@ -3,14 +3,16 @@ from dotenv import load_dotenv
 from sendgrid import SendGridAPIClient
 from sendgrid.helpers.mail import Mail
 
-load_dotenv() 
+load_dotenv()
+
+VOUCHER_FROM_EMAIL = os.getenv("VOUCHER_FROM_EMAIL", "graham@indigoio.co.za")
 
 
 def GenericSendMail(to_email, subject, body ):
     api_key = os.getenv("SENDGRID_API_KEY")
 
     message = Mail(
-        from_email ='graham@indigoio.co.za',
+        from_email =VOUCHER_FROM_EMAIL,
         to_emails=to_email,
         subject=subject,
         html_content=body
@@ -56,7 +58,7 @@ def send_email_template(to_email, subject, template_data, template_id):
         template_data["subject"] = subject
 
     message = Mail(
-        from_email="graham@indigoio.co.za",
+        from_email=VOUCHER_FROM_EMAIL,
         to_emails=to_email
     )
 
