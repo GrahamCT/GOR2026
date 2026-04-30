@@ -1,4 +1,5 @@
 import os
+from datetime import datetime
 from fastapi import APIRouter, Form, Request, Response
 from fastapi.responses import HTMLResponse, RedirectResponse
 from app.services import comms
@@ -9,13 +10,28 @@ import app.services.dal as DAL
 from app.core.templates import templates
 
 BOOKING_EMAIL = os.getenv("BOOKING_EMAIL", "diningrewards@gorhino.co.za")
+LOGIN_URL = "/v2/"
 
-router = APIRouter(prefix="/v2/benefits", tags=["benefits-v2"])
+def _login_redirect(request: Request):
+    if request.headers.get("hx-request"):
+        r = Response(status_code=204)
+        r.headers["HX-Redirect"] = LOGIN_URL
+        return r
+    return RedirectResponse(LOGIN_URL, status_code=302)
+
+router = APIRouter(prefix="/v2", tags=["v2"])
+
+@router.get("/fonts")
+async def font_review(request: Request):
+    return templates.TemplateResponse("benefits_v2/fonts.html", {"request": request})
 
 @router.get("/")
 async def beneifts(request: Request):
     context = {"request": request}
-    return templates.TemplateResponse("benefits_v2/index.html", context)
+    response = templates.TemplateResponse("benefits_v2/index.html", context)
+    response.delete_cookie("customer_id")
+    response.delete_cookie("category")
+    return response
 
 @router.post("/tug_login", response_class=HTMLResponse)
 async def tug_login(request: Request, mobile_number: str = Form(...), email_address: str = Form("0")):
@@ -25,14 +41,14 @@ async def tug_login(request: Request, mobile_number: str = Form(...), email_addr
         return f"""
         <div class="text-sm text-orange-700 font-semibold">
         Could not find mobile number number: <span class="font-semibold">{mobile_number}</span>
-        <span> Please use correct number or contact support on </span>
+        <span> Please use correct number or contact support on 0861 990 000</span>
 
         </div>
         """
 
     response = Response(status_code=204)
     if customer[0]['status'] !="ACTIVE":
-        response.headers["HX-Redirect"] = "/v2/benefits/support"
+        response.headers["HX-Redirect"] = "/v2/support"
     else:
         customer_id = customer[0]['client_id']
 
@@ -44,14 +60,16 @@ async def tug_login(request: Request, mobile_number: str = Form(...), email_addr
             samesite="lax",
             max_age=60 * 60 * 4
         )
-        response.headers["HX-Redirect"] = "/v2/benefits/category"
+        response.headers["HX-Redirect"] = "/v2/category"
 
     return response
 
 
 @router.get("/select/{category_id}")
-async def select_category(category_id: int):
-    response = RedirectResponse("/v2/benefits/landing", status_code=302)
+async def select_category(request: Request, category_id: int):
+    if not request.cookies.get("customer_id"):
+        return _login_redirect(request)
+    response = RedirectResponse("/v2/landing", status_code=302)
     response.set_cookie(
         key="category",
         value=str(category_id),
@@ -68,7 +86,7 @@ async def landing(request: Request):
 
     customer_id = request.cookies.get("customer_id")
     if not customer_id:
-        return RedirectResponse("/v2/benefits")
+        return _login_redirect(request)
 
     category_id = int(request.cookies.get("category", 0))
 
@@ -82,23 +100,29 @@ async def landing(request: Request):
     context = {"request": request,
                "customer_id": customer_id,
                "customer": customer[0],
-               "category": category[0]}
+               "category": category[0],
+               "current_page": str(category_id)
+               }
     return templates.TemplateResponse("benefits_v2/landing.html", context)
 
 
 @router.get("/category", response_class=HTMLResponse)
 async def category(request: Request):
+    if not request.cookies.get("customer_id"):
+        return _login_redirect(request)
 
-    context = {"request":request}
+    context = {"request": request, "current_page": "0"}
 
     return templates.TemplateResponse(
-        "benefits_v2/category.html",context
-            )
+        "benefits_v2/category.html", context
+    )
 
 
 
 @router.get("/partners", response_class=HTMLResponse)
 async def partners_partial(request: Request):
+    if not request.cookies.get("customer_id"):
+        return _login_redirect(request)
 
     category_id = int(request.cookies.get("category", 0))
 
@@ -123,32 +147,35 @@ async def partner_detail_partial(request: Request, partner_id: int):
         """
 
 
+    customer_id = request.cookies.get("customer_id")
+    if not customer_id:
+        return _login_redirect(request)
+
     partner = DAL.dal(1,sql,(partner_id,))
     if not partner:
         return HTMLResponse("<div>Partner not found</div>", status_code=404)
 
-    customer_id = request.cookies.get("customer_id")
-
-    if customer_id:
-        query = 'select id, first_name, last_name, email_address, mobile_number from customer where id = ?'
-        customer = DAL.dal(1,query,(customer_id,))
+    query = 'select id, first_name, last_name, email_address, mobile_number from customer where id = ?'
+    customer = DAL.dal(1,query,(customer_id,))
 
 
 
     return templates.TemplateResponse(
-        "benefits_v2/_partner_detail.html",
+        "benefits_v2/partner.html",
         {"request": request, "partner": partner[0], "customer":customer[0]},
     )
 
 
 @router.post("/request_voucher")
-async def request_voucher(request:Request,
+async def request_voucher(request: Request,
                             name: str = Form(...),
                             email: str = Form(...),
                             phone: str = Form(...),
                             partner_id: int = Form(...),
                             customer_id: int = Form(...)
                           ):
+    if not request.cookies.get("customer_id"):
+        return _login_redirect(request)
 
     sql = "exec tug_AssignVoucher ?,?"
 
@@ -158,8 +185,10 @@ async def request_voucher(request:Request,
 
 
 
+    is_test = os.getenv("IS_TEST", "False") == "True"
+
     context = {"request": request,
-               "voucher_number":voucher,
+               "voucher_number": "000 SAMPLE 000" if is_test else voucher,
                "partner":partner[0],
                "customer":customer[0]
                }
@@ -173,9 +202,17 @@ async def request_voucher(request:Request,
 
     subject = f"Your {partner[0]['partner_name']} voucher"
 
-    is_test = os.getenv("IS_TEST", "False") == "True"
-    to_email = os.getenv("TEST_EMAIL") if is_test else customer[0]['email_address']
-    comms.send_email_template(to_email, subject, template_data, "d-cf770a728cf04053bddf62d23bde823d")
+    to_email = os.getenv("TEST_EMAIL") if is_test else email
+
+
+    category_templates = {
+        1: "d-cf770a728cf04053bddf62d23bde823d",
+        2: "d-67dbc5897de0418690ca15e01797c024",
+        3: "d-5f0a4132ab114d2d839daaf467c47747",
+    }
+    template_id = category_templates[partner[0]['book_category_id']]
+
+    comms.send_email_template(to_email, subject, template_data, template_id)
 
     return templates.TemplateResponse("benefits_v2/_booking_voucher.html", context)
 
@@ -187,13 +224,16 @@ async def support(request:Request):
 
 
 @router.get("/partner/{partner_id}/detail")
-async def get_partner(request:Request):
+async def get_partner(request: Request):
+    if not request.cookies.get("customer_id"):
+        return _login_redirect(request)
     context = {"request": request}
     return templates.TemplateResponse("benefits_v2/support.html", context)
 
 
 @router.post("/manage_booking", response_class=HTMLResponse)
 async def manage_booking(
+    request: Request,
     book_customer_id: int = Form(...),
     book_name: str = Form(...),
     book_email: str = Form(...),
@@ -202,8 +242,11 @@ async def manage_booking(
     book_datetime: str = Form(...),
     book_guests: int = Form(...),
     partner_id: int = Form(...),
-    partner_name: str=Form(...)
+    partner_name: str = Form(...)
 ):
+    if not request.cookies.get("customer_id"):
+        return _login_redirect(request)
+
     sql = "insert into book_booking_tug (client_id, partner_id, booking_date, branch, num_guests) values (?,?,?,?,?)"
     DAL.dal(0, sql, (book_customer_id, partner_id, book_datetime, book_branch, book_guests))
 
@@ -285,14 +328,22 @@ async def manage_booking(
         """
 
 
-    comms.GenericSendMail(BOOKING_EMAIL,"New Booking Recieved",body)
+    comms.GenericSendMail(BOOKING_EMAIL, "New Booking Recieved", body)
 
+    try:
+        book_date_display = datetime.strptime(book_datetime, "%Y-%m-%dT%H:%M").strftime("%-d %B %Y")
+    except ValueError:
+        book_date_display = book_datetime
 
-
-    return f"""
-    <div class="mt-8 p-6 bg-green-50 border border-green-300 rounded-2xl max-w-3xl mx-auto text-sm text-green-800 font-semibold">
-        Booking received for <span class="font-bold">{book_name}</span> on {book_datetime}
-        for {book_guests} guest(s) at {book_branch}.
-        We will confirm via {book_email} or {book_phone}.
-    </div>
-    """
+    return templates.TemplateResponse(
+        "benefits_v2/_booking_confirmation.html",
+        {
+            "request": request,
+            "book_name": book_name,
+            "book_email": book_email,
+            "book_phone": book_phone,
+            "book_guests": book_guests,
+            "book_date_display": book_date_display,
+            "partner_name": partner_name,
+        },
+    )

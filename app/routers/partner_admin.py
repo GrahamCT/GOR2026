@@ -29,10 +29,10 @@ def _slug(name: str) -> str:
     return name.strip("_")
 
 
-def _save_upload(upload: UploadFile, prefix: str, slug: str) -> str:
+def _save_upload(upload: UploadFile, prefix: str, slug: str, category_id: int) -> str:
     """Save uploaded file and return the DB path string (partners/filename)."""
     ext = os.path.splitext(upload.filename)[1]
-    filename = f"{prefix}_{slug}{ext}"
+    filename = f"{prefix}_cat{category_id}_{slug}{ext}"
     dest = os.path.join(STATIC_PARTNERS_DIR, filename)
     with open(dest, "wb") as f:
         shutil.copyfileobj(upload.file, f)
@@ -71,11 +71,11 @@ async def partner_save(
 
     logo_path = ""
     if logo_image and logo_image.filename:
-        logo_path = _save_upload(logo_image, "logo", slug)
+        logo_path = _save_upload(logo_image, "logo", slug, book_category_id)
 
     landing_path = ""
     if landing_image and landing_image.filename:
-        landing_path = _save_upload(landing_image, "landing", slug)
+        landing_path = _save_upload(landing_image, "landing", slug, book_category_id)
 
     sql = """
         INSERT INTO book_partner
@@ -172,11 +172,11 @@ async def partner_update(
 
     logo_path = existing_logo
     if logo_image and logo_image.filename:
-        logo_path = _save_upload(logo_image, "logo", slug)
+        logo_path = _save_upload(logo_image, "logo", slug, book_category_id)
 
     landing_path = existing_landing
     if landing_image and landing_image.filename:
-        landing_path = _save_upload(landing_image, "landing", slug)
+        landing_path = _save_upload(landing_image, "landing", slug, book_category_id)
 
     sql = """
         UPDATE book_partner

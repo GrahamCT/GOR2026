@@ -1,51 +1,265 @@
-{% extends "benefits/base.html" %}
+{% extends 'benefits_v2/base.html' %}
 
 {% block content %}
 
-<!-- Hero Image -->
-<div class="w-full mt-4 mb-8">
-  <img
-    src="{{ url_for('static', path='general-slider.jpg') }}"
-    alt="Benefits"
-    class="w-full h-auto rounded-lg object-cover"
-  />
-</div>
+<section class="bg-[#F7F7F7] pb-10">
+  <div class="container-main">
 
-<!-- Benefit Category Cards -->
-<div class="flex flex-wrap justify-center gap-6 mb-10">
-
-  <!-- Card 1: Dining -->
-  <a href="/v2/benefits/select/1">
-    <div class="bg-white rounded-2xl shadow-lg overflow-hidden w-72">
-        <img
-        src="{{ url_for('static', path='2_4_1_dining.png') }}"
-        alt="2 for 1 Dining"
-        class="w-full h-auto object-cover"
-        />
+    <!-- HERO -->
+    <div class="relative overflow-hidden">
+      <img
+        src="/static/v2/hero_category.png"
+        alt="Hero banner"
+        class="block w-full h-auto object-cover"
+      >
     </div>
-  </a>
 
-  <!-- Card 2: Coffee -->
-<a href="/v2/benefits/select/2">
-  <div class="bg-white rounded-2xl shadow-lg overflow-hidden w-72">
-    <img
-      src="{{ url_for('static', path='241-coffee.png') }}"
-      alt="2 for 1 Coffee"
-      class="w-full h-auto object-cover"
-    />
-  </div>
-  </a>
 
-  <!-- Card 3: Experiences -->
-    <a href="/v2/benefits/select/3">
-  <div class="bg-white rounded-2xl shadow-lg overflow-hidden w-72">
-    <img
-      src="{{ url_for('static', path='241-experiences.png') }}"
-      alt="2 for 1 Experiences"
-      class="w-full h-auto object-cover"
-    />
+      <!-- WELCOME TEXT -->
+      <div class="absolute inset-0 flex flex-col justify-center pl-8 md:pl-14" style="max-width: 50%;">
+        <h1 style="font-family: 'TheUnlimitedSans'; font-weight: 900; font-size: 100px; line-height: 81%; font-style: normal; color: #FA453D; text-transform: uppercase; width: 508px; flex-shrink: 0;">
+          More value,  <br>Every Day
+        </h1>
+        <p style="color: #1A1C1C; font-family: Gilroy; font-size: 24px; font-style: normal; font-weight: 600; line-height: 32px; width: 462px; margin-top: 50px;">
+          With My Unlimited, you unlock <span style="color: #1A1C1C; font-family: Gilroy; font-size: 24px; font-style: normal; font-weight: 700; line-height: 32px;">unbeatable value</span> from day one. The more you use your benefits, the harder your membership works for you.
+        </p>
+        <div class="flex items-center mt-8" style="width: 292px; height: 50.631px;">
+          <a href="#" class="flex-1 flex items-center justify-center rounded-l-[10px] bg-[#FA453D] h-full">
+            <span style="color: var(--White, #FFF); font-family: Gilroy; font-size: 16px; font-style: normal; font-weight: 700; line-height: normal; text-transform: uppercase;">EXPLORE YOUR REWARDS</span>
+          </a>
+          <a href="#">
+            <svg width="53" height="51" viewBox="0 0 53 51" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M0 0H42.7433C48.2662 0 52.7433 4.47715 52.7433 10V39.6308C52.7433 45.7059 47.8185 50.6308 41.7433 50.6308H0V0Z" fill="black"/>
+              <path fill-rule="evenodd" clip-rule="evenodd" d="M26.4036 28.1873L28.9884 25.7385H20.6389V23.9966H28.9074L26.322 21.5476L27.6223 20.3159L32.4925 24.8825L27.7038 29.419L26.4036 28.1873Z" fill="white"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+
+
+    <!-- FILTER PANEL
+    <div class="max-w-[1280px] mx-auto bg-[#F3F3F3] px-8 py-12">
+      <p class="text-[#1A1C1C] text-[18px] font-medium mb-6">
+        <span class="font-semibold">Let’s get you saving!</span>
+        Search or select your 2-for-1 rewards partner.
+      </p>
+
+      <div class="flex flex-col gap-4 md:flex-row md:items-center">
+        <div class="flex-1">
+          <input
+            type="text"
+            placeholder="Search by partner name"
+            class="w-full rounded-lg bg-white px-4 py-3 text-[14px] outline-none"
+          >
+        </div>
+
+        <div class="flex flex-wrap gap-3">
+          <button class="rounded-lg border border-black/10 bg-white px-6 py-3 text-[14px] font-medium text-[#1A1C1C] transition hover:bg-[#FF4B43] hover:text-white">
+            Dining
+          </button>
+          <button class="rounded-lg border border-black/10 bg-white px-6 py-3 text-[14px] font-medium text-[#1A1C1C] transition hover:bg-[#FF4B43] hover:text-white">
+            Coffee
+          </button>
+          <button class="rounded-lg border border-black/10 bg-white px-6 py-3 text-[14px] font-medium text-[#1A1C1C] transition hover:bg-[#FF4B43] hover:text-white">
+            Experiences
+          </button>
+        </div>
+      </div>
+    </div>
+     -->
+
   </div>
-</a>
+</section>
+
+<section class="bg-[#F7F7F7] pb-16">
+  <div class="mx-auto max-w-[1280px] px-4">
+    <h2 class="mb-8" style="color: #1A1C1C; font-family: Gilroy; font-size: 48px; font-style: normal; font-weight: 700; line-height: 60px;">
+      Your 2-For-1 rewards
+    </h2>
+
+    <div class="grid grid-cols-1 gap-6 md:grid-cols-3">
+
+      <!-- CARD 1 -->
+      <div class="flex flex-col rounded-lg bg-white p-8">
+        <div class="mb-6">
+          <img
+            src="/static/v2/21dining.png"
+            alt="Dining icon"
+            style="width: 91.278px; height: 81.931px; object-fit: contain;"
+          >
+        </div>
+
+        <h3 class="mb-2" style="color: #1A1C1C; font-family: Gilroy; font-size: 30px; font-style: normal; font-weight: 700; line-height: 36px;">
+          2-for-1 Dining
+        </h3>
+
+        <p class="mb-6" style="color: rgba(26, 28, 28, 0.60); font-family: Gilroy; font-size: 16px; font-style: normal; font-weight: 400; line-height: 26px;">
+          Buy two main meals and get up to R100 off your second meal.
+        </p>
+
+        <ul class="mb-6 space-y-2 text-[14px] text-[#1A1C1C]">
+          <li class="flex items-center gap-2" style="color: #1A1C1C; font-family: Gilroy; font-size: 14px; font-style: normal; font-weight: 600; line-height: 20px;">
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg" class="flex-shrink-0"><path d="M5.01667 8.51667L9.12917 4.40417L8.3125 3.5875L5.01667 6.88333L3.35417 5.22083L2.5375 6.0375L5.01667 8.51667ZM5.83333 11.6667C5.02639 11.6667 4.26806 11.5135 3.55833 11.2073C2.84861 10.901 2.23125 10.4854 1.70625 9.96042C1.18125 9.43542 0.765625 8.81806 0.459375 8.10833C0.153125 7.39861 0 6.64028 0 5.83333C0 5.02639 0.153125 4.26806 0.459375 3.55833C0.765625 2.84861 1.18125 2.23125 1.70625 1.70625C2.23125 1.18125 2.84861 0.765625 3.55833 0.459375C4.26806 0.153125 5.02639 0 5.83333 0C6.64028 0 7.39861 0.153125 8.10833 0.459375C8.81806 0.765625 9.43542 1.18125 9.96042 1.70625C10.4854 2.23125 10.901 2.84861 11.2073 3.55833C11.5135 4.26806 11.6667 5.02639 11.6667 5.83333C11.6667 6.64028 11.5135 7.39861 11.2073 8.10833C10.901 8.81806 10.4854 9.43542 9.96042 9.96042C9.43542 10.4854 8.81806 10.901 8.10833 11.2073C7.39861 11.5135 6.64028 11.6667 5.83333 11.6667Z" fill="#FA453D"/></svg>
+            Casual &amp; Fine Dining
+          </li>
+          <li class="flex items-center gap-2" style="color: #1A1C1C; font-family: Gilroy; font-size: 14px; font-style: normal; font-weight: 600; line-height: 20px;">
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg" class="flex-shrink-0"><path d="M5.01667 8.51667L9.12917 4.40417L8.3125 3.5875L5.01667 6.88333L3.35417 5.22083L2.5375 6.0375L5.01667 8.51667ZM5.83333 11.6667C5.02639 11.6667 4.26806 11.5135 3.55833 11.2073C2.84861 10.901 2.23125 10.4854 1.70625 9.96042C1.18125 9.43542 0.765625 8.81806 0.459375 8.10833C0.153125 7.39861 0 6.64028 0 5.83333C0 5.02639 0.153125 4.26806 0.459375 3.55833C0.765625 2.84861 1.18125 2.23125 1.70625 1.70625C2.23125 1.18125 2.84861 0.765625 3.55833 0.459375C4.26806 0.153125 5.02639 0 5.83333 0C6.64028 0 7.39861 0.153125 8.10833 0.459375C8.81806 0.765625 9.43542 1.18125 9.96042 1.70625C10.4854 2.23125 10.901 2.84861 11.2073 3.55833C11.5135 4.26806 11.6667 5.02639 11.6667 5.83333C11.6667 6.64028 11.5135 7.39861 11.2073 8.10833C10.901 8.81806 10.4854 9.43542 9.96042 9.96042C9.43542 10.4854 8.81806 10.901 8.10833 11.2073C7.39861 11.5135 6.64028 11.6667 5.83333 11.6667Z" fill="#FA453D"/></svg>
+            Nationwide Coverage
+          </li>
+        </ul>
+
+        <a href="/v2/select/1" class="mt-auto flex items-center gap-2" style="color: #FA453D; font-family: Manrope; font-size: 12px; font-style: normal; font-weight: 900; line-height: 16px; letter-spacing: 1.2px;">
+          EXPLORE VENUES
+          <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7.10208 5.25H0V4.08333H7.10208L3.83542 0.816667L4.66667 0L9.33333 4.66667L4.66667 9.33333L3.83542 8.51667L7.10208 5.25Z" fill="#FA453D"/></svg>
+        </a>
+      </div>
+
+      <!-- CARD 2 -->
+      <div class="flex flex-col rounded-lg bg-white p-8">
+        <div class="mb-6">
+          <img
+            src="/static/v2/21coffee.png"
+            alt="Coffee icon"
+            style="width: 91.278px; height: 81.931px; object-fit: contain;"
+          >
+        </div>
+
+        <h3 class="mb-2" style="color: #1A1C1C; font-family: Gilroy; font-size: 30px; font-style: normal; font-weight: 700; line-height: 36px;">
+          2-for-1 Coffee
+        </h3>
+
+        <p class="mb-6" style="color: rgba(26, 28, 28, 0.60); font-family: Gilroy; font-size: 16px; font-style: normal; font-weight: 400; line-height: 26px;">
+          Buy two coffees and get R20 off your second coffee.
+        </p>
+
+        <ul class="mb-6 space-y-2 text-[14px] text-[#1A1C1C]">
+          <li class="flex items-center gap-2" style="color: #1A1C1C; font-family: Gilroy; font-size: 14px; font-style: normal; font-weight: 600; line-height: 20px;">
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg" class="flex-shrink-0"><path d="M5.01667 8.51667L9.12917 4.40417L8.3125 3.5875L5.01667 6.88333L3.35417 5.22083L2.5375 6.0375L5.01667 8.51667ZM5.83333 11.6667C5.02639 11.6667 4.26806 11.5135 3.55833 11.2073C2.84861 10.901 2.23125 10.4854 1.70625 9.96042C1.18125 9.43542 0.765625 8.81806 0.459375 8.10833C0.153125 7.39861 0 6.64028 0 5.83333C0 5.02639 0.153125 4.26806 0.459375 3.55833C0.765625 2.84861 1.18125 2.23125 1.70625 1.70625C2.23125 1.18125 2.84861 0.765625 3.55833 0.459375C4.26806 0.153125 5.02639 0 5.83333 0C6.64028 0 7.39861 0.153125 8.10833 0.459375C8.81806 0.765625 9.43542 1.18125 9.96042 1.70625C10.4854 2.23125 10.901 2.84861 11.2073 3.55833C11.5135 4.26806 11.6667 5.02639 11.6667 5.83333C11.6667 6.64028 11.5135 7.39861 11.2073 8.10833C10.901 8.81806 10.4854 9.43542 9.96042 9.96042C9.43542 10.4854 8.81806 10.901 8.10833 11.2073C7.39861 11.5135 6.64028 11.6667 5.83333 11.6667Z" fill="#FA453D"/></svg>
+            Daily Redemption
+          </li>
+          <li class="flex items-center gap-2" style="color: #1A1C1C; font-family: Gilroy; font-size: 14px; font-style: normal; font-weight: 600; line-height: 20px;">
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg" class="flex-shrink-0"><path d="M5.01667 8.51667L9.12917 4.40417L8.3125 3.5875L5.01667 6.88333L3.35417 5.22083L2.5375 6.0375L5.01667 8.51667ZM5.83333 11.6667C5.02639 11.6667 4.26806 11.5135 3.55833 11.2073C2.84861 10.901 2.23125 10.4854 1.70625 9.96042C1.18125 9.43542 0.765625 8.81806 0.459375 8.10833C0.153125 7.39861 0 6.64028 0 5.83333C0 5.02639 0.153125 4.26806 0.459375 3.55833C0.765625 2.84861 1.18125 2.23125 1.70625 1.70625C2.23125 1.18125 2.84861 0.765625 3.55833 0.459375C4.26806 0.153125 5.02639 0 5.83333 0C6.64028 0 7.39861 0.153125 8.10833 0.459375C8.81806 0.765625 9.43542 1.18125 9.96042 1.70625C10.4854 2.23125 10.901 2.84861 11.2073 3.55833C11.5135 4.26806 11.6667 5.02639 11.6667 5.83333C11.6667 6.64028 11.5135 7.39861 11.2073 8.10833C10.901 8.81806 10.4854 9.43542 9.96042 9.96042C9.43542 10.4854 8.81806 10.901 8.10833 11.2073C7.39861 11.5135 6.64028 11.6667 5.83333 11.6667Z" fill="#FA453D"/></svg>
+            Artisan Roasteries
+          </li>
+        </ul>
+
+             <a href="/v2/select/2" class="mt-auto flex items-center gap-2" style="color: #FA453D; font-family: Manrope; font-size: 12px; font-style: normal; font-weight: 900; line-height: 16px; letter-spacing: 1.2px;">
+          FIND A CAFE
+          <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7.10208 5.25H0V4.08333H7.10208L3.83542 0.816667L4.66667 0L9.33333 4.66667L4.66667 9.33333L3.83542 8.51667L7.10208 5.25Z" fill="#FA453D"/></svg>
+        </a>
+      </div>
+
+      <!-- CARD 3 -->
+      <div class="flex flex-col rounded-lg bg-white p-8">
+        <div class="mb-6">
+          <img
+            src="/static/v2/21experience.jpg"
+            alt="Experience icon"
+            style="width: 91.278px; height: 81.931px; object-fit: contain;"
+          >
+        </div>
+
+        <h3 class="mb-2" style="color: #1A1C1C; font-family: Gilroy; font-size: 30px; font-style: normal; font-weight: 700; line-height: 36px;">
+          2-for-1 Experiences
+        </h3>
+
+        <p class="mb-6" style="color: rgba(26, 28, 28, 0.60); font-family: Gilroy; font-size: 16px; font-style: normal; font-weight: 400; line-height: 26px;">
+          Buy two experiences and get your second experience free to you. 
+        </p>
+
+        <ul class="mb-6 space-y-2 text-[14px] text-[#1A1C1C]">
+          <li class="flex items-center gap-2" style="color: #1A1C1C; font-family: Gilroy; font-size: 14px; font-style: normal; font-weight: 600; line-height: 20px;">
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg" class="flex-shrink-0"><path d="M5.01667 8.51667L9.12917 4.40417L8.3125 3.5875L5.01667 6.88333L3.35417 5.22083L2.5375 6.0375L5.01667 8.51667ZM5.83333 11.6667C5.02639 11.6667 4.26806 11.5135 3.55833 11.2073C2.84861 10.901 2.23125 10.4854 1.70625 9.96042C1.18125 9.43542 0.765625 8.81806 0.459375 8.10833C0.153125 7.39861 0 6.64028 0 5.83333C0 5.02639 0.153125 4.26806 0.459375 3.55833C0.765625 2.84861 1.18125 2.23125 1.70625 1.70625C2.23125 1.18125 2.84861 0.765625 3.55833 0.459375C4.26806 0.153125 5.02639 0 5.83333 0C6.64028 0 7.39861 0.153125 8.10833 0.459375C8.81806 0.765625 9.43542 1.18125 9.96042 1.70625C10.4854 2.23125 10.901 2.84861 11.2073 3.55833C11.5135 4.26806 11.6667 5.02639 11.6667 5.83333C11.6667 6.64028 11.5135 7.39861 11.2073 8.10833C10.901 8.81806 10.4854 9.43542 9.96042 9.96042C9.43542 10.4854 8.81806 10.901 8.10833 11.2073C7.39861 11.5135 6.64028 11.6667 5.83333 11.6667Z" fill="#FA453D"/></svg>
+            Adventure and Entertainment
+          </li>
+          <li class="flex items-center gap-2" style="color: #1A1C1C; font-family: Gilroy; font-size: 14px; font-style: normal; font-weight: 600; line-height: 20px;">
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg" class="flex-shrink-0"><path d="M5.01667 8.51667L9.12917 4.40417L8.3125 3.5875L5.01667 6.88333L3.35417 5.22083L2.5375 6.0375L5.01667 8.51667ZM5.83333 11.6667C5.02639 11.6667 4.26806 11.5135 3.55833 11.2073C2.84861 10.901 2.23125 10.4854 1.70625 9.96042C1.18125 9.43542 0.765625 8.81806 0.459375 8.10833C0.153125 7.39861 0 6.64028 0 5.83333C0 5.02639 0.153125 4.26806 0.459375 3.55833C0.765625 2.84861 1.18125 2.23125 1.70625 1.70625C2.23125 1.18125 2.84861 0.765625 3.55833 0.459375C4.26806 0.153125 5.02639 0 5.83333 0C6.64028 0 7.39861 0.153125 8.10833 0.459375C8.81806 0.765625 9.43542 1.18125 9.96042 1.70625C10.4854 2.23125 10.901 2.84861 11.2073 3.55833C11.5135 4.26806 11.6667 5.02639 11.6667 5.83333C11.6667 6.64028 11.5135 7.39861 11.2073 8.10833C10.901 8.81806 10.4854 9.43542 9.96042 9.96042C9.43542 10.4854 8.81806 10.901 8.10833 11.2073C7.39861 11.5135 6.64028 11.6667 5.83333 11.6667Z" fill="#FA453D"/></svg>
+            Outdoor Fun
+          </li>
+        </ul>
+
+             <a href="/v2/select/3" class="mt-auto flex items-center gap-2" style="color: #FA453D; font-family: Manrope; font-size: 12px; font-style: normal; font-weight: 900; line-height: 16px; letter-spacing: 1.2px;">
+          BOOK NOW
+          <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7.10208 5.25H0V4.08333H7.10208L3.83542 0.816667L4.66667 0L9.33333 4.66667L4.66667 9.33333L3.83542 8.51667L7.10208 5.25Z" fill="#FA453D"/></svg>
+        </a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="bg-[#F7F7F7]">
+  <div class="max-w-[1280px] mx-auto px-4">
+
+    <div class="bg-white px-8 py-10">
+      <h2 class="mb-10" style="color: #1A1C1C; font-family: Gilroy; font-size: 60px; font-style: normal; font-weight: 700; line-height: 60px;">
+        How 2-for-1 rewards work
+      </h2>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+
+  <!-- STEP 1 -->
+  <div>
+    <!-- Number -->
+    <span class="block text-[120px] leading-[1] font-extrabold text-[#FA453D]/10 mb-4">
+      01
+    </span>
+
+    <!-- Content -->
+    <div class="flex items-start gap-4">
+      <div class="flex h-[48px] w-[48px] items-center justify-center rounded-[10px] bg-[#FF4B43]">
+        <img src="/static/v2/icon-search.png" class="h-5 w-5" alt="">
+      </div>
+
+      <div>
+        <p style="color: #1A1C1C; font-family: Gilroy; font-size: 24px; font-style: normal; font-weight: 700; line-height: 32px;">
+          Choose your 2-for-1<br>rewards partner
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- STEP 2 -->
+  <div>
+    <span class="block text-[120px] leading-[1] font-extrabold text-[#FA453D]/10 mb-4">
+      02
+    </span>
+
+    <div class="flex items-start gap-4">
+      <div class="flex h-[48px] w-[48px] items-center justify-center rounded-[10px] bg-[#FF4B43]">
+        <img src="/static/v2/icon-voucher.png" class="h-5 w-5" alt="">
+      </div>
+
+      <div>
+        <p style="color: #1A1C1C; font-family: Gilroy; font-size: 24px; font-style: normal; font-weight: 700; line-height: 32px;">
+          Get your unique<br>digital voucher
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- STEP 3 -->
+  <div>
+    <span class="block text-[120px] leading-[1] font-extrabold text-[#FA453D]/10 mb-4">
+      03
+    </span>
+
+    <div class="flex items-start gap-4">
+      <div class="flex h-[48px] w-[48px] items-center justify-center rounded-[10px] bg-[#FF4B43]">
+        <img src="/static/v2/icon-money.png" class="h-5 w-5" alt="">
+      </div>
+
+      <div>
+        <p style="color: #1A1C1C; font-family: Gilroy; font-size: 24px; font-style: normal; font-weight: 700; line-height: 32px;">
+          Present your voucher<br>and save
+        </p>
+      </div>
+    </div>
+  </div>
+
 </div>
+    </div>
+  </div>
+</section>
 
 {% endblock content %}

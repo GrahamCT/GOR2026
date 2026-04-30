@@ -34,29 +34,24 @@ CRM:
     ☐ swagger must not be allowed to insert user @15m
 
 TUG:
-    ✔ Images large reduce in size @done(26-04-18 10:44)
     ☐ Experiencies not national no provinces
-    ✔ Hamburger menu different to main @done(26-04-18 10:44)
-
 
 DEPLOY LIVE:
     ☐ On Prod db run script scripts/fix_image_extensions_prod.sql 
 
 New Site:
     Design:
-        ☐ Login 
-        ☐ Login Mobile          
-        ☐ Login Failure            
+        ☐ Login Mobile
         ☐ Login Failure Mobile
-        ☐ Homepage
         ☐ Homepage Mobile
         Landing Pages:
-            ☐ Dining 
             ☐ Dining Mobile
-            ☐ Coffee 
             ☐ Coffee Mobile 
-            ☐ Experience
             ☐ Experience Mobile
+        Partner pages:
+            ☐ Partner Page
+            ☐ voucher
+            ☐ Booking
     Email Templates:
         ☐ Coffee 
         ☐ Dining
@@ -65,32 +60,69 @@ New Site:
         ☐ Coffee
         ☐ Dining
         ☐ Experiences
+    
+    Tug Dependency:
+        ☐ Email template - coffee Tug to provide
+        ☐ Email template - dining Tug to provide
+        ☐ Email template - Experience Tug to provide
+    MVP:
+        ☐ /voucher - Check DB if client has already requested Voucher 
+            Check with Yash/Perlene logic
+        ☐ /category -  wireup search partner name @45m
+        ☐ Experience booking - Needs work (see QA notes)
+        ✔ /partner/Coffee&Dining - voucher fix button  @15m @done(26-04-25 11:40)
+        ✔ /partner/experience booking - fix button @10m @done(26-04-25 11:40)
+        ✔ /landing start button to go to partner list @done(26-04-25 11:32)
+        ✔ GLOBAL - nav_bar, show active @15m @done(26-04-25 11:26)
+        ✔ /login - Check cookies for legit user @done(26-04-25 11:25)
+        ✔ Fix Calcachio copy: The w need to be removed and add a . Offer needs a capital O @done(26-04-25 11:14)
+        ✔ Fix partner copy: Missing digits before 738 Wrong time format needs to be zeros and not o. @done(26-04-25 11:12)
+        ✔ /comms - voucher send email @45m @done(26-04-25 11:07)
+        ✔ /experiencre - Add Expereince Partners @done(26-04-25 09:50)
+        ✔ /voucher - Change Voucher expiry copy @done(26-04-25 09:50)
+        ✔ Email template - coffee Code setup @done(26-04-25 10:40)
+        ✔ Email template - dining Code setup @done(26-04-25 10:40)
+        ✔ Email template - Experience Code setup @done(26-04-25 10:40)
+    Mobile QA:
+        ☐ iPhone
+        ☐ Android
+        ☐ 375 px
+        ☐ 412 px
+        ☐ 912 px (surface/tablet)
+    Live Deploy:
+        ☐ partner data, logos and images to align
+        ☐ Run RedGate comparison meta data
+        ☐ Run Redgate Lookup data 
+        ☐ On Rebuild Docker Container Check images & logos
+
+        
 
 
-              
-                              
-         
-Delete app/routers/tug.py and app/pages/benefits/
-Rename tug_v2.py → tug.py, change prefix back to /benefits
-Rename benefits_v2/ → benefits/, update template references back to benefits/
-In main.py: swap import from tug_v2 to tug
-
-
-GoLive:
-    ✔ Setup beneifits 2742/2743 @done(26-04-16 14:33)
-    ✔ Load Experience partners @30m @done(26-04-16 17:49)
-    ✔ Partner Vouchers @60m @done(26-04-17 13:09)
-    ✔ Root Landing page @30m @done(26-04-17 13:11)
-    ✔ Dont show partners if inactive or no vouchers.@45m @done(26-04-17 14:29)
-    ✔ Env Settings - BOOKING_EMAIL = "diningrewards@gorhino.co.za" @done(26-04-17 14:49)
-    ✔ Env Settings Booking from Tug VOUCHER_FROM_EMAIL = "grahamrusson@gmail.com" @done(26-04-17 14:49)
-
- 
- 
-    https://theunlimited-lifestyle.co.za/access.php - Booking site open to all categories
- https://theunlimited-lifestyle.co.za/benefits/access.php - Instant dining
 
 Archive:
+  ✔ Images large reduce in size @done(26-04-18 10:44) @project(TUG)
+  ✔ Hamburger menu different to main @done(26-04-18 10:44) @project(TUG)
+  ✔ Login @done(26-04-24 10:36) @project(New Site.Design)
+  ✔ Login Failure @done(26-04-24 10:36) @project(New Site.Design)
+  ✔ Homepage @done(26-04-24 10:36) @project(New Site.Design)
+  ✔ Dining @done(26-04-24 10:36) @project(New Site.Design.Landing Pages)
+  ✔ Coffee @done(26-04-24 10:36) @project(New Site.Design.Landing Pages)
+  ✔ Experience @done(26-04-24 10:36) @project(New Site.Design.Landing Pages)
+  ✔ hero-button got to partners @15m @done(26-04-24 14:18) @project(New Site.MVP)
+  ✔ partners link - return to partners- wire up @15m @done(26-04-24 14:18) @project(New Site.MVP)
+  ✔ voucher succes spanel @45m @done(26-04-24 14:18) @project(New Site.MVP)
+  ✔ booking success panel @45m @done(26-04-24 14:18) @project(New Site.MVP)
+  ✔ booking send email @45m @done(26-04-24 14:18) @project(New Site.MVP)
+  ✔ fix dining partners/images @45m @done(26-04-24 16:04) @project(New Site.MVP)
+  ✔ fix coffee partners/images @45m @done(26-04-24 16:04) @project(New Site.MVP)
+  ✔ fix experience partners/images @45m @done(26-04-24 16:04) @project(New Site.MVP)
+  ✔ Setup beneifits 2742/2743 @done(26-04-16 14:33) @project(GoLive)
+  ✔ Load Experience partners @30m @done(26-04-16 17:49) @project(GoLive)
+  ✔ Partner Vouchers @60m @done(26-04-17 13:09) @project(GoLive)
+  ✔ Root Landing page @30m @done(26-04-17 13:11) @project(GoLive)
+  ✔ Dont show partners if inactive or no vouchers.@45m @done(26-04-17 14:29) @project(GoLive)
+  ✔ Env Settings - BOOKING_EMAIL = "diningrewards@gorhino.co.za" @done(26-04-17 14:49) @project(GoLive)
+  ✔ Env Settings Booking from Tug VOUCHER_FROM_EMAIL = "grahamrusson@gmail.com" @done(26-04-17 14:49) @project(GoLive)
   ✔ scaffold @done(26-04-02 16:46) @project(TUG.Landing Page)
   ✔ dining coffee experience routes @done(26-04-02 16:46) @project(TUG.Landing Page)
   ✔ add category to database @done(26-04-02 16:46) @project(TUG.database)
@@ -110,3 +142,12 @@ Archive:
   ✔ Home to category page @done(26-04-03 13:48) @project(TUG.NavBar)
   ✔ Add Coffee @done(26-04-03 13:48) @project(TUG.NavBar)
   ✔ Add Experience @done(26-04-03 13:48) @project(TUG.NavBar)
+
+
+  Delete app/routers/tug.py and app/pages/benefits/
+Rename tug_v2.py → tug.py, change prefix back to /benefits
+Rename benefits_v2/ → benefits/, update template references back to benefits/
+In main.py: swap import from tug_v2 to tug
+
+
+ https://theunlimited-lifestyle.co.za/benefits/access.php - Instant dining

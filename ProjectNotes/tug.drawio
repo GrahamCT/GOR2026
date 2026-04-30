@@ -1,4 +1,4 @@
-<mxfile host="Electron" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/29.6.6 Chrome/144.0.7559.236 Electron/40.8.4 Safari/537.36" version="29.6.6" pages="7">
+<mxfile host="Electron" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/29.6.6 Chrome/144.0.7559.236 Electron/40.8.4 Safari/537.36" pages="7">
   <diagram name="Page-1" id="8WbltWkP-jPNGLZwclC2">
     <mxGraphModel dx="1188" dy="701" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1654" pageHeight="1169" math="0" shadow="0">
       <root>
@@ -436,24 +436,18 @@
     </mxGraphModel>
   </diagram>
   <diagram id="QrFWmg_wl4X-mITAjfrw" name="Page-7">
-    <mxGraphModel dx="679" dy="400" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
+    <mxGraphModel dx="673" dy="400" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
-        <mxCell id="i3D3nhJaEVyPaOmCG4h5-3" edge="1" parent="1" source="i3D3nhJaEVyPaOmCG4h5-1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="i3D3nhJaEVyPaOmCG4h5-2" value="tug_login">
+        <mxCell id="KrYNNkiUrv6js7QPYi3R-3" edge="1" parent="1" source="KrYNNkiUrv6js7QPYi3R-1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="KrYNNkiUrv6js7QPYi3R-2">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="i3D3nhJaEVyPaOmCG4h5-1" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="&lt;div&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;/benefits&lt;/span&gt;&lt;/div&gt;" vertex="1">
-          <mxGeometry height="60" width="120" x="80" y="40" as="geometry" />
+        <mxCell id="KrYNNkiUrv6js7QPYi3R-1" parent="1" style="strokeWidth=2;html=1;shape=mxgraph.flowchart.document2;whiteSpace=wrap;size=0.25;fillColor=#d5e8d4;strokeColor=#82b366;" value="login&lt;div&gt;&lt;b&gt;/&lt;/b&gt;&lt;/div&gt;&lt;div&gt;index.html&lt;/div&gt;" vertex="1">
+          <mxGeometry height="100" width="170" x="120" y="40" as="geometry" />
         </mxCell>
-        <mxCell id="i3D3nhJaEVyPaOmCG4h5-5" edge="1" parent="1" source="i3D3nhJaEVyPaOmCG4h5-2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="i3D3nhJaEVyPaOmCG4h5-4" value="select_category">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="i3D3nhJaEVyPaOmCG4h5-2" parent="1" style="whiteSpace=wrap;html=1;rounded=0;" value="/category" vertex="1">
-          <mxGeometry height="60" width="120" x="80" y="150" as="geometry" />
-        </mxCell>
-        <mxCell id="i3D3nhJaEVyPaOmCG4h5-4" parent="1" style="whiteSpace=wrap;html=1;rounded=0;" value="/landing" vertex="1">
-          <mxGeometry height="60" width="120" x="80" y="270" as="geometry" />
+        <mxCell id="KrYNNkiUrv6js7QPYi3R-2" parent="1" style="strokeWidth=2;html=1;shape=mxgraph.flowchart.document2;whiteSpace=wrap;size=0.25;fillColor=#d5e8d4;strokeColor=#82b366;" value="Ooops&lt;div&gt;/support&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="100" width="170" x="360" y="40" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>

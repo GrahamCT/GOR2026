@@ -1,0 +1,177 @@
+{% extends 'benefits_v2/base.html' %}
+
+{% block content %}
+
+<style>
+  .font-specimen { border-bottom: 1px solid #E5E5E5; padding: 32px 0; }
+  .font-specimen:last-child { border-bottom: none; }
+  .specimen-label { font-family: monospace; font-size: 11px; color: #999; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 8px; }
+  .specimen-meta { font-family: monospace; font-size: 11px; color: #bbb; margin-top: 6px; }
+  .section-divider { background: #111; color: #fff; padding: 14px 24px; margin: 48px 0 0; border-radius: 8px 8px 0 0; font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; font-family: monospace; }
+</style>
+
+<div class="container-main py-12">
+
+  <!-- Header -->
+  <div class="mb-10">
+    <h1 style="font-family: 'TheUnlimitedSans'; font-weight: 700; font-size: 36px; color: #111; letter-spacing: -0.02em;">
+      Font Review
+    </h1>
+    <p style="font-family: 'TheUnlimitedSans'; font-weight: 400; font-size: 16px; color: #666; margin-top: 6px;">
+      The Unlimited Lifestyle — Typography specimen for marketing sign-off
+    </p>
+    <div style="margin-top: 12px; padding: 10px 16px; background: #FFF8F0; border: 1px solid #FCDAB0; border-radius: 6px; display: inline-block;">
+      <span style="font-family: monospace; font-size: 12px; color: #C06000;">
+        Please confirm each font weight looks correct before sign-off
+      </span>
+    </div>
+  </div>
+
+  <!-- ─────────────────────────────────────────── -->
+  <!-- THE UNLIMITED SANS — STANDARD WEIGHTS       -->
+  <!-- ─────────────────────────────────────────── -->
+  <div class="section-divider">TheUnlimitedSans — Standard Weights</div>
+  <div style="border: 1px solid #E5E5E5; border-top: none; border-radius: 0 0 8px 8px; padding: 0 24px 8px; background: #fff;">
+
+    {% set samples = [
+      ("Regular", 400),
+      ("Medium", 500),
+      ("SemiBold", 600),
+      ("Bold", 700),
+      ("Heavy", 800),
+      ("Black", 900)
+    ] %}
+
+    {% for label, weight in samples %}
+    <div class="font-specimen">
+      <div class="specimen-label">{{ label }} · font-weight: {{ weight }}</div>
+      <div style="font-family: 'TheUnlimitedSans'; font-weight: {{ weight }}; font-size: 42px; color: #111; line-height: 1.1; letter-spacing: -0.02em;">
+        The Unlimited Lifestyle
+      </div>
+      <div style="font-family: 'TheUnlimitedSans'; font-weight: {{ weight }}; font-size: 18px; color: #444; margin-top: 8px; line-height: 1.5;">
+        Exclusive benefits for members — dining, coffee &amp; experiences.
+      </div>
+      <div style="font-family: 'TheUnlimitedSans'; font-weight: {{ weight }}; font-size: 14px; color: #666; margin-top: 6px; line-height: 1.6;">
+        AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz · 0123456789
+      </div>
+      <div class="specimen-meta">font-family: 'TheUnlimitedSans'</div>
+    </div>
+    {% endfor %}
+
+  </div>
+
+  <!-- ─────────────────────────────────────────── -->
+  <!-- THE UNLIMITED SANS — SPECIALTY CUTS         -->
+  <!-- ─────────────────────────────────────────── -->
+  <div class="section-divider" style="margin-top: 32px;">TheUnlimitedSans — Specialty Cuts</div>
+  <div style="border: 1px solid #E5E5E5; border-top: none; border-radius: 0 0 8px 8px; padding: 0 24px 8px; background: #fff;">
+
+    {% set specialty = [
+      ("Display", "TheUnlimitedSans-Display"),
+      ("Super", "TheUnlimitedSans-Super"),
+      ("Ultra", "TheUnlimitedSans-Ultra"),
+      ("Base", "TheUnlimitedSans-Base")
+    ] %}
+
+    {% for label, family in specialty %}
+    <div class="font-specimen">
+      <div class="specimen-label">{{ label }} · own font-family name</div>
+      <div style="font-family: '{{ family }}'; font-size: 42px; color: #111; line-height: 1.1; letter-spacing: -0.02em;">
+        The Unlimited Lifestyle
+      </div>
+      <div style="font-family: '{{ family }}'; font-size: 18px; color: #444; margin-top: 8px; line-height: 1.5;">
+        Exclusive benefits for members — dining, coffee &amp; experiences.
+      </div>
+      <div style="font-family: '{{ family }}'; font-size: 14px; color: #666; margin-top: 6px; line-height: 1.6;">
+        AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz · 0123456789
+      </div>
+      <div class="specimen-meta">font-family: '{{ family }}'</div>
+    </div>
+    {% endfor %}
+
+  </div>
+
+  <!-- ─────────────────────────────────────────── -->
+  <!-- GILROY                                       -->
+  <!-- ─────────────────────────────────────────── -->
+  <div class="section-divider" style="margin-top: 32px;">Gilroy — All Weights</div>
+  <div style="border: 1px solid #E5E5E5; border-top: none; border-radius: 0 0 8px 8px; padding: 0 24px 8px; background: #fff;">
+
+    {% set gilroy = [
+      ("Regular", 400),
+      ("Medium", 500),
+      ("SemiBold", 600),
+      ("Bold", 700),
+      ("ExtraBold", 800),
+      ("Black", 900)
+    ] %}
+
+    {% for label, weight in gilroy %}
+    <div class="font-specimen">
+      <div class="specimen-label">{{ label }} · font-weight: {{ weight }}</div>
+      <div style="font-family: 'Gilroy'; font-weight: {{ weight }}; font-size: 42px; color: #111; line-height: 1.1; letter-spacing: -0.02em;">
+        The Unlimited Lifestyle
+      </div>
+      <div style="font-family: 'Gilroy'; font-weight: {{ weight }}; font-size: 18px; color: #444; margin-top: 8px; line-height: 1.5;">
+        Exclusive benefits for members — dining, coffee &amp; experiences.
+      </div>
+      <div style="font-family: 'Gilroy'; font-weight: {{ weight }}; font-size: 14px; color: #666; margin-top: 6px; line-height: 1.6;">
+        AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz · 0123456789
+      </div>
+      <div class="specimen-meta">font-family: 'Gilroy'</div>
+    </div>
+    {% endfor %}
+
+  </div>
+
+  <!-- ─────────────────────────────────────────── -->
+  <!-- SIDE BY SIDE                                -->
+  <!-- ─────────────────────────────────────────── -->
+  <div class="section-divider" style="margin-top: 32px;">Side by Side — Same Weight, Both Families</div>
+  <div style="border: 1px solid #E5E5E5; border-top: none; border-radius: 0 0 8px 8px; padding: 24px; background: #fff;">
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 32px;">
+
+      {% for weight, label in [(400,"Regular"),(700,"Bold"),(900,"Black")] %}
+      <div>
+        <div class="specimen-label">TheUnlimitedSans · {{ label }}</div>
+        <div style="font-family: 'TheUnlimitedSans'; font-weight: {{ weight }}; font-size: 28px; color: #111; line-height: 1.2;">
+          The Unlimited<br>Lifestyle
+        </div>
+      </div>
+      <div>
+        <div class="specimen-label">Gilroy · {{ label }}</div>
+        <div style="font-family: 'Gilroy'; font-weight: {{ weight }}; font-size: 28px; color: #111; line-height: 1.2;">
+          The Unlimited<br>Lifestyle
+        </div>
+      </div>
+      {% endfor %}
+
+    </div>
+  </div>
+
+  <!-- ─────────────────────────────────────────── -->
+  <!-- BRAND COLOURS                               -->
+  <!-- ─────────────────────────────────────────── -->
+  <div class="section-divider" style="margin-top: 32px;">Fonts on Brand Background</div>
+  <div style="border: 1px solid #E5E5E5; border-top: none; border-radius: 0 0 8px 8px; background: #fff;">
+    <div style="background: #FA453D; padding: 40px 24px; border-radius: 0 0 8px 8px;">
+      <div style="font-family: 'TheUnlimitedSans'; font-weight: 900; font-size: 48px; color: #fff; line-height: 1.1; letter-spacing: -0.02em;">
+        The Unlimited Lifestyle
+      </div>
+      <div style="font-family: 'TheUnlimitedSans'; font-weight: 400; font-size: 18px; color: rgba(255,255,255,0.85); margin-top: 12px;">
+        Your exclusive member benefits — dining, coffee &amp; unforgettable experiences.
+      </div>
+      <div style="margin-top: 24px;">
+        <div style="font-family: 'Gilroy'; font-weight: 700; font-size: 20px; color: #fff; margin-bottom: 4px;">Gilroy Bold on brand red</div>
+        <div style="font-family: 'Gilroy'; font-weight: 400; font-size: 15px; color: rgba(255,255,255,0.8);">Gilroy Regular — supporting body copy</div>
+      </div>
+    </div>
+  </div>
+
+  <div style="margin-top: 48px; padding: 16px; background: #F7F7F7; border-radius: 8px; font-family: monospace; font-size: 11px; color: #999; text-align: center;">
+    Font review page · /v2/fonts · For internal use only
+  </div>
+
+</div>
+
+{% endblock %}

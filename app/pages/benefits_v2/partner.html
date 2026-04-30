@@ -1,0 +1,244 @@
+{% extends 'benefits_v2/base.html' %}
+
+{% block content %}
+
+<!-- HERO -->
+<section class="bg-[#F7F7F7] mb-16">
+  <div class="container-main">
+    <div class="relative overflow-hidden">
+
+      <div class="relative w-full max-w-[1280px] mx-auto">
+
+        <!-- Main image -->
+        <img
+          src="{{ url_for('static', path=partner.landing_image) if partner.landing_image else 'https://placehold.co/1280x400?text=' ~ partner.partner_name | replace(' ', '+') }}"
+          alt="Main image" class="w-full max-h-[650px] object-fill rounded-2xl shadow-lg" />
+
+        <!-- Logo + name overlay -->
+        <div class="absolute bottom-4 left-4 flex items-start gap-4">
+          <img
+            src="{{ url_for('static', path=partner.logo_image) if partner.logo_image else 'https://placehold.co/200x200?text=' ~ partner.partner_name | replace(' ', '+') }}"
+            alt="Logo" class="w-24 h-24 object-contain bg-white rounded-xl p-2 shadow" />
+          <span
+            style="color:#FFF; font-family:Gilroy; font-size:96px; font-style:normal; font-weight:700; line-height:96px; text-transform:uppercase; width:948px; height:96px; display:inline-block;">{{
+            partner.partner_name }}</span>
+        </div>
+
+
+      </div>
+
+
+    </div>
+    <a href="/v2/select/{{partner.book_category_id}}" class="inline-flex items-center gap-2 mt-6 hover:text-gray-700"
+      style="color:#FA453D; font-family:Gilroy; font-size:16px; font-style:normal; font-weight:700; line-height:80%;">
+
+      <svg class="w-4 h-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+        <path d="M15 18l-6-6 6-6"></path>
+      </svg>
+
+      Return to partners
+    </a>
+  </div>
+
+
+</section>
+
+<!-- CONTENT -->
+<section class="container-main mb-16">
+  <div id="partner-content" class="grid grid-cols-1 lg:grid-cols-[1fr_420px] gap-12">
+
+    <!-- Left: partner info -->
+    <div class="pl-8">
+
+      <h1
+        style="color:#1A1C1C; font-family:Gilroy; font-size:48px; font-style:normal; font-weight:700; line-height:48px; margin-bottom:1rem;">
+        {{ partner.partner_name }}</h1>
+      <div
+        style="color:rgba(26,28,28,0.70); font-family:Gilroy; font-size:16px; font-style:normal; font-weight:400; line-height:26px; margin-bottom:1.5rem;">
+        {{ partner.partner_write_up | safe }}</div>
+
+      <p
+        style="color:rgba(26,28,28,0.70); font-family:Gilroy; font-size:16px; font-style:normal; font-weight:700; line-height:26px; margin-bottom:0.5rem;">
+        {{partner.offer_label}}
+      </p>
+
+      <div
+        style="color:rgba(26,28,28,0.70); font-family:Gilroy; font-size:16px; font-style:normal; font-weight:400; line-height:26px; margin-bottom:1.5rem;">
+        {{ partner.partner_offer | safe }}</div>
+
+      <p
+        style="color:rgba(26,28,28,0.70); font-family:Gilroy; font-size:16px; font-style:normal; font-weight:700; line-height:26px; margin-bottom:0.5rem;">
+        If you need help
+      </p>
+
+      <div
+        style="color:rgba(26,28,28,0.70); font-family:Gilroy; font-size:16px; font-style:normal; font-weight:400; line-height:26px; margin-bottom:1.5rem;">
+        Call 010 143 7557 or WhatsApp on 071 738 3238 (08:00am - 6:00pm, Monday to Friday), otherwise complete the booking form</div>
+
+    </div>
+
+
+
+    <!-- Right: form panel -->
+    <div class="bg-white border border-gray-200 rounded-2xl p-8 shadow-sm self-start">
+
+      {% if partner.book_category_id in [1, 2] %}
+      <!-- Voucher form -->
+      <p
+        style="color:#FA453D; font-family:Gilroy; font-size:45px; font-style:normal; font-weight:700; line-height:60px; text-transform:uppercase; margin-bottom:0.25rem;">
+        {% if partner.book_category_id == 1 %}UP TO R100 OFF{% elif partner.book_category_id == 2 %}UP TO R20 OFF{%
+        endif %}
+      </p>
+      <p
+        style="color:rgba(26,28,28,0.40); font-family:Gilroy; font-size:14px; font-style:normal; font-weight:400; line-height:20px; border-bottom:1px solid #E5E7EB; padding-bottom:1rem;">
+        Request your voucher code for {{ partner.partner_name }} now!</p>
+
+      <p
+        style="color:rgba(26,28,28,0.40); font-family:Gilroy; font-size:14px; font-style:normal; font-weight:400; line-height:20px; border-bottom:1px solid #E5E7EB; padding-bottom:1rem;">
+        Rembember, these are 'instant' vouchers, valid for 12 hours only, so make sure you don't request your voucher
+        too early!
+      </p>
+
+      <h2
+        style="color:#1A1C1C; font-family:Gilroy; font-size:24px; font-style:normal; font-weight:600; line-height:32px; margin-bottom:1.5rem;">
+        Get your voucher instantly</h2>
+
+      <form hx-post="/v2/request_voucher" hx-target="#partner-content" hx-swap="innerHTML" class="flex flex-col gap-5">
+        <input type="hidden" name="partner_id" value="{{ partner.id }}" />
+        <input type="hidden" name="customer_id" value="{{ customer.id }}" />
+        <div>
+          <label
+            style="display:block; color:rgba(26,28,28,0.40); font-family:Gilroy; font-size:10px; font-style:normal; font-weight:400; line-height:15px; text-transform:uppercase; margin-bottom:0.25rem;">Full
+            Name</label>
+          <input type="text" name="name" placeholder="e.g. Julian Venter"
+            value="{{ customer.first_name }} {{ customer.last_name }}"
+            style="color:#6B7280; font-family:Gilroy; font-size:14px; font-style:normal; font-weight:400; line-height:normal;"
+            class="w-full border border-gray-200 rounded-lg px-4 py-3 bg-gray-50 focus:outline-none focus:ring-2 focus:ring-[#E63329]" />
+        </div>
+        <div>
+          <label
+            style="display:block; color:rgba(26,28,28,0.40); font-family:Gilroy; font-size:10px; font-style:normal; font-weight:400; line-height:15px; text-transform:uppercase; margin-bottom:0.25rem;">Email
+            Address</label>
+          <input type="email" name="email" placeholder="julian@example.com" value="{{ customer.email_address }}"
+            style="color:#6B7280; font-family:Gilroy; font-size:14px; font-style:normal; font-weight:400; line-height:normal;"
+            class="w-full border border-gray-200 rounded-lg px-4 py-3 bg-gray-50 focus:outline-none focus:ring-2 focus:ring-[#E63329]" />
+        </div>
+        <div>
+          <label
+            style="display:block; color:rgba(26,28,28,0.40); font-family:Gilroy; font-size:10px; font-style:normal; font-weight:400; line-height:15px; text-transform:uppercase; margin-bottom:0.25rem;">Cell
+            Phone Number</label>
+          <input type="tel" name="phone" placeholder="+27 00 000 0000" value="{{ customer.mobile_number }}"
+            style="color:#6B7280; font-family:Gilroy; font-size:14px; font-style:normal; font-weight:400; line-height:normal;"
+            class="w-full border border-gray-200 rounded-lg px-4 py-3 bg-gray-50 focus:outline-none focus:ring-2 focus:ring-[#E63329]" />
+        </div>
+        <button type="submit" class="flex h-[50px] w-full overflow-hidden rounded-[4px]">
+          <span class="flex flex-1 items-center bg-[#FF4B43] px-5"
+            style="color:#FFF; font-family:Gilroy; font-size:16px; font-style:normal; font-weight:700; line-height:normal; text-transform:uppercase;">
+            REQUEST VOUCHER
+          </span>
+          <span class="flex w-[48px] items-center justify-center bg-black text-white">
+            <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <path d="M5 12h14"></path>
+              <path d="M13 5l7 7-7 7"></path>
+            </svg>
+          </span>
+        </button>
+        <p
+          style="color:rgba(26,28,28,0.40); font-family:Gilroy; font-size:10px; font-style:normal; font-weight:400; line-height:15px; letter-spacing:-0.5px; text-transform:uppercase; text-align:center;">
+          By clicking, you agree to our restaurant partner terms &amp; conditions.</p>
+      </form>
+
+
+
+      {% elif partner.book_category_id == 3 %}
+      <!-- Booking form -->
+      <p
+        style="color:#FA453D; font-family:Gilroy; font-size:45px; font-style:normal; font-weight:700; line-height:60px; text-transform:uppercase; margin-bottom:0.25rem;">
+        Make a booking</p>
+      <p
+        style="color:rgba(26,28,28,0.40); font-family:Gilroy; font-size:14px; font-style:normal; font-weight:400; line-height:20px; border-bottom:1px solid #E5E7EB; padding-bottom:1rem; margin-bottom:1.5rem;">
+        Request your booking &amp; voucher code for {{ partner.partner_name }} now!</p>
+      <h2
+        style="color:#1A1C1C; font-family:Gilroy; font-size:24px; font-style:normal; font-weight:600; line-height:32px; margin-bottom:1.5rem;">
+        Book your experience &amp; voucher</h2>
+
+      <form hx-post="/v2/manage_booking" hx-target="#partner-content" hx-swap="innerHTML" class="flex flex-col gap-5">
+        <input type="hidden" name="book_customer_id" value="{{ customer.id }}" />
+        <input type="hidden" name="partner_id" value="{{ partner.id }}" />
+        <input type="hidden" name="partner_name" value="{{ partner.partner_name }}" />
+        <div>
+          <label
+            style="display:block; color:rgba(26,28,28,0.40); font-family:Gilroy; font-size:10px; font-style:normal; font-weight:400; line-height:15px; text-transform:uppercase; margin-bottom:0.25rem;">Full
+            Name</label>
+          <input type="text" name="book_name" placeholder="e.g. Julian Venter"
+            value="{{ customer.first_name }} {{ customer.last_name }}"
+            style="color:#6B7280; font-family:Gilroy; font-size:14px; font-style:normal; font-weight:400; line-height:normal;"
+            class="w-full border border-gray-200 rounded-lg px-4 py-3 bg-gray-50 focus:outline-none focus:ring-2 focus:ring-[#E63329]" />
+        </div>
+        <div>
+          <label
+            style="display:block; color:rgba(26,28,28,0.40); font-family:Gilroy; font-size:10px; font-style:normal; font-weight:400; line-height:15px; text-transform:uppercase; margin-bottom:0.25rem;">Email
+            Address</label>
+          <input type="email" name="book_email" placeholder="julian@example.com" value="{{ customer.email_address }}"
+            style="color:#6B7280; font-family:Gilroy; font-size:14px; font-style:normal; font-weight:400; line-height:normal;"
+            class="w-full border border-gray-200 rounded-lg px-4 py-3 bg-gray-50 focus:outline-none focus:ring-2 focus:ring-[#E63329]" />
+        </div>
+        <div>
+          <label
+            style="display:block; color:rgba(26,28,28,0.40); font-family:Gilroy; font-size:10px; font-style:normal; font-weight:400; line-height:15px; text-transform:uppercase; margin-bottom:0.25rem;">Cell
+            Phone Number</label>
+          <input type="tel" name="book_phone" placeholder="+27 00 000 0000" value="{{ customer.mobile_number }}"
+            style="color:#6B7280; font-family:Gilroy; font-size:14px; font-style:normal; font-weight:400; line-height:normal;"
+            class="w-full border border-gray-200 rounded-lg px-4 py-3 bg-gray-50 focus:outline-none focus:ring-2 focus:ring-[#E63329]" />
+        </div>
+        <div>
+          <label
+            style="display:block; color:rgba(26,28,28,0.40); font-family:Gilroy; font-size:10px; font-style:normal; font-weight:400; line-height:15px; text-transform:uppercase; margin-bottom:0.25rem;">Branch</label>
+          <input type="text" name="book_branch"
+            style="color:#6B7280; font-family:Gilroy; font-size:14px; font-style:normal; font-weight:400; line-height:normal;"
+            class="w-full border border-gray-200 rounded-lg px-4 py-3 bg-gray-50 focus:outline-none focus:ring-2 focus:ring-[#E63329]" />
+        </div>
+        <div>
+          <label
+            style="display:block; color:rgba(26,28,28,0.40); font-family:Gilroy; font-size:10px; font-style:normal; font-weight:400; line-height:15px; text-transform:uppercase; margin-bottom:0.25rem;">Booking
+            Date and Time</label>
+          <input type="datetime-local" name="book_datetime"
+            style="color:#6B7280; font-family:Gilroy; font-size:14px; font-style:normal; font-weight:400; line-height:normal;"
+            class="w-full border border-gray-200 rounded-lg px-4 py-3 bg-gray-50 focus:outline-none focus:ring-2 focus:ring-[#E63329]" />
+        </div>
+        <div>
+          <label
+            style="display:block; color:rgba(26,28,28,0.40); font-family:Gilroy; font-size:10px; font-style:normal; font-weight:400; line-height:15px; text-transform:uppercase; margin-bottom:0.25rem;">Number
+            of Guests</label>
+          <input type="number" name="book_guests" min="1"
+            style="color:#6B7280; font-family:Gilroy; font-size:14px; font-style:normal; font-weight:400; line-height:normal;"
+            class="w-full border border-gray-200 rounded-lg px-4 py-3 bg-gray-50 focus:outline-none focus:ring-2 focus:ring-[#E63329]" />
+        </div>
+        <button type="submit" class="flex h-[50px] w-full overflow-hidden rounded-[4px]">
+          <span class="flex flex-1 items-center bg-[#FF4B43] px-5"
+            style="color:#FFF; font-family:Gilroy; font-size:16px; font-style:normal; font-weight:700; line-height:normal; text-transform:uppercase;">
+            MAKE A BOOKING
+          </span>
+          <span class="flex w-[48px] items-center justify-center bg-black text-white">
+            <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <path d="M5 12h14"></path>
+              <path d="M13 5l7 7-7 7"></path>
+            </svg>
+          </span>
+        </button>
+        <p
+          style="color:rgba(26,28,28,0.40); font-family:Gilroy; font-size:10px; font-style:normal; font-weight:400; line-height:15px; letter-spacing:-0.5px; text-transform:uppercase; text-align:center;">
+          By clicking, you agree to our restaurant partner terms &amp; conditions.</p>
+      </form>
+
+      {% endif %}
+
+    </div>
+
+  </div>
+</section>
+
+{% endblock content %}
+
+
+</div>

@@ -23,6 +23,9 @@ set RESOURCE_GROUP=DEVOPS
 echo Tag: %TAG%
 echo.
 
+echo Writing version.txt...
+echo %TAG%> version.txt
+
 echo [1/4] Building Docker image...
 docker build -t %IMAGE_BASE%:%TAG% .
 if %errorlevel% neq 0 ( echo ERROR: Docker build failed & pause & exit /b 1 )

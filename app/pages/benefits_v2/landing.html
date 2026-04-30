@@ -1,45 +1,32 @@
-{% extends "benefits/base.html" %}
+{% extends 'benefits_v2/base.html' %}
 
 {% block content %}
 
+<section class="bg-[#F7F7F7] pb-10 mt-10">
+  <div class="container-main">
 
-   <img
-      src="{{ url_for('static', path=category.category_image) }}"
-      alt="The Unlimited - Are you Ready?"
-    />
-   
-<section class="bg-white">
-  <div class="mx-auto max-w-6xl px-2 py-6 sm:px-6 sm:py-16 lg:px-8">
-    <div class="text-center">
-      <h2 class="text-black text-[30px] text-center my-5 font-extrabold">
-        Congratulations! You've unlocked Unbelievable Savings.
-      </h2>
-      
-      <h2 class="mt-4 text-lg text-gray-700 sm:text-2xl">
-        Start saving now with massive discounts brought to you by SA's biggest brands.
-      </h2>
-
-      <h2 class="text-black text-[30px] text-center my-5 font-extrabold">
-        {{category.category_header}}
-      </h2>
-    
-    </div>
+{% if category.id == 1 %}
+  {% include 'benefits_v2/_category_dining.html' %}
+{% elif category.id == 2 %}
+  {% include 'benefits_v2/_category_coffee.html' %}
+{% elif category.id == 3 %}
+  {% include 'benefits_v2/_category_experience.html' %}
+{% endif %}
   </div>
 </section>
 
 
-    <!-- One container that will be swapped between list + detail -->
+<!-- One container that will be swapped between list + detail -->
+<section id="partners" class="bg-white py-12 mt-10">
+  <div class="container-main">
     <main id="app"
-          hx-get="/v2/benefits/partners"
+          hx-get="/v2/partners"
           hx-trigger="load"
           hx-swap="innerHTML">
       Loading...
     </main>
-
-
-
-
-
+  </div>
+</section>
 
 {% endblock content %}
 

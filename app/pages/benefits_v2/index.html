@@ -1,123 +1,92 @@
-<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>The Unlimited Lifestyle</title>
+{% extends 'benefits_v2/base.html' %}
 
-  <link rel="icon" type="image/ico" href="{{ url_for('static', path='fav.png') }}">
+{% block content %}
 
-  <!-- Tailwind CDN -->
-  <script src="https://cdn.tailwindcss.com"></script>
+<!-- HERO -->
+<section class="bg-[#F7F7F7] mb-16">
+  <div class="container-main">
+    <div class="relative overflow-hidden">
 
-  <!-- HTMX -->
-  <script src="https://unpkg.com/htmx.org@1.9.12"></script>
-</head>
-
-<body
-  class="min-h-screen font-sans"
-  style="background-image:url('{{ url_for('static', path='login-bg.jpg') }}'); background-size:cover; background-position:center; background-repeat:no-repeat;"
->
-
-  <!-- spacing like original (<br/><br/>) -->
-  <div class="h-8"></div>
-  <div class="h-8"></div>
-
-  <!-- Logo (original had padding-left:5px and sits near top left) -->
-  <p class="pl-[5px]">
-    <img
-      src="{{ url_for('static', path='tug_logo.png') }}"
-      alt="The Unlimited"
-      class="h-12 w-auto"
-    />
-  </p>
-
-  <div class="h-8"></div>
-
-  <!-- Login Container: width 500, margin-top 5%, right aligned with right margin ~20% -->
-  <div
-    class="w-[500px] max-w-[92vw]
-           bg-white rounded-[15px] shadow-[0_0_15px_rgba(0,0,0,0.5)]
-           px-[10px] pt-[20px] pb-[35px]
-           text-center
-           ml-auto mr-[20%] mt-[5vh]"
-  >
-    <h3 class="text-black text-[24px] font-black m-0 p-0 leading-tight">
-      Welcome to The Unlimited lifestyle!
-    </h3>
-
-    <p class="text-[18px] text-[#222] mt-2">
-      Login below to unlock your unbelievable benefits.
-    </p>
-
-    <div class="h-4"></div>
-
-    <form 
-      class="space-y-0"
-      hx-post="/v2/benefits/tug_login"
-      hx-target="#login-result"
-      hx-swap="innerHTML"
-      hx-indicator="#login-indicator"
+      <!-- HERO IMAGE -->
+      <img
+        src="/static/v2/hero_login.png"
+        alt="Hero banner"
+        class="block w-full h-auto object-cover"
       >
 
-      <input name="email_address" type="hidden" value="0" />
-
-      <!-- input -->
-      <input
-        name="mobile_number"
-        type="number"
-        maxlength="10"
-        step="1"
-        required
-        class="w-[330px] max-w-full
-               px-[5px] py-[5px]
-               border-0 border-b-2 border-b-[#999]
-               outline-none
-               text-center text-[18px] text-[#FF0033]
-               focus:border-b-[#FF0033]"
-      />
-
-      <div class="mt-2">
-        <span class="text-[13px] text-[#999]">
-          Enter the cellphone number that you signed up with EG. 0821234567
-        </span>
+      <!-- WELCOME TEXT -->
+      <div class="absolute inset-0 flex flex-col justify-center pl-8 md:pl-14" style="max-width: 50%;">
+        <h1 style="font-family: 'TheUnlimitedSans'; font-weight: 900; font-size: 100px; line-height: 81%; font-style: normal; color: #FA453D; text-transform: uppercase; width: 508px; flex-shrink: 0;">
+          Welcome to<br>My Unlimited
+        </h1>
+        <p style="font-family: 'Gilroy'; font-weight: 600; font-size: 24px; font-style: normal; line-height: 32px; color: #FFF; width: 462px; margin-top: 50px;">
+          You've come to the right place to start saving big with 2-for-1 dining, coffees and experiences!
+        </p>
       </div>
 
-      <div class="h-6"></div>
+      <!-- LOGIN CARD -->
+      <div class="absolute inset-0 flex items-center justify-end pr-6 md:pr-12">
+        <div class="px-8 py-10 flex flex-col justify-center" style="width: 469.34px; height: 381px; border-radius: 20px; background: #fff; box-shadow: 0 32px 64px -12px rgba(26,28,28,0.08);">
 
-      <!-- button matches original: red bg, white border; hover invert -->
-      <input
-        type="submit"
-        value="LOGIN"
-        class="px-[20px] py-[10px]
-               bg-[#FF0033] text-white
-               border-2 border-white
-               outline-none
-               text-[16px] font-bold
-               cursor-pointer
-               hover:bg-white hover:text-[#FF0033] hover:border-[#FF0033]
-               transition"
-      />
 
-      <div id="login-result" class="mt-4"></div>
-    </form>
+          <h2 style="display: flex; width: 387px; height: 60px; flex-direction: column; justify-content: center; color: #FA453D; font-family: 'Gilroy'; font-size: 50px; font-style: normal; font-weight: 700; line-height: 60px;">
+            2-for-1 Rewards
+          </h2>
 
-    <!-- error placeholder -->
-    <p class="text-[13px] text-[#FF0033] mt-4">
-      {{ error or "" }}
-    </p>
+          <hr class="my-6 border-black/10">
+
+          <p style="align-self: stretch; color: #1A1C1C; font-family: 'Gilroy'; font-size: 24px; font-style: normal; font-weight: 600; line-height: 32px;" class="mb-6">
+            Log in to start saving!
+          </p>
+
+          <form
+            hx-post="/v2/tug_login"
+            hx-target="#login-result"
+            hx-swap="innerHTML"
+            hx-indicator="#login-indicator"
+          >
+            <div class="mb-6">
+              <label style="display: flex; width: 116.95px; height: 15px; flex-direction: column; justify-content: center; color: rgba(26,28,28,0.40); font-family: 'Gilroy'; font-size: 10px; font-style: normal; font-weight: 400; line-height: 15px; text-transform: uppercase;" class="mb-2">
+                Cell phone number
+              </label>
+              <input
+                name="mobile_number"
+                type="number"
+                maxlength="10"
+                required
+                placeholder="0000000000"
+                class="w-full bg-[#F3F3F3] rounded-lg px-4 py-3 outline-none" style="color: #6B7280; font-family: 'Gilroy'; font-size: 14px; font-style: normal; font-weight: 400; line-height: normal;"
+              >
+            </div>
+
+            <button type="submit" class="flex h-[50px] w-full max-w-[294px] overflow-hidden rounded-[4px]">
+              <span class="flex flex-1 items-center bg-[#FF4B43] px-5" style="color: #FFF; font-family: 'Gilroy'; font-size: 16px; font-style: normal; font-weight: 700; line-height: normal; text-transform: uppercase;">
+                Login
+              </span>
+              <span class="flex w-[48px] items-center justify-center bg-black text-white">
+                <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                  <path d="M5 12h14"></path>
+                  <path d="M13 5l7 7-7 7"></path>
+                </svg>
+              </span>
+            </button>
+
+            <div id="login-result" class="mt-4"></div>
+          </form>
+
+        </div>
+      </div>
+
+    </div>
   </div>
+</section>
 
-  <!-- container below (original empty / optional forgot link) -->
-  <div class="w-[500px] max-w-[92vw] mx-auto mt-4">
-    {# Optional:
-    <p class="text-right">
-      <a href="#" class="text-[#FF0033] no-underline text-[13px] inline-block px-5 py-2 hover:bg-[#ccc] hover:rounded">
-        FORGOT POLICY NUMBER
-      </a>
-    </p>
-    #}
-  </div>
 
-</body>
-</html>
+
+{% include 'benefits_v2/_by_the_numbers.html' %}
+
+
+{% endblock content %}
+
+
+</div>

@@ -1,40 +1,45 @@
-{% extends "benefits/base.html" %}
+{% extends 'benefits_v2/base.html' %}
 
 {% block content %}
+<section class="bg-[#F7F7F7] mb-16">
+  <div class="container-main">
+    <div class="relative overflow-hidden">
 
-    <img
-      src="{{ url_for('static', path='contact-slider.jpg') }}"
-      alt="The Unlimited - Are you Ready?"
+      <!-- HERO IMAGE -->
+      <img
+        src="/static/v2/hero_oops.jpg"
+        alt="Hero banner"
+        class="block w-full h-auto object-cover"
+      >
 
-    />
+      <!-- CARD -->
+      <div class="absolute inset-0 flex items-center justify-end pr-6 md:pr-12">
+        <div class="w-full max-w-[469.34px] h-[380px] rounded-[20px] bg-white shadow-[0_32px_64px_-12px_rgba(26,28,28,0.08)] px-8 py-10 flex flex-col justify-center">
 
-    <section class="bg-white">
-  <div class="mx-auto max-w-6xl px-4 py-12 sm:px-6 sm:py-16 lg:px-8">
-    <div>
-      <h1 class="text-balance text-2xl font-semibold tracking-tight text-gray-900 sm:text-3xl">
-        It looks like there may be an issue with your subscription. Please contact our support team and we’ll sort it out for you.
-      </h1>
+          <p class="text-[#1A1C1C] font-gilroy text-[20px] font-medium leading-[28px] mb-4">
+            Simply call us on
+            <span class="font-bold">0861 990 000</span>
+            and we'll get you back up and running right away.
+          </p>
 
-      <div class="mt-6 space-y-2 text-gray-700">
-        <p class="text-base sm:text-lg">
-          Call us on
+          <p class="text-[#1A1C1C] font-gilroy text-[20px] font-medium leading-[28px] mb-8">
+            We're open Monday to Friday 7am - 7pm; Saturday 8am - 1pm
+          </p>
+
           <a
-            href="tel:0861990000"
-            class="font-semibold text-gray-900 underline decoration-gray-300 underline-offset-4 hover:decoration-gray-500"
+            href="/v2/"
+            class="inline-flex items-center text-[#FA453D] font-gilroy text-[16px] font-bold leading-[80%]"
           >
-            0861 990 000
-          </a>.
-        </p>
+            ← Back to login
+          </a>
 
-        <p class="text-sm sm:text-base text-gray-600">
-          We’re available Monday to Friday, 9am to 6pm. We are closed on public holidays.
-        </p>
+        </div>
       </div>
+
     </div>
   </div>
 </section>
 
-
-
+{% include 'benefits_v2/_by_the_numbers.html' %}
 
 {% endblock content %}
