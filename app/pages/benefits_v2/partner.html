@@ -194,9 +194,14 @@
         <div>
           <label
             style="display:block; color:rgba(26,28,28,0.40); font-family:Gilroy; font-size:10px; font-style:normal; font-weight:400; line-height:15px; text-transform:uppercase; margin-bottom:0.25rem;">Branch</label>
-          <input type="text" name="book_branch"
+          <select name="book_branch_id" required
             style="color:#6B7280; font-family:Gilroy; font-size:14px; font-style:normal; font-weight:400; line-height:normal;"
-            class="w-full border border-gray-200 rounded-lg px-4 py-3 bg-gray-50 focus:outline-none focus:ring-2 focus:ring-[#E63329]" />
+            class="w-full border border-gray-200 rounded-lg px-4 py-3 bg-gray-50 focus:outline-none focus:ring-2 focus:ring-[#E63329]">
+            <option value="" disabled selected>Select a branch</option>
+            {% for branch in branches %}
+            <option value="{{ branch.id }}">{{ branch.branch_name }}</option>
+            {% endfor %}
+          </select>
         </div>
         <div>
           <label

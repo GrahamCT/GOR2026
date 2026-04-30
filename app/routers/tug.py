@@ -146,8 +146,6 @@ async def partner_detail_partial(request: Request, partner_id: int):
         query = 'select id, first_name, last_name, email_address, mobile_number from customer where id = ?'
         customer = DAL.dal(1,query,(customer_id,))
 
-
-
     return templates.TemplateResponse(
         "benefits/_partner_detail.html",
         {"request": request, "partner": partner[0], "customer":customer[0]},

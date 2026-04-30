@@ -62,12 +62,12 @@ New Site:
         ☐ Experiences
     
     Tug Dependency:
-        ☐ Email template - coffee Tug to provide
-        ☐ Email template - dining Tug to provide
-        ☐ Email template - Experience Tug to provide
+        ☐ Email template - coffee
+        ☐ Email template - dining
+        ☐ Email template - Experience
+        ☐ Email tempalte to add Branch and booking date/time  
     MVP:
         ☐ /voucher - Check DB if client has already requested Voucher 
-            Check with Yash/Perlene logic
         ☐ /category -  wireup search partner name @45m
         ☐ Experience booking - Needs work (see QA notes)
         ✔ /partner/Coffee&Dining - voucher fix button  @15m @done(26-04-25 11:40)

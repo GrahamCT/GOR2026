@@ -158,11 +158,11 @@ async def partner_detail_partial(request: Request, partner_id: int):
     query = 'select id, first_name, last_name, email_address, mobile_number from customer where id = ?'
     customer = DAL.dal(1,query,(customer_id,))
 
-
+    branches = DAL.dal(1, "select id, branch_name from book_branch where partner_id = ? order by branch_name", (partner_id,))
 
     return templates.TemplateResponse(
         "benefits_v2/partner.html",
-        {"request": request, "partner": partner[0], "customer":customer[0]},
+        {"request": request, "partner": partner[0], "customer":customer[0], "branches": branches},
     )
 
 
@@ -238,7 +238,7 @@ async def manage_booking(
     book_name: str = Form(...),
     book_email: str = Form(...),
     book_phone: str = Form(...),
-    book_branch: str = Form(...),
+    book_branch_id: int = Form(...),
     book_datetime: str = Form(...),
     book_guests: int = Form(...),
     partner_id: int = Form(...),
@@ -246,6 +246,9 @@ async def manage_booking(
 ):
     if not request.cookies.get("customer_id"):
         return _login_redirect(request)
+
+    branch_row = DAL.dal(1, "select branch_name from book_branch where id = ?", (book_branch_id,))
+    book_branch = branch_row[0]["branch_name"] if branch_row else str(book_branch_id)
 
     sql = "insert into book_booking_tug (client_id, partner_id, booking_date, branch, num_guests) values (?,?,?,?,?)"
     DAL.dal(0, sql, (book_customer_id, partner_id, book_datetime, book_branch, book_guests))
