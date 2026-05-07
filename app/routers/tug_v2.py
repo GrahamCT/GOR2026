@@ -10,7 +10,7 @@ import app.services.dal as DAL
 from app.core.templates import templates
 
 BOOKING_EMAIL = os.getenv("BOOKING_EMAIL", "diningrewards@gorhino.co.za")
-LOGIN_URL = "/v2/"
+LOGIN_URL = "/benefits/"
 
 def _login_redirect(request: Request):
     if request.headers.get("hx-request"):
@@ -19,7 +19,7 @@ def _login_redirect(request: Request):
         return r
     return RedirectResponse(LOGIN_URL, status_code=302)
 
-router = APIRouter(prefix="/v2", tags=["v2"])
+router = APIRouter(prefix="/benefits", tags=["benefits"])
 
 @router.get("/fonts")
 async def font_review(request: Request):
@@ -39,16 +39,15 @@ async def tug_login(request: Request, mobile_number: str = Form(...), email_addr
 
     if customer is None:
         return f"""
-        <div class="text-sm text-orange-700 font-semibold">
-        Could not find mobile number number: <span class="font-semibold">{mobile_number}</span>
+        <div style="font-family: 'Gilroy'; color: #FA453D; font-size: 14px; font-weight: 600;">
+        Could not find mobile number: <span style="font-weight: 700;">{mobile_number}</span>
         <span> Please use correct number or contact support on 0861 990 000</span>
-
         </div>
         """
 
     response = Response(status_code=204)
     if customer[0]['status'] !="ACTIVE":
-        response.headers["HX-Redirect"] = "/v2/support"
+        response.headers["HX-Redirect"] = "/benefits/support"
     else:
         customer_id = customer[0]['client_id']
 
@@ -60,7 +59,7 @@ async def tug_login(request: Request, mobile_number: str = Form(...), email_addr
             samesite="lax",
             max_age=60 * 60 * 4
         )
-        response.headers["HX-Redirect"] = "/v2/category"
+        response.headers["HX-Redirect"] = "/benefits/category"
 
     return response
 
@@ -69,7 +68,7 @@ async def tug_login(request: Request, mobile_number: str = Form(...), email_addr
 async def select_category(request: Request, category_id: int):
     if not request.cookies.get("customer_id"):
         return _login_redirect(request)
-    response = RedirectResponse("/v2/landing", status_code=302)
+    response = RedirectResponse("/benefits/landing", status_code=302)
     response.set_cookie(
         key="category",
         value=str(category_id),
@@ -185,10 +184,10 @@ async def request_voucher(request: Request,
 
 
 
-    is_test = os.getenv("IS_TEST", "False") == "True"
+    # is_test = os.getenv("IS_TEST", "False") == "True"
 
     context = {"request": request,
-               "voucher_number": "000 SAMPLE 000" if is_test else voucher,
+               "voucher_number": voucher,
                "partner":partner[0],
                "customer":customer[0]
                }
@@ -202,7 +201,7 @@ async def request_voucher(request: Request,
 
     subject = f"Your {partner[0]['partner_name']} voucher"
 
-    to_email = os.getenv("TEST_EMAIL") if is_test else email
+    to_email = email  # to_email = os.getenv("TEST_EMAIL") if is_test else email
 
 
     category_templates = {

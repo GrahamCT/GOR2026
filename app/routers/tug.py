@@ -10,7 +10,7 @@ from app.core.templates import templates
 
 BOOKING_EMAIL = os.getenv("BOOKING_EMAIL", "diningrewards@gorhino.co.za")
 
-router = APIRouter(prefix="/benefits", tags=["benefits"])
+router = APIRouter(prefix="/benefits_v1", tags=["benefits_v1"])
 
 @router.get("/")
 async def beneifts(request: Request):
@@ -187,8 +187,8 @@ async def request_voucher(request:Request,
 
     subject = f"Your {partner[0]['partner_name']} voucher"
 
-    is_test = os.getenv("IS_TEST", "False") == "True"
-    to_email = os.getenv("TEST_EMAIL") if is_test else customer[0]['email_address']
+    # is_test = os.getenv("IS_TEST", "False") == "True"
+    to_email = customer[0]['email_address']  # to_email = os.getenv("TEST_EMAIL") if is_test else customer[0]['email_address']
     comms.send_email_template(to_email, subject, template_data, "d-cf770a728cf04053bddf62d23bde823d")
    
     return templates.TemplateResponse("benefits/_booking_voucher.html", context)

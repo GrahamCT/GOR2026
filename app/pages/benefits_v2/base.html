@@ -189,34 +189,60 @@
 
 <body class="bg-[#F7F7F7]">
 
-  <nav class="bg-white border-b border-black/10">
+  <nav class="bg-white border-b border-black/10 sticky top-0 z-50">
     <div class="container-main relative">
       <div class="relative flex items-center justify-center h-[72px]">
 
         <a href="#" class="absolute left-4 top-1/2 -translate-y-1/2">
           <img src="/static/v2/the_unlimited_logo.png" alt="The Unlimited" class="h-auto max-h-10 w-auto">
         </a>
+
         <div class="hidden md:flex items-center gap-8">
-          <a href="/v2/category" class="nav-link {{ 'nav-link-active' if current_page == '0' else '' }}">
-            Rewards
-          </a>
-
-          <a href="/v2/select/1" class="nav-link {{ 'nav-link-active' if current_page == '1' else'' }}">
-            Dining
-          </a>
-
-          <a href="/v2/select/2" class="nav-link {{ 'nav-link-active' if current_page == '2' else '' }}">
-            Coffee
-          </a>
-
-          <a href="/v2/select/3" class="nav-link {{ 'nav-link-active' if current_page == '3' else '' }}">
-            Experiences
-          </a>
+          <a href="/benefits/category" class="nav-link {{ 'nav-link-active' if current_page == '0' else '' }}">Rewards</a>
+          <a href="/benefits/select/1" class="nav-link {{ 'nav-link-active' if current_page == '1' else '' }}">Dining</a>
+          <a href="/benefits/select/2" class="nav-link {{ 'nav-link-active' if current_page == '2' else '' }}">Coffee</a>
+          <a href="/benefits/select/3" class="nav-link {{ 'nav-link-active' if current_page == '3' else '' }}">Experiences</a>
         </div>
 
+        <!-- Hamburger button — mobile only -->
+        <button id="menu-btn" class="md:hidden absolute right-4 top-1/2 -translate-y-1/2 p-2" aria-label="Toggle menu">
+          <svg id="icon-open" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/>
+          </svg>
+          <svg id="icon-close" class="h-6 w-6 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
+          </svg>
+        </button>
+
       </div>
+
+      <!-- Mobile dropdown -->
+      <div id="mobile-menu" class="hidden border-t border-black/10 bg-white">
+        <div class="flex flex-col px-4 py-3 gap-1">
+          <a href="/benefits/category" class="nav-link py-3 {{ 'nav-link-active' if current_page == '0' else '' }}">Rewards</a>
+          <a href="/benefits/select/1" class="nav-link py-3 {{ 'nav-link-active' if current_page == '1' else '' }}">Dining</a>
+          <a href="/benefits/select/2" class="nav-link py-3 {{ 'nav-link-active' if current_page == '2' else '' }}">Coffee</a>
+          <a href="/benefits/select/3" class="nav-link py-3 {{ 'nav-link-active' if current_page == '3' else '' }}">Experiences</a>
+        </div>
+      </div>
+
     </div>
   </nav>
+
+  <script>
+    (function () {
+      var btn = document.getElementById('menu-btn');
+      var menu = document.getElementById('mobile-menu');
+      var iconOpen = document.getElementById('icon-open');
+      var iconClose = document.getElementById('icon-close');
+      btn.addEventListener('click', function () {
+        var isOpen = !menu.classList.contains('hidden');
+        menu.classList.toggle('hidden', isOpen);
+        iconOpen.classList.toggle('hidden', !isOpen);
+        iconClose.classList.toggle('hidden', isOpen);
+      });
+    })();
+  </script>
 
   {% block content %}
 

@@ -6,13 +6,19 @@
 <div class="p-4">
   <div class="flex items-center justify-between mb-4">
     <h1 class="text-2xl font-bold">Partner Admin</h1>
-    <button
-      hx-get="/partner_admin/add-form"
-      hx-target="#modal-body"
-      hx-swap="innerHTML"
-      hx-on::after-request="openPartnerModal('Add Partner')"
-      class="px-4 py-2 bg-lime-600 text-white text-sm rounded hover:bg-lime-700"
-    >+ Add Partner</button>
+    <div class="flex gap-2">
+      <a href="/partner_admin/used-vouchers"
+         class="px-4 py-2 bg-gray-200 text-gray-700 text-sm rounded hover:bg-gray-300">
+        Used Vouchers
+      </a>
+      <button
+        hx-get="/partner_admin/add-form"
+        hx-target="#modal-body"
+        hx-swap="innerHTML"
+        hx-on::after-request="openPartnerModal('Add Partner')"
+        class="px-4 py-2 bg-lime-600 text-white text-sm rounded hover:bg-lime-700"
+      >+ Add Partner</button>
+    </div>
   </div>
 
   <table class="w-full border-collapse text-sm">

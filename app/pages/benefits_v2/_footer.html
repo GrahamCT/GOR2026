@@ -1,12 +1,22 @@
+<style>
+@media (max-width: 640px) {
+    .tu-footer-top { flex-direction: column !important; gap: 12px; }
+    .tu-footer-bottom { flex-direction: column !important; align-items: center !important; gap: 12px; }
+    .tu-footer-social { padding-right: 0 !important; flex-wrap: wrap; justify-content: center; }
+    .tu-logo, .tu-calltext-svg { max-width: 100%; height: auto; }
+    .tu-phone-col { align-items: center; }
+    .tu-numbers-svg { max-width: 240px !important; height: auto; margin-top: -50px !important; }
+}
+</style>
 <div style="display: flex; flex-direction: column; gap: 16px;">
-<div style="display: flex; align-items: flex-start; justify-content: space-between;">
+<div class="tu-footer-top" style="display: flex; align-items: flex-start; justify-content: space-between;">
   <div style="display: flex; align-items: flex-start; gap: 12px;">
     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="66" viewBox="0 0 16 66" fill="none" style="width: 15.805px; height: 65.092px; flex-shrink: 0;">
       <path d="M15.8052 0H0V65.0916H15.8052V0Z" fill="#FA453D"/>
     </svg>
     <span style="width: 290.235px; height: 46.918px; color: var(--TU-Coral, #FA453D); font-family: Gilroy; font-size: 12.062px; font-style: normal; font-weight: 700; line-height: normal;">Unlimit Your Life.</span>
   </div>
-  <svg width="468" height="107" viewBox="0 0 468 107" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <svg class="tu-logo" width="468" height="107" viewBox="0 0 468 107" fill="none" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto;">
     <path d="M0 0V17.2973H11.4517V65.811H32.683V17.2973H44.1662V0H0Z" fill="#FA453D"/>
     <path d="M68.552 0V27.0876H61.9271V0H47.8254V65.811H61.9271V39.0987H68.552V65.811H82.6221V0H68.552Z" fill="#FA453D"/>
     <path d="M88.0176 0V65.811H118.082V55.4889H100.195V38.1604H117.136V27.9321H100.195V10.3533H117.861V0H88.0176Z" fill="#FA453D"/>
@@ -48,9 +58,9 @@
     <path d="M154.109 86.8931H151.017V102.407H154.109V86.8931Z" fill="#010101"/>
   </svg>
 </div>
-<div style="display: flex; align-items: center; justify-content: space-between;">
-  <div style="display: flex; flex-direction: column; gap: 0;">
-  <svg xmlns="http://www.w3.org/2000/svg" width="178" height="21" viewBox="0 0 178 21" fill="none">
+<div class="tu-footer-bottom" style="display: flex; align-items: center; justify-content: space-between;">
+  <div class="tu-phone-col" style="display: flex; flex-direction: column; gap: 0;">
+  <svg class="tu-calltext-svg" xmlns="http://www.w3.org/2000/svg" width="178" height="21" viewBox="0 0 178 21" fill="none" style="max-width:100%;height:auto;">
     <path d="M0 8.30598C0 3.86153 3.35904 0.364258 8.04948 0.364258C10.8589 0.364258 13.3751 1.78503 14.6698 4.01939L12.4712 5.2823C11.6528 3.77653 9.99162 2.81721 8.04948 2.81721C4.72708 2.81721 2.52844 5.16087 2.52844 8.30598C2.52844 11.4511 4.72708 13.7948 8.04948 13.7948C9.9794 13.7948 11.6772 12.8354 12.4712 11.3297L14.6698 12.5804C13.3995 14.8148 10.8833 16.2477 8.04948 16.2477C3.37125 16.2477 0 12.7504 0 8.30598Z" fill="black"/>
     <path d="M27.6541 5.02722V15.9562H25.2844V14.3776C24.4538 15.5312 23.1468 16.2355 21.4368 16.2355C18.4442 16.2355 15.9646 13.7218 15.9646 10.4796C15.9646 7.23729 18.4564 4.72363 21.4368 4.72363C23.1468 4.72363 24.4538 5.42794 25.2844 6.55727V5.00293H27.6541V5.02722ZM25.2844 10.4917C25.2844 8.46377 23.7942 6.99443 21.8154 6.99443C19.8367 6.99443 18.3465 8.46377 18.3465 10.4917C18.3465 12.5196 19.8367 13.989 21.8154 13.989C23.7942 13.989 25.2844 12.5196 25.2844 10.4917Z" fill="black"/>
     <path d="M30.4268 0H32.7964V15.9563H30.4268V0Z" fill="black"/>
@@ -66,7 +76,7 @@
     <path d="M163.555 10.4919C163.555 13.7463 161.075 16.2478 158.083 16.2478C156.372 16.2478 155.065 15.5435 154.235 14.4142V20.3401H151.865V5.03955H154.235V6.61818C155.065 5.46457 156.372 4.76025 158.083 4.76025C161.075 4.76025 163.555 7.27392 163.555 10.5162V10.4919ZM161.185 10.4919C161.185 8.46396 159.695 6.99462 157.716 6.99462C155.737 6.99462 154.247 8.46396 154.247 10.4919C154.247 12.5198 155.737 13.9892 157.716 13.9892C159.695 13.9892 161.185 12.5198 161.185 10.4919Z" fill="black"/>
     <path d="M177.406 10.4919C177.406 13.7463 174.927 16.2478 171.934 16.2478C170.224 16.2478 168.917 15.5435 168.086 14.4142V20.3401H165.717V5.03955H168.086V6.61818C168.917 5.46457 170.224 4.76025 171.934 4.76025C174.927 4.76025 177.406 7.27392 177.406 10.5162V10.4919ZM175.036 10.4919C175.036 8.46396 173.546 6.99462 171.568 6.99462C169.589 6.99462 168.099 8.46396 168.099 10.4919C168.099 12.5198 169.589 13.9892 171.568 13.9892C173.546 13.9892 175.036 12.5198 175.036 10.4919Z" fill="black"/>
   </svg>
-  <svg width="312" height="163" viewBox="0 0 312 163" style="margin-top: -65px;" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <svg class="tu-numbers-svg" width="312" height="163" viewBox="0 0 312 163" style="margin-top: -65px; max-width:100%;height:auto;" fill="none" xmlns="http://www.w3.org/2000/svg">
 <path d="M0 145.95V158.349H7.71968V156.017H2.45515V153.224H7.18224V150.929H2.45515V148.294H7.63418V145.95H0Z" fill="black"/>
 <mask id="mask0_214_983" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="0" y="0" width="312" height="163">
 <path d="M311.475 0H0V162.137H311.475V0Z" fill="white"/>
@@ -125,7 +135,7 @@
 <path d="M300.726 114.038V83.9587C300.726 80.7285 299.663 79.6721 298.209 79.6721C296.658 79.6721 295.608 80.7164 295.608 83.9587V114.038C295.608 117.268 296.658 118.324 298.209 118.324C299.675 118.324 300.726 117.28 300.726 114.038ZM284.944 113.88V84.1287C284.944 74.9969 290.551 69.5688 298.038 69.5688C305.526 69.5688 311.377 74.9848 311.377 84.1287V113.88C311.377 123.024 305.685 128.44 298.038 128.44C290.392 128.44 284.944 123.024 284.944 113.88Z" fill="black"/>
   </svg>
   </div>
-  <div style="display: flex; flex-direction: row; gap: 12px; align-items: center; padding-right: 24px;">
+  <div class="tu-footer-social" style="display: flex; flex-direction: row; gap: 12px; align-items: center; padding-right: 24px;">
     <!-- Instagram -->
     <a href="https://www.instagram.com/theunlimitedza/" target="_blank" title="Follow us on Instagram">
       <svg width="45" height="45" viewBox="0 0 45 45" fill="none" xmlns="http://www.w3.org/2000/svg">

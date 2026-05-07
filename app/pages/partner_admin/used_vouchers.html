@@ -1,0 +1,43 @@
+{% extends "/base.html" %}
+
+{% block title %}Used Vouchers{% endblock %}
+
+{% block content %}
+<div class="p-4">
+  <div class="flex items-center justify-between mb-4">
+    <h1 class="text-2xl font-bold">Used Vouchers</h1>
+    <a href="/partner_admin/" class="px-4 py-2 bg-gray-200 text-gray-700 text-sm rounded hover:bg-gray-300">
+      &larr; Back to Partners
+    </a>
+  </div>
+
+  <p class="text-sm text-gray-500 mb-4">{{ vouchers|length }} voucher{{ 's' if vouchers|length != 1 else '' }} used</p>
+
+  <table class="w-full border-collapse text-sm">
+    <thead>
+      <tr class="bg-gray-100 text-left">
+        <th class="border px-3 py-2">Partner</th>
+        <th class="border px-3 py-2">Voucher Number</th>
+        <th class="border px-3 py-2">Assigned Date</th>
+        <th class="border px-3 py-2">Customer Number</th>
+        <th class="border px-3 py-2">Last Name</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for v in vouchers %}
+      <tr class="hover:bg-gray-50 {% if loop.index is even %}bg-white{% else %}bg-gray-50{% endif %}">
+        <td class="border px-3 py-2">{{ v.partner_name }}</td>
+        <td class="border px-3 py-2 font-mono text-xs">{{ v.voucher_number }}</td>
+        <td class="border px-3 py-2">{{ v.assigned_date.strftime('%Y-%m-%d %H:%M') if v.assigned_date else '' }}</td>
+        <td class="border px-3 py-2">{{ v.customer_number }}</td>
+        <td class="border px-3 py-2">{{ v.last_name }}</td>
+      </tr>
+      {% else %}
+      <tr>
+        <td colspan="5" class="border px-3 py-4 text-center text-gray-400">No used vouchers found.</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

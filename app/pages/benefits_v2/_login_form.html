@@ -1,0 +1,45 @@
+<h2 style="color:#FA453D; font-family:'Gilroy'; font-size:clamp(28px,5vw,50px); font-weight:700; line-height:1.2; margin-bottom:0.25rem;">
+  2-for-1 Rewards
+</h2>
+
+<hr class="my-4 md:my-6 border-black/10">
+
+<p style="color:#1A1C1C; font-family:'Gilroy'; font-size:clamp(18px,2.5vw,24px); font-weight:600; line-height:32px;" class="mb-6">
+  Log in to start saving!
+</p>
+
+<form
+  hx-post="/benefits/tug_login"
+  hx-target="#login-result"
+  hx-swap="innerHTML"
+  hx-indicator="#login-indicator"
+>
+  <div class="mb-6">
+    <label style="display:flex; color:rgba(26,28,28,0.40); font-family:'Gilroy'; font-size:10px; font-weight:400; line-height:15px; text-transform:uppercase;" class="mb-2">
+      Cell phone number
+    </label>
+    <input
+      name="mobile_number"
+      type="number"
+      maxlength="10"
+      required
+      placeholder="0000000000"
+      class="w-full bg-[#F3F3F3] rounded-lg px-4 py-3 outline-none"
+      style="color:#6B7280; font-family:'Gilroy'; font-size:14px; font-weight:400; line-height:normal;"
+    >
+  </div>
+
+  <button type="submit" class="flex h-[50px] w-full max-w-[294px] overflow-hidden rounded-[4px]">
+    <span class="flex flex-1 items-center bg-[#FF4B43] px-5" style="color:#FFF; font-family:'Gilroy'; font-size:16px; font-weight:700; text-transform:uppercase;">
+      Login
+    </span>
+    <span class="flex w-[48px] items-center justify-center bg-black text-white">
+      <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+        <path d="M5 12h14"></path>
+        <path d="M13 5l7 7-7 7"></path>
+      </svg>
+    </span>
+  </button>
+
+  <div id="login-result" class="mt-4"></div>
+</form>

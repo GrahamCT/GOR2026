@@ -139,6 +139,17 @@ async def partner_add_vouchers(
     return response
 
 
+# ── Used Vouchers ────────────────────────────────────────────────────────────
+
+@router.get("/used-vouchers")
+async def used_vouchers(request: Request):
+    vouchers = generic_fetch_data("exec spBook_get_used_vouchers") or []
+    return templates.TemplateResponse(
+        "partner_admin/used_vouchers.html",
+        {"request": request, "vouchers": vouchers},
+    )
+
+
 # ── Edit ─────────────────────────────────────────────────────────────────────
 
 @router.get("/{partner_id}/edit-form", response_class=HTMLResponse)
