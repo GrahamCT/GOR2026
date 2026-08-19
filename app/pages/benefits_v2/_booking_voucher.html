@@ -1,14 +1,14 @@
 <!-- Congratulations header -->
-<div class="col-span-full ml-8" style="font-family: Gilroy; font-size: 16px; font-weight: 400; line-height: 26px; color: rgba(26,28,28,0.70);">
+<div class="col-span-full md:ml-8" style="font-family: Gilroy; font-size: 16px; font-weight: 400; line-height: 26px; color: rgba(26,28,28,0.70);">
   <h1 class="font-gilroy font-bold text-[40px] leading-[48px] text-black mb-3">
     Congratulations {{ customer.first_name }} {{ customer.last_name }}
   </h1>
   {% if partner.book_category_id == 1 %}
   <p>When you buy two main meals you get up to R100 off your second meal!</p>
-  <p class="mb-8">Your dining voucher code is supplied below. We will email it to you, as well.</p>
+  <p class="mb-8">Your dining voucher code is supplied. We will email it to you, as well.</p>
   {% elif partner.book_category_id == 2 %}
   <p>You will receive up to R20 off your beverage.</p>
-  <p class="mb-8">Your coffee voucher code is supplied below. We will email it to you, as well.</p>
+  <p class="mb-8">Your coffee voucher code is supplied. We will email it to you, as well.</p>
   {% endif %}
 
 
@@ -18,37 +18,33 @@
 
   <!-- Voucher card -->
   <div class="bg-white rounded-2xl p-6 max-w-5xl shadow-lg">
-    <div class="flex items-start gap-6">
 
-      <!-- Logo -->
-      <div class="w-28 h-28 flex-shrink-0">
-        <img
-          src="{{ url_for('static', path=partner.logo_image) if partner.logo_image else 'https://placehold.co/200x200?text=' ~ partner.partner_name | replace(' ', '+') }}"
-          alt="{{ partner.partner_name }}"
-          class="w-full h-full object-contain rounded-lg bg-white p-2 shadow"
-        />
-      </div>
-
-      <!-- Content -->
-      <div class="flex-1">
-        <div class="flex items-start justify-between border-b border-gray-300 pb-3 mb-3">
-          
-          <h2 class="font-gilroy font-bold text-[60px] leading-[60px] text-[#FA453D] tracking-[0px]">
-            {% if partner.book_category_id == 1 %}R100{% elif partner.book_category_id == 2 %}R20{% endif %} {{ partner.partner_name }} Voucher
-          </h2>
-        </div>
-        <p class="text-xl font-bold tracking-widest mb-3">{{ voucher_number }}</p>
-        {% if partner.book_category_id == 1 %}
-        <p class="text-sm text-gray-600">When you buy two main meals you get up to R100 off your second meal!</p>
-        <p class="text-sm text-gray-600">Your dining voucher code is supplied below. We will email it to you, as well.</p>
-
-        {% elif partner.book_category_id == 2 %}
-        <p class="text-sm text-gray-600">You will receive up to R20 off your beverage.</p>
-        <p class="text-sm text-gray-600">Your coffee voucher code is supplied below. We will email it to you, as well.</p>
-        {% endif %}
-      </div>
-
+    <!-- Logo -->
+    <div class="w-24 h-24 mb-4">
+      <img
+        src="{{ url_for('static', path=partner.logo_image) if partner.logo_image else 'https://placehold.co/200x200?text=' ~ partner.partner_name | replace(' ', '+') }}"
+        alt="{{ partner.partner_name }}"
+        class="w-full h-full object-contain rounded-lg bg-white p-2 shadow"
+      />
     </div>
+
+    <!-- Heading -->
+    <h2 class="font-bold text-[#FA453D] border-b border-gray-300 pb-3 mb-3" style="font-family:Gilroy; font-size:clamp(32px,8vw,60px); line-height:1.1;">
+      {% if partner.book_category_id == 1 %}R100{% elif partner.book_category_id == 2 %}R20{% endif %} {{ partner.partner_name }} Voucher
+    </h2>
+
+    <!-- Voucher number -->
+    <p class="font-bold tracking-widest mb-3 break-all" style="font-family:Gilroy; font-size:clamp(14px,4vw,20px);">{{ voucher_number }}</p>
+
+    <!-- Description -->
+    {% if partner.book_category_id == 1 %}
+    <p class="text-sm text-gray-600">When you buy two main meals you get up to R100 off your second meal!</p>
+    <p class="text-sm text-gray-600">Your dining voucher code is supplied. We will email it to you, as well.</p>
+    {% elif partner.book_category_id == 2 %}
+    <p class="text-sm text-gray-600">You will receive up to R20 off your beverage.</p>
+    <p class="text-sm text-gray-600">Your coffee voucher code is supplied. We will email it to you, as well.</p>
+    {% endif %}
+
   </div>
 
   <p class="text-sm text-gray-400 mt-4">Voucher sent by email to: {{ customer.email_address }}</p>

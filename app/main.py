@@ -12,7 +12,7 @@ from app.routers import tug_v2
 from app.routers import partners
 from app.routers import partner_admin
 from app.routers import landing_v2
-
+from app.routers import pf
 
 app = FastAPI(title="GoRhino")
 
@@ -31,6 +31,7 @@ app.include_router(tug_v2.router)
 app.include_router(partners.router)
 app.include_router(partner_admin.router)
 app.include_router(landing_v2.router)
+app.include_router(pf.router)
 
 app.mount(
     "/static",

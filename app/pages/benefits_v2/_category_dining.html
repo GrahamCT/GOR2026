@@ -1,22 +1,22 @@
 <section class="bg-[#F7F7F7]">
   <div class="container-main">
 
-    <div class="relative overflow-hidden">
-
-      <!-- HERO IMAGE (with text baked in) -->
-      <img
-        src="/static/v2/category-dining.png"
-        alt="Hero banner"
-        class="block w-full h-auto object-cover"
-      >
-
-      <!-- TEXT + BUTTON OVERLAY -->
-      <div class="relative md:absolute md:left-12 md:top-12 flex flex-col gap-6 px-6 py-6 md:p-0">
-        <p style="color: #FA453D; font-family: 'TheUnlimitedSans-Base'; font-size: clamp(2.5rem, 12vw, 98px); font-style: normal; font-weight: 400; line-height: 81%;">
-          Enjoy your meal<br> and let us help<br>with the bill.
+    <!-- MOBILE HERO -->
+    <div
+      class="md:hidden relative"
+      style="height: 65vh;
+             background-image: url('/static/v2/dining_mobile.png');
+             background-size: cover;
+             background-position: center top;"
+    >
+      <div class="absolute bottom-20 left-4 right-4 pointer-events-none">
+        <p style="color: #FA453D; font-family: 'TheUnlimitedSans-Base'; font-size: clamp(2.2rem, 11vw, 60px); font-weight: 400; line-height: 81%;">
+          Enjoy your meal and let us help with the bill
         </p>
-        <a href="#partners" class="flex h-[50px] w-full max-w-[294px] overflow-hidden rounded-[4px]">
-          <span class="flex flex-1 items-center bg-[#FF4B43] px-5" style="color: #FFF; font-family: 'Gilroy'; font-size: 16px; font-weight: 700; line-height: normal; text-transform: uppercase;">
+      </div>
+      <div class="absolute bottom-4 left-4 pointer-events-auto">
+        <a href="#partners" class="flex h-[50px] overflow-hidden rounded-[4px]" style="width: calc(100vw - 2rem);">
+          <span class="flex flex-1 items-center bg-[#FF4B43] px-5" style="color: #FFF; font-family: 'Gilroy'; font-size: 16px; font-weight: 700; text-transform: uppercase;">
             START SAVING TODAY
           </span>
           <span class="flex w-[48px] items-center justify-center bg-black text-white">
@@ -27,7 +27,31 @@
           </span>
         </a>
       </div>
+    </div>
 
+    <!-- DESKTOP HERO -->
+    <div class="hidden md:block relative overflow-hidden">
+      <img
+        src="/static/v2/category-dining.png"
+        alt="Hero banner"
+        class="block w-full h-auto object-cover"
+      >
+      <div class="absolute left-12 top-12 flex flex-col gap-6">
+        <p style="color: #FA453D; font-family: 'TheUnlimitedSans-Base'; font-size: clamp(2.5rem, 6vw, 98px); font-weight: 400; line-height: 81%;">
+          Enjoy your meal<br>and let us help<br>with the bill.
+        </p>
+        <a href="#partners" class="flex h-[50px] w-full max-w-[294px] overflow-hidden rounded-[4px]">
+          <span class="flex flex-1 items-center bg-[#FF4B43] px-5" style="color: #FFF; font-family: 'Gilroy'; font-size: 16px; font-weight: 700; text-transform: uppercase;">
+            START SAVING TODAY
+          </span>
+          <span class="flex w-[48px] items-center justify-center bg-black text-white">
+            <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <path d="M5 12h14"></path>
+              <path d="M13 5l7 7-7 7"></path>
+            </svg>
+          </span>
+        </a>
+      </div>
     </div>
 
   </div>
@@ -54,11 +78,11 @@
       
       <!-- STEP 1 -->
       <div class="relative">
-        <div class="absolute -top-10 left-0 text-[120px] leading-none font-semibold text-[#F2DDDD] pointer-events-none select-none">
+        <div class="hidden md:block absolute -top-10 left-0 text-[120px] leading-none font-semibold text-[#F2DDDD] pointer-events-none select-none">
           01
         </div>
 
-        <div class="relative pt-20">
+        <div class="relative md:pt-20">
           <div class="flex items-start gap-4 mb-8">
             <div class="w-[48px] h-[48px] rounded-[12px] bg-[#FF4B3E] flex items-center justify-center shrink-0">
               <img src="/static/v2/icon-search.png" alt="Choose restaurant" class="w-6 h-6 object-contain">
@@ -76,11 +100,11 @@
 
       <!-- STEP 2 -->
       <div class="relative">
-        <div class="absolute -top-10 left-0 text-[120px] leading-none font-semibold text-[#F2DDDD] pointer-events-none select-none">
+        <div class="hidden md:block absolute -top-10 left-0 text-[120px] leading-none font-semibold text-[#F2DDDD] pointer-events-none select-none">
           02
         </div>
 
-        <div class="relative pt-20">
+        <div class="relative md:pt-20">
           <div class="flex items-start gap-4 mb-8">
             <div class="w-[48px] h-[48px] rounded-[12px] bg-[#FF4B3E] flex items-center justify-center shrink-0">
               <img src="/static/v2/icon-voucher.png" alt="Get voucher" class="w-6 h-6 object-contain">
@@ -101,11 +125,11 @@
 
       <!-- STEP 3 -->
       <div class="relative">
-        <div class="absolute -top-10 left-0 text-[120px] leading-none font-semibold text-[#F2DDDD] pointer-events-none select-none">
+        <div class="hidden md:block absolute -top-10 left-0 text-[120px] leading-none font-semibold text-[#F2DDDD] pointer-events-none select-none">
           03
         </div>
 
-        <div class="relative pt-20">
+        <div class="relative md:pt-20">
           <div class="flex items-start gap-4 mb-8">
             <div class="w-[48px] h-[48px] rounded-[12px] bg-[#FF4B3E] flex items-center justify-center shrink-0">
               <img src="/static/v2/icon-money.png" alt="Get discount" class="w-6 h-6 object-contain">
@@ -123,11 +147,11 @@
 
       <!-- STEP 4 -->
       <div class="relative">
-        <div class="absolute -top-10 left-0 text-[120px] leading-none font-semibold text-[#F2DDDD] pointer-events-none select-none">
+        <div class="hidden md:block absolute -top-10 left-0 text-[120px] leading-none font-semibold text-[#F2DDDD] pointer-events-none select-none">
           04
         </div>
 
-        <div class="relative pt-20">
+        <div class="relative md:pt-20">
           <div class="flex items-start gap-4 mb-8">
             <div class="w-[48px] h-[48px] rounded-[12px] bg-[#FF4B3E] flex items-center justify-center shrink-0">
               <img src="/static/v2/icon-burger.png" alt="Enjoy the saving" class="w-6 h-6 object-contain">

@@ -3,41 +3,56 @@
 {% block content %}
 
 <!-- HERO -->
-<section class="bg-[#F7F7F7] mb-8 md:mb-16">
+<section class="md:mb-16" style="margin-top:0;padding-top:0;">
   <div class="container-main">
 
-    <!-- Image + text overlay wrapper (always relative so overlay anchors correctly) -->
-    <div class="relative">
+    <!-- ===== MOBILE HERO: background div with heading image overlaid ===== -->
+    <div
+      class="md:hidden relative"
+      style="height: 58vh;
+             background-image: url('/static/v2/mb_login.png');
+             background-size: cover;
+             background-position: center -100px;
+             background-repeat: no-repeat;"
+    >
+      <div class="absolute bottom-14 left-4 pointer-events-none">
+        <img
+          src="/static/v2/mb_login_Heading 1.png"
+          alt="MY UNLIMITED"
+          style="width: 200px; max-width: 55vw; height: auto;"
+        />
+      </div>
+    </div>
 
+    <!-- ===== DESKTOP HERO: image + text + login card overlaid ===== -->
+    <div class="hidden md:block relative">
       <img
         src="/static/v2/hero_login.png"
         alt="Hero banner"
-        class="block w-full object-cover h-[240px] md:h-auto"
+        class="w-full object-cover h-auto"
       >
 
-      <!-- Welcome text overlay
-           Mobile: small, anchored bottom-left of image
-           Desktop: large, centred vertically on left half -->
-      <div class="absolute bottom-3 left-4 md:inset-0 md:flex md:flex-col md:justify-center md:pl-14 pointer-events-none" style="max-width:50%;">
+      <div class="absolute inset-0 flex flex-col justify-center pl-14 pointer-events-none" style="max-width:50%;">
         <h1 class="text-[#FA453D] uppercase" style="font-family:'TheUnlimitedSans'; font-weight:900; font-size:clamp(22px,6vw,100px); line-height:81%;">
           Welcome to<br>My Unlimited
         </h1>
-        <p class="hidden md:block text-white" style="font-family:'Gilroy'; font-weight:600; font-size:24px; line-height:32px; width:462px; margin-top:50px; flex-shrink:0;">
+        <p class="text-white" style="font-family:'Gilroy'; font-weight:600; font-size:24px; line-height:32px; width:462px; margin-top:50px; flex-shrink:0;">
           You've come to the right place to start saving big with 2-for-1 dining, coffees and experiences!
         </p>
       </div>
 
-      <!-- Login card — desktop only, absolute right overlay -->
-      <div class="hidden md:flex absolute inset-0 items-center justify-end pr-6 md:pr-12">
+      <div class="absolute inset-0 flex items-center justify-end pr-6 md:pr-12">
         <div class="px-8 py-10 flex flex-col justify-center" style="width:469.34px; height:381px; border-radius:20px; background:#fff; box-shadow:0 32px 64px -12px rgba(26,28,28,0.08);">
           {% include 'benefits_v2/_login_form.html' %}
         </div>
       </div>
-
     </div>
 
-    <!-- Login card — mobile only, below the image -->
-    <div class="md:hidden bg-white px-6 py-8 shadow-sm">
+    <!-- ===== MOBILE LOGIN CARD: slides up over hero ===== -->
+    <div
+      class="md:hidden bg-white rounded-2xl relative z-10"
+      style="margin-top: -3rem; margin-left: 1rem; margin-right: 1rem; padding: 2rem 2rem 3rem; box-shadow: 0 8px 32px rgba(0,0,0,0.12);"
+    >
       {% include 'benefits_v2/_login_form.html' %}
     </div>
 

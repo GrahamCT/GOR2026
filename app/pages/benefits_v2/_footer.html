@@ -1,16 +1,19 @@
 <style>
 @media (max-width: 640px) {
     .tu-footer-top { flex-direction: column !important; gap: 12px; }
-    .tu-footer-bottom { flex-direction: column !important; align-items: center !important; gap: 12px; }
+    .tu-footer-bottom { flex-direction: column !important; align-items: stretch !important; gap: 12px; }
     .tu-footer-social { padding-right: 0 !important; flex-wrap: wrap; justify-content: center; }
     .tu-logo, .tu-calltext-svg { max-width: 100%; height: auto; }
-    .tu-phone-col { align-items: center; }
-    .tu-numbers-svg { max-width: 240px !important; height: auto; margin-top: -50px !important; }
+    .tu-phone-col { align-items: center; width: 100%; }
+    .tu-calltext-svg { display: none !important; }
+    .tu-numbers-svg { display: none !important; }
+    .tu-mobile-phone-img { display: block !important; }
+    .tu-unlimit-tagline { display: none !important; }
 }
 </style>
 <div style="display: flex; flex-direction: column; gap: 16px;">
 <div class="tu-footer-top" style="display: flex; align-items: flex-start; justify-content: space-between;">
-  <div style="display: flex; align-items: flex-start; gap: 12px;">
+  <div class="tu-unlimit-tagline" style="display: flex; align-items: flex-start; gap: 12px;">
     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="66" viewBox="0 0 16 66" fill="none" style="width: 15.805px; height: 65.092px; flex-shrink: 0;">
       <path d="M15.8052 0H0V65.0916H15.8052V0Z" fill="#FA453D"/>
     </svg>
@@ -60,6 +63,7 @@
 </div>
 <div class="tu-footer-bottom" style="display: flex; align-items: center; justify-content: space-between;">
   <div class="tu-phone-col" style="display: flex; flex-direction: column; gap: 0;">
+  <img class="tu-mobile-phone-img" src="/static/v2/mobile_whatsapp.png" alt="Call or Whatsapp 0861 990 000" style="display:none; max-width:100%; height:auto;">
   <svg class="tu-calltext-svg" xmlns="http://www.w3.org/2000/svg" width="178" height="21" viewBox="0 0 178 21" fill="none" style="max-width:100%;height:auto;">
     <path d="M0 8.30598C0 3.86153 3.35904 0.364258 8.04948 0.364258C10.8589 0.364258 13.3751 1.78503 14.6698 4.01939L12.4712 5.2823C11.6528 3.77653 9.99162 2.81721 8.04948 2.81721C4.72708 2.81721 2.52844 5.16087 2.52844 8.30598C2.52844 11.4511 4.72708 13.7948 8.04948 13.7948C9.9794 13.7948 11.6772 12.8354 12.4712 11.3297L14.6698 12.5804C13.3995 14.8148 10.8833 16.2477 8.04948 16.2477C3.37125 16.2477 0 12.7504 0 8.30598Z" fill="black"/>
     <path d="M27.6541 5.02722V15.9562H25.2844V14.3776C24.4538 15.5312 23.1468 16.2355 21.4368 16.2355C18.4442 16.2355 15.9646 13.7218 15.9646 10.4796C15.9646 7.23729 18.4564 4.72363 21.4368 4.72363C23.1468 4.72363 24.4538 5.42794 25.2844 6.55727V5.00293H27.6541V5.02722ZM25.2844 10.4917C25.2844 8.46377 23.7942 6.99443 21.8154 6.99443C19.8367 6.99443 18.3465 8.46377 18.3465 10.4917C18.3465 12.5196 19.8367 13.989 21.8154 13.989C23.7942 13.989 25.2844 12.5196 25.2844 10.4917Z" fill="black"/>

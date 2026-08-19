@@ -158,8 +158,8 @@
 
     .container-main {
       width: 100%;
-      padding-left: 0;
-      padding-right: 0;
+      padding: 0;
+      margin: 0;
     }
 
     .nav-link {
@@ -187,7 +187,7 @@
   </style>
 </head>
 
-<body class="bg-[#F7F7F7]">
+<body class="bg-[#F7F7F7]" style="overflow-x:hidden;">
 
   <nav class="bg-white border-b border-black/10 sticky top-0 z-50">
     <div class="container-main relative">
@@ -202,6 +202,7 @@
           <a href="/benefits/select/1" class="nav-link {{ 'nav-link-active' if current_page == '1' else '' }}">Dining</a>
           <a href="/benefits/select/2" class="nav-link {{ 'nav-link-active' if current_page == '2' else '' }}">Coffee</a>
           <a href="/benefits/select/3" class="nav-link {{ 'nav-link-active' if current_page == '3' else '' }}">Experiences</a>
+          <a href="/static/terms_conditions.pdf" target="_blank" rel="noopener noreferrer" class="nav-link">Terms &amp; Conditions</a>
         </div>
 
         <!-- Hamburger button — mobile only -->
@@ -223,6 +224,7 @@
           <a href="/benefits/select/1" class="nav-link py-3 {{ 'nav-link-active' if current_page == '1' else '' }}">Dining</a>
           <a href="/benefits/select/2" class="nav-link py-3 {{ 'nav-link-active' if current_page == '2' else '' }}">Coffee</a>
           <a href="/benefits/select/3" class="nav-link py-3 {{ 'nav-link-active' if current_page == '3' else '' }}">Experiences</a>
+          <a href="/static/terms_conditions.pdf" target="_blank" rel="noopener noreferrer" class="nav-link py-3">Terms &amp; Conditions</a>
         </div>
       </div>
 

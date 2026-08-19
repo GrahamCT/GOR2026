@@ -3,7 +3,7 @@
 {% block content %}
 
 <!-- HERO -->
-<section class="bg-[#F7F7F7] mb-16">
+<section class="bg-white">
   <div class="container-main">
     <div class="relative overflow-hidden">
 
@@ -12,7 +12,7 @@
         <!-- Main image -->
         <img
           src="{{ url_for('static', path=partner.landing_image) if partner.landing_image else 'https://placehold.co/1280x400?text=' ~ partner.partner_name | replace(' ', '+') }}"
-          alt="Main image" class="w-full h-[200px] md:h-auto md:max-h-[650px] object-cover rounded-2xl shadow-lg" />
+          alt="Main image" class="w-full h-[200px] md:h-auto md:max-h-[650px] object-cover shadow-lg" />
 
         <!-- Logo + name overlay -->
         <div class="absolute bottom-4 left-4 flex items-center gap-2 md:gap-4" style="max-width:calc(100% - 2rem);">
@@ -43,7 +43,7 @@
 </section>
 
 <!-- CONTENT -->
-<section class="container-main mb-16">
+<section class="container-main mb-16 px-4 md:px-0 bg-white">
   <div id="partner-content" class="grid grid-cols-1 lg:grid-cols-[1fr_420px] gap-12">
 
     <!-- Left: partner info -->

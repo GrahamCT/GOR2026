@@ -12,35 +12,76 @@
 
   <!-- HTMX -->
   <script src="https://unpkg.com/htmx.org@1.9.12"></script>
+
+  <style>
+    /* Desktop full-page background only */
+    @media (min-width: 768px) {
+      body {
+        background-image: url("{{ url_for('static', path='login-bg.jpg') }}");
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+      }
+    }
+  </style>
 </head>
 
-<body
-  class="min-h-screen font-sans"
-  style="background-image:url('{{ url_for('static', path='login-bg.jpg') }}'); background-size:cover; background-position:center; background-repeat:no-repeat;"
->
+<body class="min-h-screen font-sans">
 
-  <!-- spacing like original (<br/><br/>) -->
-  <div class="h-8"></div>
-  <div class="h-8"></div>
-
-  <!-- Logo (original had padding-left:5px and sits near top left) -->
-  <p class="pl-[5px]">
-    <img
-      src="{{ url_for('static', path='tug_logo.png') }}"
-      alt="The Unlimited"
-      class="h-12 w-auto"
-    />
-  </p>
-
-  <div class="h-8"></div>
-
-  <!-- Login Container: width 500, margin-top 5%, right aligned with right margin ~20% -->
+  <!-- ===== MOBILE HERO (hidden on desktop) ===== -->
   <div
-    class="w-[500px] max-w-[92vw]
-           bg-white rounded-[15px] shadow-[0_0_15px_rgba(0,0,0,0.5)]
-           px-[10px] pt-[20px] pb-[35px]
+    class="md:hidden relative"
+    style="min-height: 58vh;
+           background-image: url('{{ url_for('static', path='v2/mb_login.png') }}');
+           background-size: cover;
+           background-position: center top;
+           background-repeat: no-repeat;"
+  >
+    <!-- Logo top-left -->
+    <div class="absolute top-4 left-4">
+      <img
+        src="{{ url_for('static', path='tug_logo.png') }}"
+        alt="The Unlimited"
+        class="h-8 w-auto"
+      />
+    </div>
+
+    <!-- Heading image overlaid in lower-left of the hero -->
+    <div class="absolute bottom-14 left-4">
+      <img
+        src="{{ url_for('static', path='v2/mb_login_Heading 1.png') }}"
+        alt="MY UNLIMITED"
+        class="w-[200px] max-w-[55vw] h-auto"
+      />
+    </div>
+  </div>
+
+  <!-- ===== DESKTOP HEADER (hidden on mobile) ===== -->
+  <div class="hidden md:block">
+    <div class="h-8"></div>
+    <div class="h-8"></div>
+    <p class="pl-[5px]">
+      <img
+        src="{{ url_for('static', path='tug_logo.png') }}"
+        alt="The Unlimited"
+        class="h-12 w-auto"
+      />
+    </p>
+    <div class="h-8"></div>
+  </div>
+
+  <!-- ===== LOGIN CARD ===== -->
+  <!-- Mobile: full-width, rounded top, slides up over the hero (-mt-6) -->
+  <!-- Desktop: fixed 500px width, right-aligned -->
+  <div
+    class="bg-white shadow-[0_0_15px_rgba(0,0,0,0.3)]
+           px-6 md:px-[10px] pt-[20px] pb-[35px]
            text-center
-           ml-auto mr-[20%] mt-[5vh]"
+           rounded-t-2xl md:rounded-[15px]
+           -mt-6 md:mt-[5vh]
+           relative z-10
+           w-full md:w-[500px] md:max-w-[92vw]
+           md:ml-auto md:mr-[20%]"
   >
     <h3 class="text-black text-[24px] font-black m-0 p-0 leading-tight">
       Welcome to The Unlimited lifestyle!
@@ -52,17 +93,15 @@
 
     <div class="h-4"></div>
 
-    <form 
+    <form
       class="space-y-0"
       hx-post="/benefits/tug_login"
       hx-target="#login-result"
       hx-swap="innerHTML"
       hx-indicator="#login-indicator"
-      >
-
+    >
       <input name="email_address" type="hidden" value="0" />
 
-      <!-- input -->
       <input
         name="mobile_number"
         type="number"
@@ -85,7 +124,6 @@
 
       <div class="h-6"></div>
 
-      <!-- button matches original: red bg, white border; hover invert -->
       <input
         type="submit"
         value="LOGIN"
@@ -102,21 +140,9 @@
       <div id="login-result" class="mt-4"></div>
     </form>
 
-    <!-- error placeholder -->
     <p class="text-[13px] text-[#FF0033] mt-4">
       {{ error or "" }}
     </p>
-  </div>
-
-  <!-- container below (original empty / optional forgot link) -->
-  <div class="w-[500px] max-w-[92vw] mx-auto mt-4">
-    {# Optional:
-    <p class="text-right">
-      <a href="#" class="text-[#FF0033] no-underline text-[13px] inline-block px-5 py-2 hover:bg-[#ccc] hover:rounded">
-        FORGOT POLICY NUMBER
-      </a>
-    </p>
-    #}
   </div>
 
 </body>
