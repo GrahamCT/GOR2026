@@ -18,7 +18,7 @@
         <div class="absolute bottom-4 left-4 flex items-center gap-2 md:gap-4" style="max-width:calc(100% - 2rem);">
           <img
             src="{{ url_for('static', path=partner.logo_image) if partner.logo_image else 'https://placehold.co/200x200?text=' ~ partner.partner_name | replace(' ', '+') }}"
-            alt="Logo" class="w-12 h-12 md:w-24 md:h-24 shrink-0 object-contain bg-white rounded-xl p-1 md:p-2 shadow" />
+            alt="{{ partner.partner_name }}" class="w-12 h-12 md:w-24 md:h-24 shrink-0 object-contain bg-white rounded-xl p-1 md:p-2 shadow" />
           <span class="text-white uppercase truncate" style="font-family:Gilroy; font-weight:700; line-height:1; font-size:clamp(20px,5vw,96px);">{{
             partner.partner_name }}</span>
         </div>
@@ -43,7 +43,7 @@
 </section>
 
 <!-- CONTENT -->
-<section class="container-main mb-16 px-4 md:px-0 bg-white">
+<section class="container-main mb-16 px-4 md:pl-0 md:pr-8 bg-white">
   <div id="partner-content" class="grid grid-cols-1 lg:grid-cols-[1fr_420px] gap-12">
 
     <!-- Left: partner info -->

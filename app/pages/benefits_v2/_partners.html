@@ -35,6 +35,7 @@
     loading="lazy"
     class="partner-logo relative max-h-[110px] max-w-[110px] object-contain"
     onload="this.classList.add('loaded'); this.previousElementSibling.remove();"
+    onerror="this.onerror=null; this.previousElementSibling.remove(); var s=document.createElement('span'); s.className='px-3 text-center font-bold text-[#1A1C1C]'; s.style.fontFamily='Gilroy'; s.textContent=this.alt; this.replaceWith(s);"
   />
 </a>
 

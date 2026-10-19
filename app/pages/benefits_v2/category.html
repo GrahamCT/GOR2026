@@ -37,6 +37,12 @@
         alt="Hero banner"
         class="block w-full object-cover h-auto"
       >
+
+      <!-- white fade from the left edge (per Figma) -->
+      <div
+        class="absolute inset-0 pointer-events-none"
+        style="background: linear-gradient(to right, rgba(255,255,255,0.75) 0%, rgba(255,255,255,0.35) 25%, rgba(255,255,255,0) 55%);"
+      ></div>
       <div class="absolute inset-0 flex flex-col justify-center pl-14 pointer-events-none" style="max-width:55%;">
         <h1 class="text-[#FA453D] uppercase" style="font-family:'TheUnlimitedSans'; font-weight:900; font-size:clamp(22px,6vw,100px); line-height:81%; flex-shrink:0;">
           More value,<br>Every Day

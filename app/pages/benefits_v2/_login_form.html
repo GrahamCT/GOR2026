@@ -10,7 +10,7 @@
 
 <form
   hx-post="/benefits/tug_login"
-  hx-target="#login-result"
+  hx-target="find .login-result"
   hx-swap="innerHTML"
   hx-indicator="#login-indicator"
 >
@@ -41,5 +41,5 @@
     </span>
   </button>
 
-  <div id="login-result" class="mt-4"></div>
+  <div class="login-result mt-4"></div>
 </form>

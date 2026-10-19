@@ -31,7 +31,7 @@
   <!-- Logo overlay -->
   <img
     src="{{ url_for('static', path=partner.logo_image) if partner.logo_image else 'https://placehold.co/200x200?text=' ~ partner.partner_name | replace(' ', '+') }}"
-    alt="Logo"
+    alt="{{ partner.partner_name }}"
     class="absolute top-4 left-4 w-36 h-36 object-contain bg-white/90 rounded-xl p-2 shadow"
   />
 

@@ -6,21 +6,39 @@
 <section class="md:mb-16" style="margin-top:0;padding-top:0;">
   <div class="container-main">
 
-    <!-- ===== MOBILE HERO: background div with heading image overlaid ===== -->
+    <!-- ===== MOBILE HERO: background image containing heading + login card ===== -->
+    <style>
+      .mobile-login h2 { font-size: 24px !important; }
+      .mobile-login hr { margin: 0.5rem 0 !important; }
+      .mobile-login p { font-size: 16px !important; line-height: 22px !important; margin-bottom: 0.75rem !important; }
+      .mobile-login form > div.mb-6 { margin-bottom: 1rem; }
+      .mobile-login input { padding-top: 0.6rem; padding-bottom: 0.6rem; }
+      .mobile-login button { height: 44px; max-width: none; }
+    </style>
     <div
-      class="md:hidden relative"
-      style="height: 58vh;
-             background-image: url('/static/v2/mb_login.png');
-             background-size: cover;
-             background-position: center -100px;
-             background-repeat: no-repeat;"
+      class="md:hidden relative overflow-hidden flex flex-col justify-end"
+      style="min-height: 85vh; padding: 7rem 0.75rem 2.5rem;"
     >
-      <div class="absolute bottom-14 left-4 pointer-events-none">
-        <img
-          src="/static/v2/mb_login_Heading 1.png"
-          alt="MY UNLIMITED"
-          style="width: 200px; max-width: 55vw; height: auto;"
-        />
+      <!-- top 100px of the image is blank, so pull it up and crop -->
+      <img
+        src="/static/v2/mb_login.png"
+        alt=""
+        class="absolute left-0 w-full pointer-events-none"
+        style="top: -100px; height: calc(100% + 100px); object-fit: cover; object-position: center top; z-index: 0;"
+      />
+
+      <img
+        src="/static/v2/mb_login_Heading 1.png"
+        alt="MY UNLIMITED"
+        class="relative pointer-events-none"
+        style="width: 280px; max-width: 75vw; height: auto; margin: 0 0 1rem 0.5rem;"
+      />
+
+      <div
+        class="mobile-login relative bg-white rounded-2xl"
+        style="padding: 1.25rem 1.25rem 1.5rem; box-shadow: 0 8px 32px rgba(0,0,0,0.18);"
+      >
+        {% include 'benefits_v2/_login_form.html' %}
       </div>
     </div>
 
@@ -32,6 +50,12 @@
         class="w-full object-cover h-auto"
       >
 
+      <!-- white fade from the left edge (per Figma) -->
+      <div
+        class="absolute inset-0 pointer-events-none"
+        style="background: linear-gradient(to right, rgba(255,255,255,0.75) 0%, rgba(255,255,255,0.35) 25%, rgba(255,255,255,0) 55%);"
+      ></div>
+
       <div class="absolute inset-0 flex flex-col justify-center pl-14 pointer-events-none" style="max-width:50%;">
         <h1 class="text-[#FA453D] uppercase" style="font-family:'TheUnlimitedSans'; font-weight:900; font-size:clamp(22px,6vw,100px); line-height:81%;">
           Welcome to<br>My Unlimited
@@ -42,18 +66,10 @@
       </div>
 
       <div class="absolute inset-0 flex items-center justify-end pr-6 md:pr-12">
-        <div class="px-8 py-10 flex flex-col justify-center" style="width:469.34px; height:381px; border-radius:20px; background:#fff; box-shadow:0 32px 64px -12px rgba(26,28,28,0.08);">
+        <div class="px-8 py-10 flex flex-col justify-center" style="width:469.34px; min-height:381px; border-radius:20px; background:#fff; box-shadow:0 32px 64px -12px rgba(26,28,28,0.08);">
           {% include 'benefits_v2/_login_form.html' %}
         </div>
       </div>
-    </div>
-
-    <!-- ===== MOBILE LOGIN CARD: slides up over hero ===== -->
-    <div
-      class="md:hidden bg-white rounded-2xl relative z-10"
-      style="margin-top: -3rem; margin-left: 1rem; margin-right: 1rem; padding: 2rem 2rem 3rem; box-shadow: 0 8px 32px rgba(0,0,0,0.12);"
-    >
-      {% include 'benefits_v2/_login_form.html' %}
     </div>
 
   </div>

@@ -1,0 +1,85 @@
+{% extends 'pf/base.html' %}
+
+{% block heading %}Simulate Client POST{% endblock %}
+
+{% block content %}
+
+<p class="mb-4 text-sm text-slate-600">
+  This page simulates the calling app posting the login payload to
+  <code class="rounded bg-slate-100 px-1 py-0.5">/pf/</code> in the request
+  body (not the URL). Edit the JSON below and send it.
+</p>
+
+<label for="payload" class="mb-1 block text-sm font-medium text-slate-700">
+  Request body (JSON)
+</label>
+<textarea
+  id="payload"
+  rows="8"
+  class="mb-4 w-full rounded-lg border border-slate-300 bg-white p-3 font-mono text-sm text-slate-900 shadow-sm focus:border-slate-500 focus:outline-none focus:ring-1 focus:ring-slate-500"
+>{
+  "pf_customer_id": 12345,
+  "reward_tier": 2,
+  "mobile_number": "5551234567",
+  "email_address": "test@example.com"
+}</textarea>
+
+<button
+  id="send-btn"
+  type="button"
+  class="w-full rounded-lg bg-black px-4 py-3 text-sm font-semibold text-white transition hover:bg-slate-800"
+>
+  Send POST to /pf/
+</button>
+
+<div id="result" class="mt-4"></div>
+
+{% endblock content %}
+
+{% block scripts %}
+<script>
+  document.getElementById("send-btn").addEventListener("click", async () => {
+    const resultEl = document.getElementById("result");
+    const textarea = document.getElementById("payload");
+    resultEl.innerHTML = "";
+
+    let body;
+    try {
+      body = JSON.parse(textarea.value);
+    } catch (err) {
+      resultEl.innerHTML = `
+        <div class="rounded-lg border border-red-200 bg-red-50 p-3 text-sm text-red-800">
+          Invalid JSON: ${err.message}
+        </div>`;
+      return;
+    }
+
+    try {
+      const response = await fetch("/pf/", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(body),
+      });
+      const text = await response.text();
+
+      if (response.ok) {
+        document.open();
+        document.write(text);
+        document.close();
+        return;
+      }
+
+      resultEl.innerHTML = `
+        <div class="rounded-lg border border-red-200 bg-red-50 p-3 text-sm text-red-800">
+          <div class="mb-2 font-semibold">Status: ${response.status}</div>
+          <pre class="whitespace-pre-wrap break-words">${text.replace(/</g, "&lt;")}</pre>
+        </div>`;
+    } catch (err) {
+      resultEl.innerHTML = `
+        <div class="rounded-lg border border-red-200 bg-red-50 p-3 text-sm text-red-800">
+          Request failed: ${err.message}
+        </div>`;
+    }
+  });
+</script>
+{% endblock scripts %}

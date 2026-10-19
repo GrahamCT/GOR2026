@@ -14,8 +14,7 @@ if /i "!CONFIRM!" neq "yes" ( echo Deployment cancelled. & pause & exit /b 0 )
 echo.
 
 :: Generate timestamp tag (format: YYYYMMDDHHmm)
-for /f "tokens=2 delims==" %%I in ('wmic os get localdatetime /value') do set dt=%%I
-set TAG=%dt:~0,12%
+for /f %%I in ('powershell -NoProfile -Command "Get-Date -Format yyyyMMddHHmm"') do set TAG=%%I
 set IMAGE_BASE=gor20206acr.azurecr.io/gorhino-fastapi
 set APP_NAME=gor26-P
 set RESOURCE_GROUP=DEVOPS
@@ -32,6 +31,8 @@ if %errorlevel% neq 0 ( echo ERROR: Docker build failed & pause & exit /b 1 )
 
 echo.
 echo [2/4] Pushing image to ACR...
+call az acr login --name gor20206acr
+if %errorlevel% neq 0 ( echo ERROR: ACR login failed - run "az login" first & pause & exit /b 1 )
 docker push %IMAGE_BASE%:%TAG%
 if %errorlevel% neq 0 ( echo ERROR: Docker push failed & pause & exit /b 1 )
 

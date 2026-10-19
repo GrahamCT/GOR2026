@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en" class="h-full bg-slate-100">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="theme-color" content="#000000">
+    <meta name="color-scheme" content="light">
+    <meta name="format-detection" content="telephone=no">
+
+    <title>{% block title %}Planet Fitness &amp; GoRhino Rewards{% endblock %}</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script
+      src="https://unpkg.com/htmx.org@2.0.4"
+      integrity="sha384-HGfztofotfshcF7+8n44JQL2oJmowVChPTg48S+jvZoztPfvwD79OC/LTtG6dMp+"
+      crossorigin="anonymous"
+    ></script>
+
+    <style>
+      [x-cloak] { display: none !important; }
+
+      .safe-top {
+        padding-top: env(safe-area-inset-top, 0px);
+      }
+
+      .safe-bottom {
+        padding-bottom: env(safe-area-inset-bottom, 0px);
+      }
+
+      .htmx-indicator {
+        opacity: 0;
+        transition: opacity 150ms ease-in;
+      }
+
+      .htmx-request .htmx-indicator,
+      .htmx-request.htmx-indicator {
+        opacity: 1;
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        *, *::before, *::after {
+          scroll-behavior: auto !important;
+          transition-duration: 0.01ms !important;
+          animation-duration: 0.01ms !important;
+          animation-iteration-count: 1 !important;
+        }
+      }
+    </style>
+
+    {% block head %}{% endblock %}
+  </head>
+
+  <body
+    class="min-h-full bg-slate-100 text-slate-900 antialiased"
+    hx-boost="true"
+    hx-indicator="#page-loader"
+  >
+    <div class="mx-auto flex min-h-[100dvh] w-full max-w-lg flex-col bg-white shadow-sm">
+      <header class="safe-top shrink-0 bg-black text-white">
+        <div class="flex min-h-20 items-center justify-center px-5 py-4">
+          <img
+            src="{{ url_for('static', path='PF/planet_fitness_logo.png') }}"
+            alt="Planet Fitness"
+            class="h-12 w-auto max-w-[12rem] object-contain"
+            width="192"
+            height="48"
+          >
+        </div>
+      </header>
+
+      <div
+        id="page-loader"
+        class="htmx-indicator fixed inset-x-0 top-0 z-50 h-1 bg-yellow-400"
+        role="progressbar"
+        aria-label="Loading"
+      ></div>
+
+      <main id="main-content" class="flex-1 px-4 py-6 sm:px-6">
+        <h1 class="mb-6 text-balance text-center text-2xl font-extrabold tracking-tight text-slate-950">
+          {% block heading %}Planet Fitness &amp; GoRhino Rewards page{% endblock %}
+        </h1>
+
+        <div id="flash-messages" aria-live="polite" aria-atomic="true">
+          {% block messages %}{% endblock %}
+        </div>
+
+        <section id="page-content" aria-live="polite">
+          {% block content %}{% endblock %}
+        </section>
+      </main>
+
+      <footer class="safe-bottom shrink-0 border-t border-slate-200 bg-white px-4 py-4 text-center text-xs text-slate-500">
+        {% block footer %}&copy; {{ current_year | default(2026) }} Planet Fitness &amp; GoRhino{% endblock %}
+      </footer>
+    </div>
+
+    <script>
+      document.body.addEventListener("htmx:responseError", function () {
+        const messages = document.getElementById("flash-messages");
+        if (!messages) return;
+
+        messages.innerHTML = `
+          <div class="mb-4 rounded-lg border border-red-200 bg-red-50 p-3 text-sm text-red-800" role="alert">
+            Something went wrong. Please try again.
+          </div>
+        `;
+      });
+    </script>
+
+    {% block scripts %}{% endblock %}
+  </body>
+</html>
