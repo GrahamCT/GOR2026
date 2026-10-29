@@ -4,6 +4,8 @@ import glob
 from datetime import date
 import pyodbc
 import openpyxl
+from openpyxl.utils import get_column_letter
+from openpyxl.worksheet.table import Table, TableStyleInfo
 from dotenv import load_dotenv
 
 DOWNLOADS = os.path.join(os.path.expanduser("~"), "Downloads")
@@ -75,6 +77,23 @@ def main():
     ws.append(columns)
     for row in rows:
         ws.append([v if v is not None else "" for v in row])
+
+    if rows:
+        ref = f"A1:{get_column_letter(len(columns))}{len(rows) + 1}"
+        table = Table(displayName="BookingReport", ref=ref)
+        table.tableStyleInfo = TableStyleInfo(
+            name="TableStyleMedium4",
+            showRowStripes=True,
+            showColumnStripes=False,
+            showFirstColumn=False,
+            showLastColumn=False,
+        )
+        ws.add_table(table)
+
+    for idx, col in enumerate(columns, start=1):
+        width = max(len(str(col)), *(len(str(r[idx - 1] or "")) for r in rows)) if rows else len(str(col))
+        ws.column_dimensions[get_column_letter(idx)].width = min(width + 4, 60)
+
     wb.save(filepath)
     print(f"📊 {len(rows)} rows written to {filepath}")
 
