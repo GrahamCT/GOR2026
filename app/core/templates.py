@@ -1,6 +1,8 @@
 import os
 from fastapi.templating import Jinja2Templates
 
+from app.services.media import media_url
+
 templates = Jinja2Templates(directory="app/pages")
 
 _version_file = "version.txt"
@@ -11,3 +13,4 @@ else:
     _version = "dev"
 
 templates.env.globals["app_version"] = _version
+templates.env.globals["media_url"] = media_url

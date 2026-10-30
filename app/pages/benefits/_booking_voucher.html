@@ -19,7 +19,7 @@
 
         <!-- Left Image -->
         <div class="w-40 h-40 flex-shrink-0">
-            <img src="{{ url_for('static', path=partner.logo_image) if partner.logo_image else 'https://placehold.co/200x200?text=' ~ partner.partner_name | replace(' ', '+') }}" alt="Restaurant Logo"
+            <img src="{{ media_url(partner.logo_image) if partner.logo_image else 'https://placehold.co/200x200?text=' ~ partner.partner_name | replace(' ', '+') }}" alt="Restaurant Logo"
                 class="w-full h-full object-contain rounded-lg bg-white p-3 shadow" />
         </div>
 

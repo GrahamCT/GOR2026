@@ -67,7 +67,7 @@
       </label>
       {% if partner.logo_image %}
       <div class="flex items-center justify-center bg-white border rounded h-24">
-        <img src="/static/{{ partner.logo_image }}" alt="Logo" class="max-h-full max-w-full object-contain p-1">
+        <img src="{{ media_url(partner.logo_image) }}" alt="Logo" class="max-h-full max-w-full object-contain p-1">
       </div>
       {% else %}
       <div class="flex items-center justify-center bg-white border rounded h-24 text-gray-300">
@@ -90,7 +90,7 @@
       </label>
       {% if partner.landing_image %}
       <div class="flex items-center justify-center bg-white border rounded h-24">
-        <img src="/static/{{ partner.landing_image }}" alt="Landing" class="max-h-full max-w-full object-contain p-1">
+        <img src="{{ media_url(partner.landing_image) }}" alt="Landing" class="max-h-full max-w-full object-contain p-1">
       </div>
       {% else %}
       <div class="flex items-center justify-center bg-white border rounded h-24 text-gray-300">

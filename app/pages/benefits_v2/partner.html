@@ -11,13 +11,13 @@
 
         <!-- Main image -->
         <img
-          src="{{ url_for('static', path=partner.landing_image) if partner.landing_image else 'https://placehold.co/1280x400?text=' ~ partner.partner_name | replace(' ', '+') }}"
+          src="{{ media_url(partner.landing_image) if partner.landing_image else 'https://placehold.co/1280x400?text=' ~ partner.partner_name | replace(' ', '+') }}"
           alt="Main image" class="w-full h-[200px] md:h-auto md:max-h-[650px] object-cover shadow-lg" />
 
         <!-- Logo + name overlay -->
         <div class="absolute bottom-4 left-4 flex items-center gap-2 md:gap-4" style="max-width:calc(100% - 2rem);">
           <img
-            src="{{ url_for('static', path=partner.logo_image) if partner.logo_image else 'https://placehold.co/200x200?text=' ~ partner.partner_name | replace(' ', '+') }}"
+            src="{{ media_url(partner.logo_image) if partner.logo_image else 'https://placehold.co/200x200?text=' ~ partner.partner_name | replace(' ', '+') }}"
             alt="{{ partner.partner_name }}" class="w-12 h-12 md:w-24 md:h-24 shrink-0 object-contain bg-white rounded-xl p-1 md:p-2 shadow" />
           <span class="text-white uppercase truncate" style="font-family:Gilroy; font-weight:700; line-height:1; font-size:clamp(20px,5vw,96px);">{{
             partner.partner_name }}</span>

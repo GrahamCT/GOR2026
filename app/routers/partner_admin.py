@@ -1,13 +1,14 @@
 import json
 import os
 import re
-import shutil
+from datetime import datetime
 
 import pyodbc
-from fastapi import APIRouter, File, Form, Request, UploadFile
+from fastapi import APIRouter, File, Form, HTTPException, Request, UploadFile
 from fastapi.responses import HTMLResponse
 
 from app.core.templates import templates
+from app.services import media
 from app.services.dal import CONN_STRING, generic_execute, generic_fetch_data
 
 router = APIRouter(prefix="/partner_admin", tags=["partner_admin"])
@@ -20,23 +21,32 @@ PARTNERS_QUERY = """
 
 CATEGORIES_QUERY = "SELECT id, cateogory FROM book_category ORDER BY cateogory"
 
-STATIC_PARTNERS_DIR = "app/static/partners"
-
-
 def _slug(name: str) -> str:
     name = name.lower().strip()
     name = re.sub(r"[^a-z0-9]+", "_", name)
     return name.strip("_")
 
 
+def _validate_uploads(*uploads: UploadFile) -> None:
+    """Reject the request before anything is saved if any image is invalid."""
+    for upload in uploads:
+        if upload and upload.filename:
+            try:
+                media.validate_image(upload)
+            except ValueError as e:
+                raise HTTPException(status_code=400, detail=str(e))
+
+
 def _save_upload(upload: UploadFile, prefix: str, slug: str, category_id: int) -> str:
-    """Save uploaded file and return the DB path string (partners/filename)."""
-    ext = os.path.splitext(upload.filename)[1]
-    filename = f"{prefix}_cat{category_id}_{slug}{ext}"
-    dest = os.path.join(STATIC_PARTNERS_DIR, filename)
-    with open(dest, "wb") as f:
-        shutil.copyfileobj(upload.file, f)
-    return f"partners/{filename}"
+    """Save uploaded file and return the DB path string (partners/filename).
+
+    The timestamp gives each upload a new URL, so browsers don't show a cached old image.
+    """
+    ext = os.path.splitext(upload.filename)[1].lower()
+    stamp = datetime.now().strftime("%Y%m%d%H%M%S")
+    path = f"partners/{prefix}_cat{category_id}_{slug}_{stamp}{ext}"
+    media.upload_image(upload, path)
+    return path
 
 
 @router.get("/")
@@ -67,6 +77,7 @@ async def partner_save(
     logo_image: UploadFile = File(None),
     landing_image: UploadFile = File(None),
 ):
+    _validate_uploads(logo_image, landing_image)
     slug = _slug(partner_name)
 
     logo_path = ""
@@ -179,6 +190,7 @@ async def partner_update(
     logo_image: UploadFile = File(None),
     landing_image: UploadFile = File(None),
 ):
+    _validate_uploads(logo_image, landing_image)
     slug = _slug(partner_name)
 
     logo_path = existing_logo

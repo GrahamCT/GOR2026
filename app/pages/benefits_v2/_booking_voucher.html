@@ -22,7 +22,7 @@
     <!-- Logo -->
     <div class="w-24 h-24 mb-4">
       <img
-        src="{{ url_for('static', path=partner.logo_image) if partner.logo_image else 'https://placehold.co/200x200?text=' ~ partner.partner_name | replace(' ', '+') }}"
+        src="{{ media_url(partner.logo_image) if partner.logo_image else 'https://placehold.co/200x200?text=' ~ partner.partner_name | replace(' ', '+') }}"
         alt="{{ partner.partner_name }}"
         class="w-full h-full object-contain rounded-lg bg-white p-2 shadow"
       />
